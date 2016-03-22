@@ -129,13 +129,40 @@ app.get('*', function(req, res, next){
 
 app.get('/', function(req, res, next){
 
-    res.render('main', {});
+    res.render('main', {
+        
+        user : req.user
+        
+    });
     
 });
 
 app.get('/login', function(req, res, next){
 
     res.render('login', {});
+    
+});
+app.post('/login',
+         
+    // authenticate
+    passport.authenticate('local', {
+            failureRedirect: '/login'
+    }),
+         
+    // success
+    function(req, res) {
+
+        console.log(req.user.name +' loggin!');
+
+        res.redirect('/');
+    }
+         
+);
+
+app.get('/logout', function(req, res){
+    
+    req.logout();
+    res.redirect('/login');
     
 });
 
