@@ -198,6 +198,11 @@ app.listen(openShift.port, openShift.ipaddress, function(){
 
     users.infoCheck();
     pebble.reserveCheck();
+    pebble.getTaxRate(510, function(rate, amount){
+        
+        console.log('tax rate for amount ' + amount + ' is :' + rate);
+        
+    });
     
     // for now create an account, and call pebble.takeRequest
     //pebble.takeRequest('dustin', 1);
