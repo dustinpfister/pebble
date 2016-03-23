@@ -136,6 +136,20 @@ app.get('/', function(req, res, next){
     });
     
 });
+app.post('/', function(req, res){
+    
+    console.log(req.user.username);
+    console.log(req.body);
+    pebble.takeRequest(req.user.username, req.body.amount, function(wallet){
+    
+        console.log('compleate');
+        console.log(wallet);
+        
+        res.send(JSON.stringify({amount:wallet}));
+        
+    });
+    
+});
 
 app.get('/login', function(req, res, next){
 

@@ -1,4 +1,41 @@
+<!DOCTYPE html>
+<html>
 
+<head>
 
-<h1>Pebble</h1>
-<span> <%= user.username %> (<a href="/logout">logout</a>) pebbles: <%= user.wallet%> </span>
+    <title>Pebble</title>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+    
+    <h1>Pebble</h1>
+    
+    <p> <%= user.username %> (<a href="/logout">logout</a>) pebbles: <span id="disp_wallet"><%= user.wallet%></span> </p>
+    
+    <input id="button_getpebble" type="button" value = "take a pebble" >
+    
+    
+    <script src="/js/jquery-1.12.2.min.js"></script>
+    <script>
+    
+    $('#button_getpebble').on( 'click', function(){
+        
+        console.log('getting pebble');
+        
+        $.post('/', {action: 'take', amount:1},function(data){
+        
+            console.log(data);
+            
+            $('#disp_wallet').text(JSON.parse(data).amount);
+        
+        });
+        
+    });
+    
+    </script>
+    
+</body>
+
+</html>
