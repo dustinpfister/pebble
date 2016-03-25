@@ -12,7 +12,13 @@
     
     <h1>Pebble</h1>
     
-    <p> <%= user.username %> (<a href="/logout">logout</a>) pebbles: <span id="disp_wallet"><%= user.wallet%></span> </p>
+    <p> <%= user.username %> (<a href="/logout">logout</a>) pebbles: <span id="disp_wallet"><%= user.wallet %></span> </p>
+    <ul>
+        
+        <li>The Reserve: <ul>
+            <li>reserve's wallet : <span><%= reserve.wallet %></span> </li>
+        </ul></li>
+    </ul>
     
     <input id="button_getpebble" type="button" value = "take a pebble" >
     

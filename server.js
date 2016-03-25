@@ -129,9 +129,14 @@ app.get('*', function(req, res, next){
 
 app.get('/', function(req, res, next){
 
-    res.render('main', {
+    pebble.getReserve(function(reserve){
+    
+        res.render('main', {
         
-        user : req.user
+            reserve : reserve,
+            user : req.user
+        
+        });
         
     });
     
