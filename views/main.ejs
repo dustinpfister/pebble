@@ -33,6 +33,22 @@
         });
         
     });
+        
+    var dialHome = function(){
+        
+        setTimeout(dialHome, 10000);
+        
+        $.post('/', {action: 'check'},function(data){
+        
+            console.log(data);
+            
+            //$('#disp_wallet').text(JSON.parse(data).amount);
+        
+        });
+        
+    };
+    dialHome();
+        
     
     </script>
     

@@ -138,16 +138,28 @@ app.get('/', function(req, res, next){
 });
 app.post('/', function(req, res){
     
-    console.log(req.user.username);
-    console.log(req.body);
-    pebble.takeRequest(req.user.username, req.body.amount, function(wallet){
+    // if "take" action
+    if(req.body.action === 'take'){
     
-        console.log('compleate');
-        console.log(wallet);
+        pebble.takeRequest(req.user.username, req.body.amount, function(wallet){
+    
+            console.log('take request compleate for ' + req.user.username + ' users wallet: ' + wallet);
         
-        res.send(JSON.stringify({amount:wallet}));
+            res.send(JSON.stringify({amount:wallet}));
         
-    });
+        });
+        
+    }
+    
+    // if "check" action
+    if(req.body.action === 'check'){
+        
+        pebble.check({username: req.user.username}, function(data){
+        
+            res.send(JSON.stringify(data));
+        
+        });
+    }
     
 });
 
