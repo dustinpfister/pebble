@@ -196,10 +196,17 @@ app.listen(openShift.port, openShift.ipaddress, function(){
 
     console.log('pebble lives');
 
-    
     users.infoCheck();
     pebble.reserveCheck();
-    pebble.collectTax();
+    
+    // the tax loop
+    var taxLoop = function(){
+    
+        var t = setTimeout(taxLoop, 65000);        
+        pebble.collectTax();
+        
+    };
+    taxLoop();
     
     /*
     pebble.getTaxRate(510, function(rate, amount){
