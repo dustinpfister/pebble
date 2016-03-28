@@ -17,7 +17,8 @@
     <ul>
         
         <li>The Reserve: <ul>
-            <li>reserve's wallet : <span><%= reserve.wallet %></span> </li>
+            <li>total world pebbles : <span><%= reserve.worldTotal %></span> </li>
+            <li>reserve's wallet : <span id="disp_reswallet"><%= reserve.wallet %></span> </li>
         </ul></li>
     </ul>
     
@@ -67,9 +68,10 @@
         
         $.post('/', {action: 'check', requesting: requested},function(data){
         
-            console.log(data);
+            console.log(data)
             
             $('#disp_wallet').text(JSON.parse(data).userWallet);
+            $('#disp_reswallet').text(JSON.parse(data).reserve.wallet   );
         
         });
         
