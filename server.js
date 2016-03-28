@@ -159,7 +159,7 @@ app.post('/', function(req, res){
     // if "check" action
     if(req.body.action === 'check'){
         
-        pebble.check({username: req.user.username}, function(data){
+        pebble.check({username: req.user.username, requesting: req.body.requesting}, function(data){
         
             res.send(JSON.stringify(data));
         
