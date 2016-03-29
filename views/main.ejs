@@ -8,10 +8,91 @@
 
 </head>
 
-<body>
-    
+<body ng-app="pebble_client">
+
     <h1>Pebble</h1>
-    
+
+
+    <script src="/js/angular.js"></script>
+
+    <p><span> <%= user.username %> </span> (<a href="/logout">logout</a>)</p>
+    <p ng-controller="user">pebbles: <span>{{ userdata.wallet }}</span></p>
+
+
+    <script>
+        var app = angular.module('pebble_client', []);
+
+
+        app.controller('user', function ($http, $scope) {
+
+            $scope.userdata = {
+
+                wallet: 0,
+                
+                requested : 0
+
+            };
+
+
+            var dialHome = function () {
+
+                var requesting = $scope.userdata.requested;
+                
+                // call home every 30 seconds
+                setTimeout(dialHome, 5000);
+                
+                
+                // make the post
+                $http({
+                    method: 'POST'
+                    , url: '/'
+                    , data: {
+                        action: 'check'
+                        , requesting: requesting
+                    }
+
+                }).then(function successCallback(response) {
+
+                    console.log(response.data);
+
+
+                    $scope.userdata.wallet = response.data.userWallet;
+
+                    // this callback will be called asynchronously
+                    // when the response is available
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+
+            };
+            
+            // start dial home
+            dialHome();
+
+        });
+
+        /*
+        app.service("friendService", function( $http, $q ) {
+        
+        
+        });
+        
+        */
+
+        /*
+        angular.module('pebble_client', []).controller('user', function ($scope) {
+
+            $scope.userwallet = "0";
+
+            
+
+        });
+        */
+    </script>
+
+
+    <!--
     <p> <%= user.username %> (<a href="/logout">logout</a>) pebbles: <span id="disp_wallet"><%= user.wallet %></span> (<span id="disp_worldwealth"></span>) </p>
     <p>requesting: <span id="disp_requesting">0</span></p>
     <ul>
@@ -24,7 +105,6 @@
     </ul>
     
     <input id="button_getpebble" type="button" value = "take a pebble" >
-    
     
     <script src="/js/jquery-1.12.2.min.js"></script>
     <script>
@@ -67,7 +147,8 @@
         
     
     </script>
-    
+    -->
+
 </body>
 
 </html>

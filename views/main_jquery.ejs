@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Pebble</title>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+    
+    <h1>Pebble</h1>
+    
+    <p> <%= user.username %> (<a href="/logout">logout</a>) pebbles: <span id="disp_wallet"><%= user.wallet %></span> (<span id="disp_worldwealth"></span>) </p>
+    <p>requesting: <span id="disp_requesting">0</span></p>
+    <ul>
+        
+        <li>The Reserve: <ul>
+            <li>total world pebbles : <span><%= reserve.worldTotal %></span> </li>
+            <li>reserve's wallet : <span id="disp_reswallet"><%= reserve.wallet %></span> </li>
+        </ul></li>
+        
+    </ul>
+    
+    <input id="button_getpebble" type="button" value = "take a pebble" >
+    
+    
+    <script src="/js/jquery-1.12.2.min.js"></script>
+    <script>
+    
+    
+    var requesting = 0;
+        
+    $('#button_getpebble').on( 'click', function(){
+        
+        requesting += 1;
+        
+        console.log(requesting);
+        
+        $('#disp_requesting').text(requesting);
+        
+    });
+        
+    var dialHome = function(){
+        
+        setTimeout(dialHome, 10000);
+        
+        var requested = requesting;
+        requesting = 0;
+        
+        $('#disp_requesting').text(requesting);
+        
+        $.post('/', {action: 'check', requesting: requested},function(data){
+        
+            console.log(data)
+            
+            $('#disp_wallet').text(JSON.parse(data).userWallet);
+            $('#disp_worldwealth').text(Number(JSON.parse(data).worldWealth * 100) + '% World Wealth');
+            
+            $('#disp_reswallet').text(JSON.parse(data).reserve.wallet);
+        
+        });
+        
+    };
+    dialHome();
+        
+    
+    </script>
+    
+</body>
+
+</html>
