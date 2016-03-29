@@ -9,17 +9,20 @@
         
         .userpebbles{
             
-            background: #ff0000;
+            border-top: 3px solid #000000;
+            border-right: 3px solid #000000;
+            background: rgba(0,0,0,0.2);
             padding:20px;
-            margin:5px;
+           
             
         }
         
         .reservepebbles{
             
-            background: #00ff00;
+            border-top: 3px solid #000000;
+            border-left: 3px solid #000000;
             padding:20px;
-            margin:5px;
+            
             
         }
         
@@ -38,21 +41,32 @@
     <div ng-controller="mainclient">
 
         <div class="userpebbles">
-            <p>pebbles: <span>{{ userdata.wallet }}</span> (<span>{{ userdata.worldwealth }}</span>% World Wealth) </p>
+            
+            <h2>pebbles: <span>{{ userdata.wallet }}</span> (<span>{{ userdata.worldwealth }}</span>% World Wealth) </h2>
+            
             <p>requested: <span>{{ userdata.requested }}</span></p>
+            
+            <input ng-click="take()" type="button" value="take a pebble">
+            
         </div>
 
         <div class="reservepebbles">
+            
             <ul>
 
                 <li>The Reserve:
+                    
                     <ul>
+                        
                         <li>total world pebbles : <span><%= reserve.worldTotal %></span> </li>
                         <li>reserve's wallet : <span> {{ reservedata.wallet }} </span> </li>
+                        
                     </ul>
+                    
                 </li>
 
             </ul>
+            
         </div>
 
     </div>
@@ -78,6 +92,12 @@
                 wallet: 0
 
             };
+            
+            $scope.take = function(){
+              
+                this.userdata.requested += 1;
+                
+            };
 
 
             // dial home with new client data, and get server data
@@ -85,8 +105,10 @@
 
                 var requesting = $scope.userdata.requested;
 
-                // call home every 30 seconds
-                setTimeout(dialHome, 5000);
+                $scope.userdata.requested = 0;
+                
+                // call home every 15 seconds
+                setTimeout(dialHome, 15000);
 
 
                 // make the post
