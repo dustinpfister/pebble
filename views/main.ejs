@@ -5,6 +5,20 @@
 
     <title>Pebble</title>
     <meta charset="utf-8">
+    <style>
+        
+        .userpebbles{
+            
+            
+            
+        }
+        
+        .reservepebbles{
+            
+            
+        }
+        
+    </style>
 
 </head>
 
@@ -16,32 +30,60 @@
     <script src="/js/angular.js"></script>
 
     <p><span> <%= user.username %> </span> (<a href="/logout">logout</a>)</p>
-    <p ng-controller="user">pebbles: <span>{{ userdata.wallet }}</span></p>
+    <div ng-controller="mainclient">
 
+        <div class="userpebbles">
+            <p>pebbles: <span>{{ userdata.wallet }}</span> (<span>{{ userdata.worldwealth }}</span>% World Wealth) </p>
+            <p>requested: <span>{{ userdata.requested }}</span></p>
+        </div>
+
+        <div class="reservepebbles">
+            <ul>
+
+                <li>The Reserve:
+                    <ul>
+                        <li>total world pebbles : <span><%= reserve.worldTotal %></span> </li>
+                        <li>reserve's wallet : <span> {{ reservedata.wallet }} </span> </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
 
     <script>
+        // my angular client for pebble
         var app = angular.module('pebble_client', []);
 
-
-        app.controller('user', function ($http, $scope) {
+        // the main user controler
+        app.controller('mainclient', function ($http, $scope) {
 
             $scope.userdata = {
 
-                wallet: 0,
-                
-                requested : 0
+                wallet: 0
+                , worldwealth: 0,
+
+                requested: 0
+
+            };
+
+            $scope.reservedata = {
+
+                wallet: 0
 
             };
 
 
+            // dial home with new client data, and get server data
             var dialHome = function () {
 
                 var requesting = $scope.userdata.requested;
-                
+
                 // call home every 30 seconds
                 setTimeout(dialHome, 5000);
-                
-                
+
+
                 // make the post
                 $http({
                     method: 'POST'
@@ -51,103 +93,29 @@
                         , requesting: requesting
                     }
 
-                }).then(function successCallback(response) {
+                }).then(function (response) {
+
+                    // success callback
 
                     console.log(response.data);
 
-
                     $scope.userdata.wallet = response.data.userWallet;
+                    $scope.userdata.worldwealth = Number(response.data.worldWealth * 100).toFixed(4);
+                    $scope.reservedata = response.data.reserve;
 
-                    // this callback will be called asynchronously
-                    // when the response is available
-                }, function errorCallback(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                }, function (response) {
+
+                    // error callback
+
                 });
 
             };
-            
+
             // start dial home
             dialHome();
 
         });
-
-        /*
-        app.service("friendService", function( $http, $q ) {
-        
-        
-        });
-        
-        */
-
-        /*
-        angular.module('pebble_client', []).controller('user', function ($scope) {
-
-            $scope.userwallet = "0";
-
-            
-
-        });
-        */
     </script>
-
-
-    <!--
-    <p> <%= user.username %> (<a href="/logout">logout</a>) pebbles: <span id="disp_wallet"><%= user.wallet %></span> (<span id="disp_worldwealth"></span>) </p>
-    <p>requesting: <span id="disp_requesting">0</span></p>
-    <ul>
-        
-        <li>The Reserve: <ul>
-            <li>total world pebbles : <span><%= reserve.worldTotal %></span> </li>
-            <li>reserve's wallet : <span id="disp_reswallet"><%= reserve.wallet %></span> </li>
-        </ul></li>
-        
-    </ul>
-    
-    <input id="button_getpebble" type="button" value = "take a pebble" >
-    
-    <script src="/js/jquery-1.12.2.min.js"></script>
-    <script>
-    
-    
-    var requesting = 0;
-        
-    $('#button_getpebble').on( 'click', function(){
-        
-        requesting += 1;
-        
-        console.log(requesting);
-        
-        $('#disp_requesting').text(requesting);
-        
-    });
-        
-    var dialHome = function(){
-        
-        setTimeout(dialHome, 10000);
-        
-        var requested = requesting;
-        requesting = 0;
-        
-        $('#disp_requesting').text(requesting);
-        
-        $.post('/', {action: 'check', requesting: requested},function(data){
-        
-            console.log(data)
-            
-            $('#disp_wallet').text(JSON.parse(data).userWallet);
-            $('#disp_worldwealth').text(Number(JSON.parse(data).worldWealth * 100) + '% World Wealth');
-            
-            $('#disp_reswallet').text(JSON.parse(data).reserve.wallet);
-        
-        });
-        
-    };
-    dialHome();
-        
-    
-    </script>
-    -->
 
 </body>
 
