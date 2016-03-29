@@ -1,0 +1,33 @@
+pebble version logg:
+
+1.0.x
+
+    * Minimum Viable Product (MVP)
+    * MongoDB will be used for database ( mongoose.js )
+    * Epress.js server framework used
+    * Node will be used 
+    * ejs used to render views server-side.
+    * passport.js is used for authentication ( passport local strategy only so far )
+    * connect-mongo used in place of default memory store for session data
+    * server.js written (this is what will be called with node to start pebble on the server)
+    * pebble.js written (this contains methods for working with the pebble reserve)
+    * users.js written (this contains methods for working with user accounts)
+    * openshift.js (this makes use of enviroment variables when deployed to openshift, else local alternatives are used )
+    
+    * "take a pebble" button working when taking pebbles from the reserve
+    
+    (proposed additions to MVP)
+    
+    * Use angular.js for client system to make pebble a MEAN Stack App
+    * Angular UI Bootstrap, or bootstrap with angular's jqLite for adaptive layout
+    * Have an Home Tab
+    * Have an Reserve Tab
+    * Have an about Tab
+    
+    
+1.1.x
+
+    (proposed ideas for 1.1.x)
+    
+    * Have a Help, Manual, or "how to play" Tab
+    * Shops
