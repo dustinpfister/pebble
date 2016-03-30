@@ -3,27 +3,32 @@ pebble version logg:
 1.0.x
 
     * Minimum Viable Product (MVP)
-    * MEAN Stack app
-        * MongoDB will be used for database ( mongoose.js )
-        * Epress.js server framework used
-        * Angular.js for client system to make pebble a MEAN Stack App
-        * Node will be used
-    * ejs used to help render views server-side.
+    * Pebble is a MEAN Stack app 
+    * MongoDB used for database ( mongoose.js )
+    * Epress.js for a server framework.
+    * Angular.js for used for the client system.
+    * Node will be used
+    * ejs (embedded javascript) used to help render views server-side.
+    * UI Bootstrap html framweork for adaptive layout.
     * passport.js is used for authentication
-        * passport local strategy used
-        * connect-mongo used in place of default memory store for session data
+    * passport local strategy used.
+    * connect-mongo used in place of default memory store for session data
     * server.js written (this is what will be called with node to start pebble on the server)
     * pebble.js written (this contains methods for working with the pebble reserve)
     * users.js written (this contains methods for working with user accounts)
-    * openshift.js (this makes use of environment variables when deployed to openshift, else local alternatives are used )   
-    * "take a pebble" button working when taking pebbles from the reserve
+    * openshift.js (this makes use of environment variables when deployed to openshift, else local alternatives are used )
+    
+    * "take a pebble" button added that is usedd to take pebbles dirrectly from the reserve's wallet.
+    * login, and signup pages added and working.
+    * visiters get redirected to the login path, if they visit any path that requires an account including root.
+    
     
     (proposed additions to MVP)  
-    * Angular UI Bootstrap, or bootstrap with angular's jqLite for adaptive layout
-    * Have an Home Tab
-    * Have an Reserve Tab
-    * Have an about Tab
     
+    * Have a Home (root / ) path Tab
+    * Have a Reserve path Tab
+    * Have a about path Tab
+    * Have a settings path Tab
     
 1.1.x
 
