@@ -5,73 +5,155 @@
 
     <title>Pebble</title>
     <meta charset="utf-8">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
     <style>
-        
-        .userpebbles{
-            
+        .userpebbles {
             border-top: 3px solid #000000;
             border-right: 3px solid #000000;
-            background: rgba(0,0,0,0.2);
-            padding:20px;
-           
-            
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
         }
         
-        .reservepebbles{
-            
+        .reservepebbles {
             border-top: 3px solid #000000;
             border-left: 3px solid #000000;
-            padding:20px;
-            
-            
+            padding: 20px;
         }
         
+        .main_container{
+            
+            margin-top:100px;
+            
+        }
     </style>
 
 </head>
 
-<body ng-app="pebble_client">
+<body>
 
-    <h1>Pebble</h1>
+    
 
-
+    <!-- angular -->
     <script src="/js/angular.js"></script>
 
-    <p><span> <%= user.username %> </span> (<a href="/logout">logout</a>)</p>
-    <div ng-controller="mainclient">
+    <!-- ui bootstrap -->
+    <script src="/js/ui-bootstrap-tpls-1.2.5.min.js"></script>
 
-        <div class="userpebbles">
+    
+    
+    <!-- nav app -->
+    <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+        
+        <div class="container" ng-controller="collapse">
             
-            <h2>pebbles: <span>{{ userdata.wallet }}</span> (<span>{{ userdata.worldwealth }}</span>% World Wealth) </h2>
+            <div class="navbar-header">
+	            <button type="button" class="navbar-toggle" ng-click="toggle()">
+                
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                
+                </button>
+            </div>
             
-            <p>requested: <span>{{ userdata.requested }}</span></p>
-            
-            <input ng-click="take()" type="button" value="take a pebble">
+	        <div uib-collapse="isCollapsed">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+	        </div>
             
         </div>
+        
+    </nav>
+    
+    
+    
+    <div class="main_container" ng-app="pebble_client">
 
-        <div class="reservepebbles">
-            
-            <ul>
+        <h1>Pebble</h1>
+        
+        <p><span> <%= user.username %> </span> (<a href="/logout">logout</a>)</p>
+        <div ng-controller="mainclient">
 
-                <li>The Reserve:
-                    
-                    <ul>
-                        
-                        <li>total world pebbles : <span><%= reserve.worldTotal %></span> </li>
-                        <li>reserve's wallet : <span> {{ reservedata.wallet }} </span> </li>
-                        
-                    </ul>
-                    
-                </li>
+            <div class="userpebbles">
 
-            </ul>
-            
+                <h2>pebbles: <span>{{ userdata.wallet }}</span> (<span>{{ userdata.worldwealth }}</span>% World Wealth) </h2>
+
+                <p>requested: <span>{{ userdata.requested }}</span></p>
+
+                <input ng-click="take()" type="button" value="take a pebble">
+
+            </div>
+
+            <div class="reservepebbles">
+
+                <ul>
+
+                    <li>The Reserve:
+
+                        <ul>
+
+                            <li>total world pebbles : <span><%= reserve.worldTotal %></span> </li>
+                            <li>reserve's wallet : <span> {{ reservedata.wallet }} </span> </li>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
         </div>
 
     </div>
 
+    
     <script>
+        
+        // ui bootstrap nav
+        
+        (function(){
+    
+            
+            var nav = angular.module('uibootstrap_nav', ['ui.bootstrap']);
+
+        
+            console.log('hello');
+            
+            
+            nav.controller('collapse', function ($scope) {
+            
+                $scope.isCollapsed = true;
+                
+                $scope.toggle = function(){
+                    
+                    
+                    
+                    $scope.isCollapsed = !$scope.isCollapsed;
+                    
+                    console.log($scope.isCollapsed);
+                }
+                
+            });
+            
+            // manual bootstrap (ng-app can only be used once)
+            angular.bootstrap(document.getElementById('navbar'), ['uibootstrap_nav']);
+            
+            
+        }());
+        
+        
+    </script>
+    
+    
+    <script>
+        
         // my angular client for pebble
         var app = angular.module('pebble_client', []);
 
@@ -92,11 +174,11 @@
                 wallet: 0
 
             };
-            
-            $scope.take = function(){
-              
+
+            $scope.take = function () {
+
                 this.userdata.requested += 1;
-                
+
             };
 
 
@@ -106,7 +188,7 @@
                 var requesting = $scope.userdata.requested;
 
                 $scope.userdata.requested = 0;
-                
+
                 // call home every 15 seconds
                 setTimeout(dialHome, 15000);
 
