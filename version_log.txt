@@ -21,7 +21,7 @@ pebble version logg:
     * "take a pebble" button added that is usedd to take pebbles dirrectly from the reserve's wallet.
     * login, and signup pages added and working.
     * visiters get redirected to the login path, if they visit any path that requires an account including root.
-    
+    * at least one tax plan is in effect.
     
     (proposed additions to MVP)  
     
@@ -29,6 +29,15 @@ pebble version logg:
     * Have a Reserve path Tab
     * Have a about path Tab
     * Have a settings path Tab
+    
+    * Have a tax plan system that allows for more then one tax plan to be in effect including "no tax"
+    * Have a way to vote for what kind of tax plan should be in place (on the reserve tab)
+    
+    * users land area size based off an expression (size = minsize + random + equalShare + worldWealth)
+    * have an area property for a user account that reflects the kind of resources that are availabule to the user
+    * have resources such as wood, oil, water, and farmland in an area.
+    
+    * break *.ejs files down into partials
     
 1.1.x
 
