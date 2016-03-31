@@ -190,6 +190,14 @@ app.post('/login',
          
 );
 
+
+app.get('/reserve', function(req, res){
+    
+    
+    res.render('reserve',{});
+    
+});
+
 app.get('/logout', function(req, res){
     
     req.logout();
@@ -224,18 +232,6 @@ app.listen(openShift.port, openShift.ipaddress, function(){
         
     };
     taxLoop();
-    
-    /*
-    pebble.getTaxRate(510, function(rate, amount){
-        
-        console.log('tax rate for amount ' + amount + ' is :' + rate);
-        
-    });
-    */
-    
-    
-    // for now create an account, and call pebble.takeRequest
-    //pebble.takeRequest('dustin', 1);
-    
+     
     
 });
