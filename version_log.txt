@@ -23,6 +23,9 @@ pebble version logg:
     * visiters get redirected to the login path, if they visit any path that requires an account including root.
     * at least one tax plan is in effect.
     
+    
+    * users land area size based off an expression (size = minsize + random + equalShare + worldWealth)
+    
     (proposed additions to MVP)  
     
     * Have a Home (root / ) path Tab
@@ -33,7 +36,6 @@ pebble version logg:
     * Have a tax plan system that allows for more then one tax plan to be in effect including "no tax"
     * Have a way to vote for what kind of tax plan should be in place (on the reserve tab)
     
-    * users land area size based off an expression (size = minsize + random + equalShare + worldWealth)
     * have an area property for a user account that reflects the kind of resources that are availabule to the user
     * have resources such as wood, oil, water, and farmland in an area.
     

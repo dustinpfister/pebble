@@ -1,0 +1,64 @@
+<!-- nav app -->
+    <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+        
+        <div class="container" ng-controller="collapse">
+            
+            <div class="navbar-header">
+	            <button type="button" class="navbar-toggle" ng-click="toggle()">
+                
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                
+                </button>
+            </div>
+            
+	        <div uib-collapse="isCollapsed">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/reserve">The Reserve</a></li>
+                </ul>
+	        </div>
+            
+        </div>
+        
+    </nav>
+
+<script>
+        
+        // ui bootstrap nav
+        
+        (function(){
+    
+            
+            var nav = angular.module('uibootstrap_nav', ['ui.bootstrap']);
+
+        
+            console.log('hello');
+            
+            
+            nav.controller('collapse', function ($scope) {
+            
+                $scope.isCollapsed = true;
+                
+                $scope.toggle = function(){
+                    
+                    
+                    
+                    $scope.isCollapsed = !$scope.isCollapsed;
+                    
+                    console.log($scope.isCollapsed);
+                }
+                
+            });
+            
+            // manual bootstrap (ng-app can only be used once)
+            angular.bootstrap(document.getElementById('navbar'), ['uibootstrap_nav']);
+            
+            
+        }());
+        
+        
+    </script>

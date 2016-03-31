@@ -1,0 +1,115 @@
+<div class="main_container" ng-app="pebble_client">
+
+        <h1>Pebble</h1>
+        
+        <p><span> <%= user.username %> </span> (<a href="/logout">logout</a>)</p>
+        <div ng-controller="mainclient">
+
+            <div class="userpebbles">
+
+                <h2>pebbles: <span>{{ userdata.wallet }}</span> (<span>{{ userdata.worldwealth }}</span>% World Wealth) </h2>
+
+                <p>requested: <span>{{ userdata.requested }}</span></p>
+
+                <input ng-click="take()" type="button" value="take a pebble">
+
+            </div>
+
+            <div class="reservepebbles">
+
+                <ul>
+
+                    <li>The Reserve:
+
+                        <ul>
+
+                            <li>total world pebbles : <span><%= reserve.worldTotal %></span> </li>
+                            <li>reserve's wallet : <span> {{ reservedata.wallet }} </span> </li>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+    
+    <script>
+        
+        // my angular client for pebble
+        var app = angular.module('pebble_client', []);
+
+        // the main user controler
+        app.controller('mainclient', function ($http, $scope) {
+
+            $scope.userdata = {
+
+                wallet: 0
+                , worldwealth: 0,
+
+                requested: 0
+
+            };
+
+            $scope.reservedata = {
+
+                wallet: 0
+
+            };
+
+            $scope.take = function () {
+
+                this.userdata.requested += 1;
+
+            };
+
+
+            // dial home with new client data, and get server data
+            var dialHome = function () {
+
+                var requesting = $scope.userdata.requested;
+
+                $scope.userdata.requested = 0;
+
+                // call home every 15 seconds
+                setTimeout(dialHome, 15000);
+
+
+                // make the post
+                $http({
+                    method: 'POST'
+                    , url: '/'
+                    , data: {
+                        action: 'check'
+                        , requesting: requesting
+                    }
+
+                }).then(function (response) {
+
+                    // success callback
+
+                    console.log(response.data);
+
+                    $scope.userdata.wallet = response.data.userWallet;
+                    $scope.userdata.worldwealth = Number(response.data.worldWealth * 100).toFixed(4);
+                    $scope.reservedata = response.data.reserve;
+
+                }, function (response) {
+
+                    // error callback
+
+                });
+
+            };
+
+            // start dial home
+            dialHome();
+
+        });
+    </script>
