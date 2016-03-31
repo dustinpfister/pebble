@@ -168,6 +168,42 @@ app.post('/', function(req, res){
     
 });
 
+
+app.get('/reserve', function(req, res){
+    
+    
+    
+    
+    res.render('reserve',{});
+    
+});
+app.post('/reserve', function(req, res){
+    
+    
+    // if "check" action
+    if(req.body.action === 'getReserve'){
+        
+        
+        pebble.getReserve(function(reserve){
+            
+            if(reserve){
+                
+                res.send(reserve);
+                
+            }else{
+                
+                res.send('error');
+                
+            }
+            
+        });
+    
+    }
+    
+    
+    
+});
+
 app.get('/login', function(req, res, next){
 
     res.render('login', {});
@@ -191,12 +227,7 @@ app.post('/login',
 );
 
 
-app.get('/reserve', function(req, res){
-    
-    
-    res.render('reserve',{});
-    
-});
+
 
 app.get('/logout', function(req, res){
     

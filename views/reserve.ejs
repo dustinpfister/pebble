@@ -1,17 +1,106 @@
 <% include ./ejs/part_head.ejs %>
 
-<body>
+    <body>
 
-    
 
-    <!-- angular -->
-    <script src="/js/angular.js"></script>
 
-    <!-- ui bootstrap -->
-    <script src="/js/ui-bootstrap-tpls-1.2.5.min.js"></script>
+        <!-- angular -->
+        <script src="/js/angular.js"></script>
 
-    <% include ./ejs/part_nav.ejs %> 
-    
-    
-</body>
-</html>
+        <!-- ui bootstrap -->
+        <script src="/js/ui-bootstrap-tpls-1.2.5.min.js"></script>
+
+        <% include ./ejs/part_nav.ejs %>
+
+            <div class="main_container">
+
+                <h2>The Reserve: </h2>
+
+                <!-- angular client html for reserve path -->
+                <div id="reserve_client_div" ng-controller="control">
+
+                    <ul>
+
+                        <li> world total: {{ reserve.worldTotal }} </li>
+                        <li> reserve wallet: {{ reserve.wallet }} </li>
+                        <li> Tax Brackets: {{ reserve.brackets }}</li>
+
+                    </ul>
+
+                </div>
+
+                <script>
+                    // angular client for the reserve path
+                    var app = angular.module('reserve_client', []);
+
+                    app.controller('control', function ($http, $scope) {
+
+                        // ALERT! just snatched this one from:
+                        // http://stackoverflow.com/questions/9362446/how-can-i-recursively-create-a-ul-lis-from-json-data-multiple-layers-deep
+                        var buildList = function(data, isSub) {
+                            var html = (isSub) ? '<div>' : ''; // Wrap with div if true
+                            html += '<ul>';
+                            for (item in data) {
+                                html += '<li>';
+                                if (typeof (data[item].sub) === 'object') { // An array will return 'object'
+                                    if (isSub) {
+                                        html += '<a href="' + data[item].link + '">' + data[item].name + '</a>';
+                                    } else {
+                                        html += data[item].id; // Submenu found, but top level list item.
+                                    }
+                                    html += buildList(data[item].sub, true); // Submenu found. Calling recursively same method (and wrapping it in a div)
+                                } else {
+                                    html += data[item].id // No submenu
+                                }
+                                html += '</li>';
+                            }
+                            html += '</ul>';
+                            html += (isSub) ? '</div>' : '';
+                            return html;
+                        };
+
+                        // the reserve data
+                        $scope.reserve = {
+
+                            worldTotal: 0
+                            , wallet: 0
+
+                        };
+
+                        // make the post
+                        $http({
+                            method: 'POST'
+                            , url: '/reserve'
+                            , data: {
+                                action: 'getReserve'
+                            }
+
+                        }).then(function (response) {
+
+                            // success callback
+
+
+
+                            $scope.reserve = response.data;
+                            
+                            
+
+                            console.log(response.data);
+
+
+                        }, function (response) {
+
+                            // error callback
+
+                        });
+
+                    });
+
+                    angular.bootstrap(document.getElementById('reserve_client_div'), ['reserve_client']);
+                </script>
+
+            </div>
+
+    </body>
+
+    </html>
