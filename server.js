@@ -171,10 +171,11 @@ app.post('/', function(req, res){
 
 app.get('/reserve', function(req, res){
     
-    
-    
-    
-    res.render('reserve',{});
+    res.render('reserve',{
+        
+        user : req.user
+        
+    });
     
 });
 app.post('/reserve', function(req, res){

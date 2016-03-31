@@ -9,6 +9,7 @@ pebble version logg:
     * Angular.js for used for the client system.
     * Node will be used
     * ejs (embedded javascript) used to help render views server-side.
+    * *.ejs files broken down into partials stored in /views/ejs
     * UI Bootstrap html framweork for adaptive layout.
     * passport.js is used for authentication
     * passport local strategy used.
@@ -16,30 +17,31 @@ pebble version logg:
     * server.js written (this is what will be called with node to start pebble on the server)
     * pebble.js written (this contains methods for working with the pebble reserve)
     * users.js written (this contains methods for working with user accounts)
-    * openshift.js (this makes use of environment variables when deployed to openshift, else local alternatives are used )
-    
+    * openshift.js (this makes use of environment variables when deployed to openshift, else local alternatives are used )   
     * "take a pebble" button added that is usedd to take pebbles dirrectly from the reserve's wallet.
     * login, and signup pages added and working.
     * visiters get redirected to the login path, if they visit any path that requires an account including root.
-    * at least one tax plan is in effect.
+    * at least one tax plan is in effect.  
     
+    * The / (Home) path
+    * The /reserve path, is used to show info about the reserve
     
     * users land area size based off an expression (size = minsize + random + equalShare + worldWealth)
     
-    (proposed additions to MVP)  
+    (proposed additions/changes to 1.0.x)  
     
-    * Have a Home (root / ) path Tab
-    * Have a Reserve path Tab
+    
+    * the dial home feature that updates the users wallet value should be site wide. make an angular.js app, and ejs part for this.
+    
+    * the "take a pebble button" function in the / (home) path client should be moved to the /reserve path client 
+    
     * Have a about path Tab
     * Have a settings path Tab
-    
     * Have a tax plan system that allows for more then one tax plan to be in effect including "no tax"
     * Have a way to vote for what kind of tax plan should be in place (on the reserve tab)
-    
     * have an area property for a user account that reflects the kind of resources that are availabule to the user
     * have resources such as wood, oil, water, and farmland in an area.
     
-    * break *.ejs files down into partials
     
 1.1.x
 
