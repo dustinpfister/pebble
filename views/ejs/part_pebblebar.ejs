@@ -1,2 +1,26 @@
 <!-- ALERT! this should be styled better! -->
-<span style="color:#000000;"> <%= user.username %> (<a href="/logout">logout</a>), pebbles: {{ userdata.wallet }} </span>
+<span id="app_pebblebar" ng-controller="pebblecheck" style="color:#000000;"> <%= user.username %> (<a href="/logout">logout</a>), pebbles: {{ userdata.wallet }} </span>
+
+
+<script>
+    
+    (function(){
+        
+        var app = angular.module('pebblebar', []);
+        
+            app.controller('pebblecheck', function ($scope,$http) {
+            
+                $scope.userdata = {
+                    
+                    wallet : 0
+                    
+                }
+                
+            });
+            
+            // manual bootstrap (ng-app can only be used once)
+            angular.bootstrap(document.getElementById('app_pebblebar'), ['pebblebar']);
+        
+    }());
+    
+</script>
