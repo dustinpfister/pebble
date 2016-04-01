@@ -16,6 +16,37 @@
                     
                 }
                 
+                
+                var userCheck = function(){
+                
+                    setTimeout(userCheck, 10000);
+                    
+                    // make the post
+                    $http({
+                        method: 'POST'
+                        , url: '/'
+                        , data: {
+                            action: 'usercheck'
+                        }
+
+                    }).then(function (response) {
+
+                        // success callback
+
+                        console.log(response.data);
+
+                        $scope.userdata = response.data;
+
+                    }, function (response) {
+
+                        // error callback
+
+                    });
+                    
+                };
+                
+                userCheck();
+                
             });
             
             // manual bootstrap (ng-app can only be used once)

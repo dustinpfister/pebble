@@ -2,15 +2,35 @@ pebble version logg:
 
 1.0.x
 
+    * MongoDB is used for database ( thanks to mongoose.js ).
+        * users.js (store user account data)
+        * pebble.js (store data about the reserve account)
+        * server.js (used for storage of user session data)
+    * Express.js used for server side framwork
+        * passport.js
+        * passport local
+        * ejs used for server side rendering
+        * ejs parshals stored at (/views/ejs)
+    * Angular.js for the client system.
+        * Angular Apps:
+            * "uibootstrap_nav" module used for navagation (/views/ejs/part_nav.ejs)
+            * "pebblecheck" module used to post to the server with client data, and return with new server data (/views/ejs/part_pebblebar.ejs).
+    * Node.js is used for server side javascript (backend programing)
+        * server.js is the main javascript file that is called with node to start the server ( $ node server.js)
+            
+
+1.0.x
+
     * Minimum Viable Product (MVP)
-    * Pebble is a MEAN Stack app 
-    * MongoDB used for database ( mongoose.js )
-    * Epress.js for a server framework.
-    * Angular.js for used for the client system.
-    * Node will be used
+    * Pebble is a MEAN Stack app so...
+    * MongoDB is used for database ( mongoose.js )
+    * Express.js for a server framework.
+    * Angular.js for the client system.
+    * Node will be used for backend programming.
     * ejs (embedded javascript) used to help render views server-side.
     * *.ejs files broken down into partials stored in /views/ejs
-    * UI Bootstrap html framweork for adaptive layout.
+    * UI Bootstrap html framweork for layout.
+    * bootstrap_pebble.css ( hacked over bootstrap.css file in /views/css, used for CSS formatting)
     * passport.js is used for authentication
     * passport local strategy used.
     * connect-mongo used in place of default memory store for session data
@@ -23,18 +43,15 @@ pebble version logg:
     * visiters get redirected to the login path, if they visit any path that requires an account including root.
     * at least one tax plan is in effect.  
     
-    * The / (Home) path
+    * The / (Home) path used to show info about the logged in user
     * The /reserve path, is used to show info about the reserve
     
     * users land area size based off an expression (size = minsize + random + equalShare + worldWealth)
     
     (proposed additions/changes to 1.0.x)  
     
-    
     * the dial home feature that updates the users wallet value should be site wide. make an angular.js app, and ejs part for this.
-    
     * the "take a pebble button" function in the / (home) path client should be moved to the /reserve path client 
-    
     * Have a about path Tab
     * Have a settings path Tab
     * Have a tax plan system that allows for more then one tax plan to be in effect including "no tax"
@@ -42,6 +59,7 @@ pebble version logg:
     * have an area property for a user account that reflects the kind of resources that are availabule to the user
     * have resources such as wood, oil, water, and farmland in an area.
     
+    * SSL for at least login and signup paths if not all
     
 1.1.x
 

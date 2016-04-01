@@ -166,6 +166,16 @@ app.post('/', function(req, res){
         });
     }
     
+    // if "usercheck"
+    if(req.body.action === 'usercheck'){
+        
+        users.getUserSafe(req.user.username, function(user){
+           
+            res.send(JSON.stringify(user));
+            
+        });
+    }
+    
 });
 
 
