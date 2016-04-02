@@ -10,9 +10,10 @@
         <!-- ui bootstrap -->
         <script src="/js/ui-bootstrap-tpls-1.2.5.min.js"></script>
 
-        <!-- pebble request -->
+        <!-- ReserveClient, this is what will be looked at by pebble bar -->
         <script>
                     
+            // ALERT! there should be a way to make this part of the angular app.
             var ReserveClient = {
                 
                 requested : 0,
@@ -21,10 +22,19 @@
                     this.requested += 1;
                     
                 },
-                set : function(n){
+                
+                // reser requetsed back to zero, and update the view
+                reset : function(n){
                     
-                    this.requested = n;
+                    this.requested = 0;
                     
+                    // ALERT! sloppy very sloppy, why do i do stuff like this when I know better?
+                    var view = document.getElementById('reserveclient_disp');
+                    if(view){
+                    
+                        view.innerHTML = this.requested;
+                    
+                    }
                 }
                 
             };

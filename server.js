@@ -150,7 +150,7 @@ app.post('/', function(req, res){
     
             console.log('take request compleate for ' + req.user.username + ' users wallet: ' + wallet);
         
-            res.send(JSON.stringify({amount:wallet}));
+            res.send(JSON.stringify({wallet:wallet}));
         
         });
         

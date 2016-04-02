@@ -21,20 +21,39 @@
                 
                     setTimeout(userCheck, 10000);
                     
+                    
+                    var action = 'usercheck',
+                        requested = 0;
+                    
                     if(window.ReserveClient){
                         
                         console.log('reserve client found!');
-                        console.log(ReserveClient);
+                        console.log(ReserveClient.requested);
+                        
+                        requested = ReserveClient.requested;
+                        
+                        if(requested > 0){
+                        
+                            action = 'take';
+                        
+                        
+                            ReserveClient.reset();
+                        
+                        }
+                        
                         
                     }
                     
+                    
+                    console.log(action)
                     
                     // make the post
                     $http({
                         method: 'POST'
                         , url: '/'
                         , data: {
-                            action: 'usercheck'
+                            action: action,
+                            amount:requested
                         }
 
                     }).then(function (response) {
