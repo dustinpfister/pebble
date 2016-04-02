@@ -10,6 +10,28 @@
         <!-- ui bootstrap -->
         <script src="/js/ui-bootstrap-tpls-1.2.5.min.js"></script>
 
+        <!-- pebble request -->
+        <script>
+                    
+            var ReserveClient = {
+                
+                requested : 0,
+                take : function(){
+                    
+                    this.requested += 1;
+                    
+                },
+                set : function(n){
+                    
+                    this.requested = n;
+                    
+                }
+                
+            };
+                    
+        </script>
+        
+        
         <% include ./ejs/part_nav.ejs %>
 
             <div class="main_container">
@@ -29,51 +51,46 @@
                         <li> world population: {{ reserve.population }} </li>
                         <li> equal share: {{ reserve.equalShare }} </li>
                         <li> Tax Brackets: {{ reserve.brackets }}</li>
-                        <li> Last tax collection: {{ reserve.lastCollection }} </lili>
+                        <li> Last tax collection: {{ reserve.lastCollection }} </li>
 
                     </ul>
+                
+                    
 
                 </div>
+                
+                <h2>Request Pebbles</h2>
+                <p> requested: <span id="reserveclient_disp">0</span></p>
+                <input id="reserveclient_take" type="button" value="take a pebble"> 
 
+                <!-- ReserveClient Evenets -->
                 <script>
+                    
+                    document.getElementById('reserveclient_take').addEventListener('click', function(e){
+                        
+                        ReserveClient.take();
+                        document.getElementById('reserveclient_disp').innerHTML = ReserveClient.requested;
+                        
+                    });
+                    
+                </script>
+                
+                
+                <!-- angular app that just displays stuff -->
+                <script>
+                    
                     // angular client for the reserve path
+                    
                     var app = angular.module('reserve_client', []);
 
                     app.controller('control', function ($http, $scope) {
 
-                        // ALERT! just snatched this one from:
-                        // http://stackoverflow.com/questions/9362446/how-can-i-recursively-create-a-ul-lis-from-json-data-multiple-layers-deep
-                        var buildList = function(data, isSub) {
-                            var html = (isSub) ? '<div>' : ''; // Wrap with div if true
-                            html += '<ul>';
-                            for (item in data) {
-                                html += '<li>';
-                                if (typeof (data[item].sub) === 'object') { // An array will return 'object'
-                                    if (isSub) {
-                                        html += '<a href="' + data[item].link + '">' + data[item].name + '</a>';
-                                    } else {
-                                        html += data[item].id; // Submenu found, but top level list item.
-                                    }
-                                    html += buildList(data[item].sub, true); // Submenu found. Calling recursively same method (and wrapping it in a div)
-                                } else {
-                                    html += data[item].id // No submenu
-                                }
-                                html += '</li>';
-                            }
-                            html += '</ul>';
-                            html += (isSub) ? '</div>' : '';
-                            return html;
-                        };
-
                         // the reserve data
-                        $scope.reserve = {
+                        $scope.reserve = {};
 
-                            worldTotal: 0
-                            , wallet: 0
-
-                        };
 
                         // make the post
+                        
                         $http({
                             method: 'POST'
                             , url: '/reserve'
@@ -102,6 +119,8 @@
 
                     });
 
+                    console.log(app)
+                    
                     angular.bootstrap(document.getElementById('reserve_client_div'), ['reserve_client']);
                 </script>
 

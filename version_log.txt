@@ -2,25 +2,6 @@ pebble version logg:
 
 1.0.x
 
-    * MongoDB is used for database ( thanks to mongoose.js ).
-        * users.js (store user account data)
-        * pebble.js (store data about the reserve account)
-        * server.js (used for storage of user session data)
-    * Express.js used for server side framwork
-        * passport.js
-        * passport local
-        * ejs used for server side rendering
-        * ejs parshals stored at (/views/ejs)
-    * Angular.js for the client system.
-        * Angular Apps:
-            * "uibootstrap_nav" module used for navagation (/views/ejs/part_nav.ejs)
-            * "pebblecheck" module used to post to the server with client data, and return with new server data (/views/ejs/part_pebblebar.ejs).
-    * Node.js is used for server side javascript (backend programing)
-        * server.js is the main javascript file that is called with node to start the server ( $ node server.js)
-            
-
-1.0.x
-
     * Minimum Viable Product (MVP)
     * Pebble is a MEAN Stack app so...
     * MongoDB is used for database ( mongoose.js )
@@ -46,12 +27,13 @@ pebble version logg:
     * The / (Home) path used to show info about the logged in user
     * The /reserve path, is used to show info about the reserve
     
-    * users land area size based off an expression (size = minsize + random + equalShare + worldWealth)
+    * users land area size based off an expression (size = minsize + random + equalShare + worldWealth
+    * pebblebar app works accross diferent paths
     
     (proposed additions/changes to 1.0.x)  
     
-    * the dial home feature that updates the users wallet value should be site wide. make an angular.js app, and ejs part for this.
-    * the "take a pebble button" function in the / (home) path client should be moved to the /reserve path client 
+    * "take a pebble" button working on reserve path, and working with pebblebar
+    
     * Have a about path Tab
     * Have a settings path Tab
     * Have a tax plan system that allows for more then one tax plan to be in effect including "no tax"

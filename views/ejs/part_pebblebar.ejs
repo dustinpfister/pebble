@@ -21,6 +21,14 @@
                 
                     setTimeout(userCheck, 10000);
                     
+                    if(window.ReserveClient){
+                        
+                        console.log('reserve client found!');
+                        console.log(ReserveClient);
+                        
+                    }
+                    
+                    
                     // make the post
                     $http({
                         method: 'POST'

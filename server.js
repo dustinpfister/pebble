@@ -191,7 +191,7 @@ app.get('/reserve', function(req, res){
 app.post('/reserve', function(req, res){
     
     
-    // if "check" action
+    // if "reserve" action
     if(req.body.action === 'getReserve'){
         
         
