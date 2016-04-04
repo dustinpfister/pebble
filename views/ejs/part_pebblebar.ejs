@@ -4,80 +4,97 @@
 
 <script>
     
-    (function(){
-        
-        var app = angular.module('pebblebar', []);
-        
-            app.controller('pebblecheck', function ($scope,$http) {
+    var pebbleBar = (function () {
+
+        var app = angular.module('pebblebar', []),
+            plugins = [];
+
+        app.controller('pebblecheck', function ($scope, $http) {
+
+            $scope.userdata = {
+
+                wallet: 0
+
+            }
+
+
+            var pebbleCheck = function () {
+
+                setTimeout(pebbleCheck, 10000);
+
+
+                var action = 'usercheck'
+                    , requested = 0;
+
+                /*
+                if (window.ReserveClient) {
+
+                    console.log('reserve client found!');
+                    console.log(ReserveClient.requested);
+
+                    requested = ReserveClient.requested;
+
+                    if (requested > 0) {
+
+                        action = 'take';
+
+
+                        ReserveClient.reset();
+
+                    }
+
+
+                }
+
+*/
+
+                
+                console.log(plugins);
+                
+                // make the post
+                $http({
+                    method: 'POST'
+                    , url: '/'
+                    , data: {
+                        action: action
+                        , amount: requested
+                    }
+
+                }).then(function (response) {
+
+                    // success callback
+
+                    $scope.userdata = response.data;
+
+                }, function (response) {
+
+                    // error callback
+
+                });
+
+            };
+
+            pebbleCheck();
             
-                $scope.userdata = {
+            
+            
+
+        });
+
+        // manual bootstrap (ng-app can only be used once)
+        angular.bootstrap(document.getElementById('app_pebblebar'), ['pebblebar']);
+
+        // public API
+        return {
+                
+                // add a plugin to pebblebar
+                addPlugin : function(plugin){
                     
-                    wallet : 0
+                    plugins.push(plugin);
                     
                 }
                 
-                
-                var userCheck = function(){
-                
-                    setTimeout(userCheck, 10000);
-                    
-                    
-                    var action = 'usercheck',
-                        requested = 0;
-                    
-                    if(window.ReserveClient){
-                        
-                        console.log('reserve client found!');
-                        console.log(ReserveClient.requested);
-                        
-                        requested = ReserveClient.requested;
-                        
-                        if(requested > 0){
-                        
-                            action = 'take';
-                        
-                        
-                            ReserveClient.reset();
-                        
-                        }
-                        
-                        
-                    }
-                    
-                    
-                    console.log(action)
-                    
-                    // make the post
-                    $http({
-                        method: 'POST'
-                        , url: '/'
-                        , data: {
-                            action: action,
-                            amount:requested
-                        }
-
-                    }).then(function (response) {
-
-                        // success callback
-
-                        console.log(response.data);
-
-                        $scope.userdata = response.data;
-
-                    }, function (response) {
-
-                        // error callback
-
-                    });
-                    
-                };
-                
-                userCheck();
-                
-            });
-            
-            // manual bootstrap (ng-app can only be used once)
-            angular.bootstrap(document.getElementById('app_pebblebar'), ['pebblebar']);
+            }
         
     }());
     

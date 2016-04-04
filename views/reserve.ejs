@@ -12,8 +12,8 @@
 
         <!-- ReserveClient, this is what will be looked at by pebble bar -->
         <script>
-                    
             // ALERT! there should be a way to make this part of the angular app.
+            /*
             var ReserveClient = {
                 
                 requested : 0,
@@ -38,101 +38,132 @@
                 }
                 
             };
-                    
+              
+              */
         </script>
-        
-        
+
+
         <% include ./ejs/part_nav.ejs %>
 
             <div class="main_container">
 
-                
+
                 <% include ./ejs/part_pebblebar.ejs %>
-                
-                <h2>The Reserve: </h2>
 
-                <!-- angular client html for reserve path -->
-                <div id="reserve_client_div" ng-controller="control">
+                    <h2>The Reserve: </h2>
 
-                    <ul>
+                    <!-- angular client html for reserve path -->
+                    <div id="reserve_client_div" ng-controller="control">
 
-                        <li> world total: {{ reserve.worldTotal }} </li>
-                        <li> reserve wallet: {{ reserve.wallet }} </li>
-                        <li> world population: {{ reserve.population }} </li>
-                        <li> equal share: {{ reserve.equalShare }} </li>
-                        <li> Tax Brackets: {{ reserve.brackets }}</li>
-                        <li> Last tax collection: {{ reserve.lastCollection }} </li>
+                        <ul>
 
-                    </ul>
-                
-                    
+                            <li> world total: {{ reserve.worldTotal }} </li>
+                            <li> reserve wallet: {{ reserve.wallet }} </li>
+                            <li> world population: {{ reserve.population }} </li>
+                            <li> equal share: {{ reserve.equalShare }} </li>
+                            <li> Tax Brackets: {{ reserve.brackets }}</li>
+                            <li> Last tax collection: {{ reserve.lastCollection }} </li>
 
-                </div>
-                
-                <h2>Request Pebbles</h2>
-                <p> requested: <span id="reserveclient_disp">0</span></p>
-                <input id="reserveclient_take" type="button" value="take a pebble"> 
+                        </ul>
 
-                <!-- ReserveClient Evenets -->
-                <script>
-                    
-                    document.getElementById('reserveclient_take').addEventListener('click', function(e){
+
+
+                    </div>
+
+                    <h2>Request Pebbles</h2>
+                    <p> requested: <span id="reserveclient_disp">0</span></p>
+                    <input id="reserveclient_take" type="button" value="take a pebble">
+
+                    <script>
                         
-                        ReserveClient.take();
-                        document.getElementById('reserveclient_disp').innerHTML = ReserveClient.requested;
-                        
-                    });
-                    
-                </script>
-                
-                
-                <!-- angular app that just displays stuff -->
-                <script>
-                    
-                    // angular client for the reserve path
-                    
-                    var app = angular.module('reserve_client', []);
+                        // reserve client
+                        (function () {
 
-                    app.controller('control', function ($http, $scope) {
+                            var app = angular.module('reserve_client', []);
 
-                        // the reserve data
-                        $scope.reserve = {};
+                            app.controller('control', function ($scope) {
 
+                                $scope.reserve = {};
+                                $scope.requesting = 0;
+                                
+                                console.log('well');
+                                
+                                pebbleBar.addPlugin({
 
-                        // make the post
-                        
-                        $http({
-                            method: 'POST'
-                            , url: '/reserve'
-                            , data: {
-                                action: 'getReserve'
-                            }
+                                    pluginName: 'reserveClient',
 
-                        }).then(function (response) {
+                                    scope : $scope
 
-                            // success callback
+                                });
+                                
+                            });
 
+                            angular.bootstrap(document.getElementById('reserve_client_div'), ['reserve_client']);
 
-
-                            $scope.reserve = response.data;
-                            
                             
 
-                            console.log(response.data);
+                        }());
+                    </script>
 
 
-                        }, function (response) {
+                    <!-- ReserveClient Evenets -->
+                    <script>
+                        /*
+                                            document.getElementById('reserveclient_take').addEventListener('click', function(e){
+                                                
+                                                ReserveClient.take();
+                                                document.getElementById('reserveclient_disp').innerHTML = ReserveClient.requested;
+                                                
+                                            });
+                                            
+                                            */
+                    </script>
 
-                            // error callback
+
+                    <!-- angular app that just displays stuff -->
+                    <script>
+                        // angular client for the reserve path
+
+                        /*
+                        var app = angular.module('reserve_client', []);
+
+                        app.controller('control', function ($http, $scope) {
+
+                            // the reserve data
+                            $scope.reserve = {};
+
+
+                            // make the post
+                            
+                            $http({
+                                method: 'POST'
+                                , url: '/reserve'
+                                , data: {
+                                    action: 'getReserve'
+                                }
+
+                            }).then(function (response) {
+
+                                // success callback
+
+
+
+                                $scope.reserve = response.data;
+                                
+                                
+
+
+                            }, function (response) {
+
+                                // error callback
+
+                            });
 
                         });
 
-                    });
-
-                    console.log(app)
-                    
-                    angular.bootstrap(document.getElementById('reserve_client_div'), ['reserve_client']);
-                </script>
+                        angular.bootstrap(document.getElementById('reserve_client_div'), ['reserve_client']);
+                        */
+                    </script>
 
             </div>
 

@@ -29,10 +29,13 @@ pebble version logg:
     
     * users land area size based off an expression (size = minsize + random + equalShare + worldWealth
     * pebblebar app works accross diferent paths
+    * "take a pebble" button working on reserve path, and working with pebblebar
     
     (proposed additions/changes to 1.0.x)  
     
-    * "take a pebble" button working on reserve path, and working with pebblebar
+    
+    * part_pebblebar.ejs : make a plugin system for pebblebar, and write plugins for all paths the should have one.
+    * part_pebblebar.ejs : i want all scripted http to be handled by pebblebar
     
     * Have a about path Tab
     * Have a settings path Tab
