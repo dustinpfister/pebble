@@ -10,44 +10,11 @@
         <!-- ui bootstrap -->
         <script src="/js/ui-bootstrap-tpls-1.2.5.min.js"></script>
 
-        <!-- ReserveClient, this is what will be looked at by pebble bar -->
-        <script>
-            // ALERT! there should be a way to make this part of the angular app.
-            /*
-            var ReserveClient = {
-                
-                requested : 0,
-                take : function(){
-                    
-                    this.requested += 1;
-                    
-                },
-                
-                // reser requetsed back to zero, and update the view
-                reset : function(n){
-                    
-                    this.requested = 0;
-                    
-                    // ALERT! sloppy very sloppy, why do i do stuff like this when I know better?
-                    var view = document.getElementById('reserveclient_disp');
-                    if(view){
-                    
-                        view.innerHTML = this.requested;
-                    
-                    }
-                }
-                
-            };
-              
-              */
-        </script>
-
-
         <% include ./ejs/part_nav.ejs %>
 
             <div class="main_container">
 
-
+                <!-- pebblebar -->
                 <% include ./ejs/part_pebblebar.ejs %>
 
                     <h2>The Reserve: </h2>
@@ -67,102 +34,82 @@
                         </ul>
 
 
+                        
+                    <h2>Request Pebbles</h2>
+                    <p> requested: <span id="reserveclient_disp">{{ requesting }}</span></p>
+                    <input id="reserveclient_take" type="button" value="take a pebble" ng-click="takeButton()">
 
                     </div>
 
-                    <h2>Request Pebbles</h2>
-                    <p> requested: <span id="reserveclient_disp">0</span></p>
-                    <input id="reserveclient_take" type="button" value="take a pebble">
 
                     <script>
                         
-                        // reserve client
-                        (function () {
+                        // the pebbleApp for the reserve path
+                        var pebbleApp = (function () {
 
-                            var app = angular.module('reserve_client', []);
+                            var app = angular.module('reserve_client', []),
+                            
+                            angularEL = document.getElementById('reserve_client_div'),
+                                
+                            // the number of pebbles requested that is subject to change via user input
+                            requesting = 0,
+                                
+                            // the clientData object contains data that will be transmited to the server    
+                            clientData = {
+                                pebbleAppName : 'reserve_client',
+                                requested : 0 // the number of pebbles requested to be credited to the users account
+                            };
 
                             app.controller('control', function ($scope) {
 
                                 $scope.reserve = {};
                                 $scope.requesting = 0;
                                 
-                                console.log('well');
-                                
-                                pebbleBar.addPlugin({
-
-                                    pluginName: 'reserveClient',
-
-                                    scope : $scope
-
-                                });
+                                $scope.takeButton = function(){
+                                  
+                                    requesting += 1;
+                                    $scope.requesting = requesting;
+                                    
+                                };
                                 
                             });
-
-                            angular.bootstrap(document.getElementById('reserve_client_div'), ['reserve_client']);
-
                             
-
-                        }());
-                    </script>
-
-
-                    <!-- ReserveClient Evenets -->
-                    <script>
-                        /*
-                                            document.getElementById('reserveclient_take').addEventListener('click', function(e){
-                                                
-                                                ReserveClient.take();
-                                                document.getElementById('reserveclient_disp').innerHTML = ReserveClient.requested;
-                                                
-                                            });
-                                            
-                                            */
-                    </script>
-
-
-                    <!-- angular app that just displays stuff -->
-                    <script>
-                        // angular client for the reserve path
-
-                        /*
-                        var app = angular.module('reserve_client', []);
-
-                        app.controller('control', function ($http, $scope) {
-
-                            // the reserve data
-                            $scope.reserve = {};
-
-
-                            // make the post
+                            angular.bootstrap(angularEL, ['reserve_client']);
                             
-                            $http({
-                                method: 'POST'
-                                , url: '/reserve'
-                                , data: {
-                                    action: 'getReserve'
+                            // standard API for a pebbleApp
+                            return {
+                                
+                                // the client data should be public to pebblebar
+                                clientData : clientData,
+                                
+                                // what to do before a post
+                                before : function(){
+                                    
+                                    // transfer requesting to requested
+                                    clientData.requested = requesting;
+                                    
+                                    angular.element(angularEL).scope().requesting = 0;
+                                    angular.element(angularEL).scope().$apply();
+                                    requesting = 0;
+                                    
+                                    
+                                },
+                                
+                                // what to do with the response from the server
+                                after : function(response){
+                                    
+                                    requested = 0;
+                                    
+                                    angular.element(angularEL).scope().reserve = response.reserve;
+                                    angular.element(angularEL).scope().$apply();
+                                    
+                                    console.log(response);
+                                    
                                 }
-
-                            }).then(function (response) {
-
-                                // success callback
-
-
-
-                                $scope.reserve = response.data;
                                 
-                                
-
-
-                            }, function (response) {
-
-                                // error callback
-
-                            });
-
-                        });
-
-                        angular.bootstrap(document.getElementById('reserve_client_div'), ['reserve_client']);
-                        */
+                            }
+                            
+                        }());
                     </script>
 
             </div>

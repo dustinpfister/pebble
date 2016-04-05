@@ -17,55 +17,44 @@
 
             }
 
-
             var pebbleCheck = function () {
 
-                setTimeout(pebbleCheck, 10000);
-
-
-                var action = 'usercheck'
-                    , requested = 0;
-
-                /*
-                if (window.ReserveClient) {
-
-                    console.log('reserve client found!');
-                    console.log(ReserveClient.requested);
-
-                    requested = ReserveClient.requested;
-
-                    if (requested > 0) {
-
-                        action = 'take';
-
-
-                        ReserveClient.reset();
-
-                    }
-
-
-                }
-
-*/
-
+                setTimeout(pebbleCheck, 5000);
                 
-                console.log(plugins);
+                
+                // look for the current pebbleApp
+                if(window.pebbleApp){
+                    
+                    console.log('we\'ve got one!');
+                    
+                    pebbleApp.before();
+                    
+                }
                 
                 // make the post
                 $http({
                     method: 'POST'
                     , url: '/'
                     , data: {
-                        action: action
-                        , amount: requested
+                        action: 'pebblebar',
+                        clientData : window.pebbleApp ? window.pebbleApp.clientData : {}
                     }
 
                 }).then(function (response) {
 
                     // success callback
+                    $scope.userdata = response.data.userData;
 
-                    $scope.userdata = response.data;
-
+                    console.log('pebblebar server response!');
+                    
+                    // look for the current pebbleApp
+                   if(window.pebbleApp){
+                
+                       pebbleApp.after(response.data)
+                       
+                   }
+                 
+                    
                 }, function (response) {
 
                     // error callback
