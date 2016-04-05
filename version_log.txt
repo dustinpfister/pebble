@@ -23,35 +23,99 @@ pebble version logg:
     * login, and signup pages added and working.
     * visiters get redirected to the login path, if they visit any path that requires an account including root.
     * at least one tax plan is in effect.  
-    
     * The / (Home) path used to show info about the logged in user
     * The /reserve path, is used to show info about the reserve
-    
     * users land area size based off an expression (size = minsize + random + equalShare + worldWealth
     * pebblebar app works accross diferent paths
     * "take a pebble" button working on reserve path, and working with pebblebar
     * part_pebblebar.ejs : make a plugin system for pebblebar
+    * write a pebblebar plugin for /reserve path
+    * write a pebblebar plugin for / (home) path
+    * part_pebblebar.ejs : i want all scripted http to be handled by pebblebar
     
     
     (proposed additions/changes to 1.0.x)  
     
-    * write a pebblebar plugin for /reserve path
-    * write a pebblebar plugin for / (home) path
     
-    * part_pebblebar.ejs : i want all scripted http to be handled by pebblebar
     
     * Have a about path Tab
     * Have a settings path Tab
-    * Have a tax plan system that allows for more then one tax plan to be in effect including "no tax"
     * Have a way to vote for what kind of tax plan should be in place (on the reserve tab)
     * have an area property for a user account that reflects the kind of resources that are availabule to the user
     * have resources such as wood, oil, water, and farmland in an area.
-    
+    * maybe pull wallets from users.js into new accounts model that will be in pebble.js if you think it's a good idea to do so.
+    * have a shops tab
+    * Have a tax plan system that allows for more then one tax plan to be in effect including "no tax"
     * SSL for at least login and signup paths if not all
+    
+    
+    * Tax System:
+    
+        * have a tax plan system that allows for different tax systems to be in effect for "the reserve".
+        * each user can place a single vote in favor of the system they would like at the reserve tab.
+        * the most popular system is the one that will be in effect.
+        * tax systems :
+        
+            * social - tax system based around user account total wealth in relation to world population.
+            * free market - low flat tax system inposed on income only, not total wealth. Population has no impact on system.
+            * no tax - pebbels flow out from the reserve, once out the only way they go back is threw the sale of new shops for users.
+    
+    * PebbleChecker:
+    
+        * pebbleChecker is a programe that can be called dirrectly from bash.
+        * although pebbleChecker can be called dirrectly from bash it will likley be called from a *.js file.
+        * the program does the following:
+            * sanity check:
+                * addes up the sum of pebbles in the reserve wallet as well as all users account wallets called "pebbleSum".
+                * pebbleSum is compared to the world total, and if it is equal the sum is valid and no action will need to be taken.
+                * in the event of an invalid sum the following action is preformed:
+                    * a percent value is computed for each account wallet relative to the invalid sum.
+                    * this percent value is used to distribute a new wallet value to all wallets including the reserve.
+                    * values are rounded down, and the remaining pebbles end up in the reserve.
+                    * this event is logged to a property in the main reserve account object.
+                    * the history of these events if they happen can be viewed on the reserve tab
+                * a sanity report will be produced and will be logged to the standard out.
+    
+    * pebbleProcess
+    
+        * pebbleProcess is a backend system that is always running that processes transactions, collects taxes, and preforms checks.
+        * transaction processing:
+            * when a transaction is recived by server.js it is logged to a database collection.
+            * at any given moment there will be a stack of transactions to process by pebbleProcess.
+            * pebbleProcess processes these transactions on a first come first serve basis.
+            * any taxes that are recived based on income or transacions are collected (if applicabule).
+            * once a transaction is processed it is transfered to a seperate database collection, where it will eventualy be purged.
+        * sanity check
+            * at the end of every game day, transaction processing is suspened for a sanity check
+            * the pebbleChecker backend is called.
+            * any corrections are preformed if needed
+            * tax Collection:
+                * after the sanity check tax collection based on wealth (not income) is preformed (if applicabule).
+    
+    * SHOPS:
+    
+        * there should be a shops tab
+        * the shops tab is a place a player can go to to spend pebbels for things.
+        * the shops tab is a place where a player can start their own shop.
+        * a shop can be bought from another player if they have it up for sale.
+        * a shop can be started by a player if they have the pebbles to start one.
+        * shops are baught from "the reserve", and the money goes back to the reserve (reserve account income).
+        * sales tax may be collected for some shops depedning on the shop and tax plan in effect (reserve account income).
+        * shops are a way to make pebbles from other users.
+        * there is a limit on the number of shops per user account (say 3 for starters maybe?).
+        * the limit on the number of shops a user account can have may be upgraded (to a max of say 10 maybe?)
+    
     
 1.1.x
 
     (proposed ideas for 1.1.x)
     
     * Have a Help, Manual, or "how to play" Tab
-    * Shops
+    
+    * Land:
+    
+        * there should be a land tab.
+        * each user starts off with a small peace of land
+        * for a price a user can buy a new peace of land.
+        * if a user has more then one peace of land they can place one of there peaces of land up for sale.
+        * will land be generated? or will there be a fixed map?
