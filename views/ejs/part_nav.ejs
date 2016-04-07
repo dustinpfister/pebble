@@ -19,10 +19,34 @@
             </div>
             
 	        <div uib-collapse="isCollapsed">
+                
+                <%
+                   // find active path
+                
+                    var paths = ['/','/reserve'], active = [], i = 0, len = paths.length;
+                
+                    while(i < len){
+                        
+                        active[i] = '';
+                        
+                        if(req.path === paths[i]){
+                            
+                            active[i] = 'active';
+                            
+                        }
+                        
+                        i++;
+                    }
+                
+                %>
+                
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/reserve">The Reserve</a></li>
+                    
+                    <li class=" <%=  active[0] %> "><a href="/">Home</a></li>
+                    <li class=" <%=  active[1] %> "><a href="/reserve">The Reserve</a></li>
+                   
                 </ul>
+                
 	        </div>
             
         </div>

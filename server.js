@@ -140,7 +140,8 @@ app.get('/', function (req, res, next) {
 
         res.render('main', {
 
-            reserve: reserve
+            req: req
+            ,reserve: reserve
             , user: req.user
 
         });
@@ -150,6 +151,7 @@ app.get('/', function (req, res, next) {
 });
 app.post('/', function (req, res) {
 
+    // ALERT ! do we really need to do this for every post to / ?
     users.getUserSafe(req.user.username, function (user) {
 
         // pebblebar backend
@@ -235,41 +237,9 @@ app.post('/', function (req, res) {
 
     });
 
-    /*
-    // if "take" action
-    if(req.body.action === 'take'){
     
-        pebble.takeRequest(req.user.username, req.body.amount, function(wallet){
     
-            console.log('take request compleate for ' + req.user.username + ' users wallet: ' + wallet);
-        
-            res.send(JSON.stringify({wallet:wallet}));
-        
-        });
-        
-    }
-    
-    // if "check" action
-    if(req.body.action === 'check'){
-        
-        pebble.check({username: req.user.username, requesting: req.body.requesting}, function(data){
-        
-            res.send(JSON.stringify(data));
-        
-        });
-    }
-    
-    // if "usercheck"
-    if(req.body.action === 'usercheck'){
-        
-        users.getUserSafe(req.user.username, function(user){
-           
-            res.send(JSON.stringify(user));
-            
-        });
-    }
-    
-    */
+   
 
 });
 
@@ -278,39 +248,14 @@ app.get('/reserve', function (req, res) {
 
     res.render('reserve', {
 
+        req: req,
         user: req.user
 
     });
+    
 
 });
-/*
-app.post('/reserve', function(req, res){
-    
-    
-    // if "reserve" action
-    if(req.body.action === 'getReserve'){
-        
-        
-        pebble.getReserve(function(reserve){
-            
-            if(reserve){
-                
-                res.send(reserve);
-                
-            }else{
-                
-                res.send('error');
-                
-            }
-            
-        });
-    
-    }
-    
-    
-    
-});
-*/
+
 
 app.get('/login', function (req, res, next) {
 
