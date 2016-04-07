@@ -2,23 +2,42 @@ pebble version logg:
 
 1.0.x
 
-    * Minimum Viable Product (MVP)
-    * Pebble is a MEAN Stack app so...
-    * MongoDB is used for database ( mongoose.js )
-    * Express.js for a server framework.
-    * Angular.js for the client system.
-    * Node will be used for backend programming.
-    * ejs (embedded javascript) used to help render views server-side.
+    * pebble 1.0.x will be a Minimum Viable Product (MVP)
+    
+    MEAN Stack:
+    
+        * pebble is a MEAN Stack Product.
+        * MongoDB is used for database ( mongoose.js )
+        * Express.js for a server framework.
+        * Angular.js for the client system.
+        * Node will be used for backend programming.
+    
+    Additional barrowed Middleware, libs, ect:
+    
+        * ejs (embedded javascript) used to help render views server-side.
+        * UI Bootstrap html framweork for layout (angular friendly bootstrap).
+        * passport.js is used for authentication
+        * passport local strategy used.
+        * connect-mongo used in place of default memory store for session data
+    
+    Original code:
+    
+        * server.js written (this is what will be called with node to start pebble on the server)
+        * pebble.js written (this contains methods for working with the pebble reserve)
+        * users.js written (this contains methods for working with user accounts)
+        * openshift.js (this makes use of environment variables when deployed to openshift, else local alternatives are used )   
+    
+    Shops : 
+    
+        * shops can be found at the shops tab
+        * a shop can be started by a player if they have the pebbles to start one.
+        * shops are baught from "the reserve", and the money goes back to the reserve (reserve account income).
+        * there is a limit on the number of shops per user account (it's 3 as of this writing).
+    
+    
+    
     * *.ejs files broken down into partials stored in /views/ejs
-    * UI Bootstrap html framweork for layout.
     * bootstrap_pebble.css ( hacked over bootstrap.css file in /views/css, used for CSS formatting)
-    * passport.js is used for authentication
-    * passport local strategy used.
-    * connect-mongo used in place of default memory store for session data
-    * server.js written (this is what will be called with node to start pebble on the server)
-    * pebble.js written (this contains methods for working with the pebble reserve)
-    * users.js written (this contains methods for working with user accounts)
-    * openshift.js (this makes use of environment variables when deployed to openshift, else local alternatives are used )   
     * "take a pebble" button added that is usedd to take pebbles dirrectly from the reserve's wallet.
     * login, and signup pages added and working.
     * visiters get redirected to the login path, if they visit any path that requires an account including root.
@@ -28,10 +47,12 @@ pebble version logg:
     * users land area size based off an expression (size = minsize + random + equalShare + worldWealth
     * pebblebar app works accross diferent paths
     * "take a pebble" button working on reserve path, and working with pebblebar
-    * part_pebblebar.ejs : make a plugin system for pebblebar
-    * write a pebblebar plugin for /reserve path
-    * write a pebblebar plugin for / (home) path
+    * part_pebblebar.ejs : made a plugin system for pebblebar
+    * writed a pebblebar plugin for /reserve path
+    * writed a pebblebar plugin for / (home) path
     * part_pebblebar.ejs : i want all scripted http to be handled by pebblebar
+    
+            
     
     
     (proposed additions/changes to 1.0.x)  
@@ -94,15 +115,13 @@ pebble version logg:
     
     * SHOPS:
     
-        * there should be a shops tab
-        * the shops tab is a place a player can go to to spend pebbels for things.
-        * the shops tab is a place where a player can start their own shop.
-        * a shop can be bought from another player if they have it up for sale.
-        * a shop can be started by a player if they have the pebbles to start one.
-        * shops are baught from "the reserve", and the money goes back to the reserve (reserve account income).
-        * sales tax may be collected for some shops depedning on the shop and tax plan in effect (reserve account income).
+        * i will need a shops collction, this will be used to store the shops rather then the user record.
+        * the users shop array will not store the shop class instances, but an id that references the shop in the shops collction
+        * must have the client system display the shops.
+    
         * shops are a way to make pebbles from other users.
-        * there is a limit on the number of shops per user account (say 3 for starters maybe?).
+        * a shop can be bought from another player if they have it up for sale.
+        * sales tax may be collected for some shops depedning on the shop and tax plan in effect (reserve account income).
         * the limit on the number of shops a user account can have may be upgraded (to a max of say 10 maybe?)
     
     
