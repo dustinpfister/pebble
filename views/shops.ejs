@@ -1,0 +1,73 @@
+<% include ./ejs/part_head.ejs %>
+
+    <body>
+
+        <!-- angular -->
+        <script src="/js/angular.js"></script>
+
+        <!-- ui bootstrap -->
+        <script src="/js/ui-bootstrap-tpls-1.2.5.min.js"></script>
+
+        <% include ./ejs/part_nav.ejs %>
+
+            <div class="main_container">
+
+                <% include ./ejs/part_pebblebar.ejs %>
+
+                    <div id="shops_client_div" ng-controller="control">
+                    </div>
+
+                    <script>
+                        
+                        // the pebbleApp for the shops path
+                        var pebbleApp = (function () {
+
+                            var app = angular.module('shops_client', []),
+
+                                angularEL = document.getElementById('shops_client_div'),
+
+                                clientData = {
+                                    
+                                    pebbleAppName: 'shops_client'
+                                    
+                                };
+
+                            app.controller('control', function ($scope) {
+
+                                $scope.disco = "stu";
+
+                            });
+
+                            angular.bootstrap(angularEL, ['shops_client']);
+
+                            // standard API for a pebbleApp
+                            return {
+
+                                // the client data should be public to pebblebar
+                                clientData: clientData,
+
+                                // what to do before a post
+                                before: function () {
+
+                                    //angular.element(angularEL).scope().requesting = 0;
+                                    //angular.element(angularEL).scope().$apply();
+
+                                },
+
+                                // what to do with the response from the server
+                                after: function (response) {
+
+                                    console.log(response);
+
+                                }
+
+                            }
+
+                        }());
+                    </script>
+
+            </div>
+
+    </body>
+
+    </html>

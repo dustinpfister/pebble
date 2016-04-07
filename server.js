@@ -257,6 +257,19 @@ app.get('/reserve', function (req, res) {
 });
 
 
+app.get('/shops', function (req, res){
+    
+    
+    res.render('shops', {
+       
+        req: req,
+        user: req.user
+        
+    });
+    
+    
+});
+
 app.get('/login', function (req, res, next) {
 
     res.render('login', {});
