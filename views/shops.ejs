@@ -14,7 +14,12 @@
 
                 <% include ./ejs/part_pebblebar.ejs %>
 
+                <h2>Start a Shop:</h2>
+                
                     <div id="shops_client_div" ng-controller="control">
+                        
+                        <input type="button" value="buy a shop" ng-click="buyShop()">
+                        
                     </div>
 
                     <script>
@@ -28,13 +33,18 @@
 
                                 clientData = {
                                     
-                                    pebbleAppName: 'shops_client'
+                                    pebbleAppName: 'shops_client',
+                                    newShop : false
                                     
                                 };
 
                             app.controller('control', function ($scope) {
 
-                                $scope.disco = "stu";
+                                $scope.buyShop = function(){
+                                  
+                                    clientData.newShop = true;
+                                    
+                                };
 
                             });
 
@@ -58,6 +68,7 @@
                                 after: function (response) {
 
                                     console.log(response);
+                                    clientData.newShop = false;
 
                                 }
 

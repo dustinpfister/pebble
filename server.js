@@ -165,7 +165,7 @@ app.post('/', function (req, res) {
 
                 switch (req.body.clientData.pebbleAppName) {
 
-                    // the reserve client at the /reserve path
+                // the reserve client at the /reserve path
                 case 'reserve_client':
 
                     console.log('reserve client!');
@@ -204,7 +204,39 @@ app.post('/', function (req, res) {
                     });
 
                     break;
+                        
+                        
+                case 'shops_client':
 
+                        
+                    if(req.body.clientData.newShop){
+                        
+                        console.log('new Shop');
+                        
+                        users.startShop(req.user.username, function(mess){
+                        
+                            res.send(JSON.stringify({
+                        
+                                userData : user,
+                                newShop : mess
+                        
+                            }));
+                            
+                        });
+                        
+                    
+                    // no new shop
+                    }else{
+                        
+                        res.send(JSON.stringify({
+                            userData : user 
+                        
+                        }));
+                    
+                    }
+                        
+                    break;
+                        
                 default:
 
                     // send just the user data for pebblebar itself
