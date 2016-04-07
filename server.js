@@ -213,12 +213,12 @@ app.post('/', function (req, res) {
                         
                         console.log('new Shop');
                         
-                        users.startShop(req.user.username, function(mess){
+                        users.startShop(req.user.username, function(shopObj){
                         
                             res.send(JSON.stringify({
                         
                                 userData : user,
-                                newShop : mess
+                                newShop : shopObj
                         
                             }));
                             
