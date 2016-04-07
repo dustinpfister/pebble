@@ -215,12 +215,18 @@ app.post('/', function (req, res) {
                         
                         users.startShop(req.user.username, function(shopObj){
                         
-                            res.send(JSON.stringify({
+                            // get the shop page
+                            users.getShopPage(req.body.shopPage, function(shopPage){
                         
-                                userData : user,
-                                newShop : shopObj
+                                res.send(JSON.stringify({
                         
-                            }));
+                                    userData : user,
+                                    shopPage : shopPage,
+                                    newShop : shopObj
+                        
+                                }));
+                            
+                            });
                             
                         });
                         
@@ -228,10 +234,17 @@ app.post('/', function (req, res) {
                     // no new shop
                     }else{
                         
-                        res.send(JSON.stringify({
-                            userData : user 
+                        // get the shop page
+                        users.getShopPage(req.body.shopPage, function(shopPage){
                         
-                        }));
+                            res.send(JSON.stringify({
+                               
+                               userData : user,
+                               shopPage : shopPage
+                        
+                            }));
+                            
+                        });
                     
                     }
                         
