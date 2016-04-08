@@ -20,6 +20,12 @@
                         
                         <input type="button" value="buy a shop" ng-click="buyShop()">
                         
+                        <div id="shops">
+                            
+                            
+                            
+                        </div>
+                        
                     </div>
 
                     <script>
@@ -68,9 +74,16 @@
                                 // what to do with the response from the server
                                 after: function (response) {
 
-                                    console.log(response);
+                                    console.log( response.shopPage );
                                     clientData.newShop = false;
 
+                                    
+                                    
+                                    // ALERT! learn how to do this with angular
+                                    var html = '';
+                                    
+                                    document.getElementById('shops').innerHTML=html;;
+                                    
                                 }
 
                             }

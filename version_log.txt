@@ -35,6 +35,8 @@ pebble version logg:
         * there is a limit on the number of shops per user account (it's 3 as of this writing).
         * there will be a shops collection
         * the users shop array stores the ids of the shops the user owns in the shops collction
+        * All the shops have a value called weight, the higher the weight the higher the ranking in the shopPages
+    
     
     * *.ejs files broken down into partials stored in /views/ejs
     * bootstrap_pebble.css ( hacked over bootstrap.css file in /views/css, used for CSS formatting)
@@ -115,9 +117,8 @@ pebble version logg:
     
     * SHOPS:
     
-        * All the shops need to have a value called weight, the higher the weight the higher the ranking in the shopPages
+        
         * must have the client system display the shops.
-    
         * shops are a way to make pebbles from other users.
         * a shop can be bought from another player if they have it up for sale.
         * sales tax may be collected for some shops depedning on the shop and tax plan in effect (reserve account income).
