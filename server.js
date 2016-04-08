@@ -235,7 +235,7 @@ app.post('/', function (req, res) {
                     }else{
                         
                         // get the shop page
-                        users.getShopPage(req.body.shopPage, function(shopPage){
+                        users.getShopPage(req.body.clientData.shopPage, function(shopPage){
                         
                             res.send(JSON.stringify({
                                
