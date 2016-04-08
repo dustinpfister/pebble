@@ -22,7 +22,7 @@
                         
                         <div id="shops">
                             
-                            
+                            <p>Whats goinf on?</p>
                             
                         </div>
                         
@@ -80,9 +80,18 @@
                                     
                                     
                                     // ALERT! learn how to do this with angular
-                                    var html = '';
+                                    var html = '', i = 0, len = response.shopPage.length;
                                     
-                                    document.getElementById('shops').innerHTML=html;;
+                                    while(i < len){
+                                        
+                                        console.log(response.shopPage[i]);
+                                        
+                                        html += '<p>' + response.shopPage[i].id + '<\/p>';
+                                        
+                                        i++;
+                                    }
+                                    
+                                    document.getElementById('shops').innerHTML = '<p>ll</\p>' + html;
                                     
                                 }
 
