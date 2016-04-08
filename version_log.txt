@@ -33,8 +33,8 @@ pebble version logg:
         * a shop can be started by a player if they have the pebbles to start one.
         * shops are baught from "the reserve", and the money goes back to the reserve (reserve account income).
         * there is a limit on the number of shops per user account (it's 3 as of this writing).
-    
-    
+        * there will be a shops collection
+        * the users shop array stores the ids of the shops the user owns in the shops collction
     
     * *.ejs files broken down into partials stored in /views/ejs
     * bootstrap_pebble.css ( hacked over bootstrap.css file in /views/css, used for CSS formatting)
@@ -115,8 +115,7 @@ pebble version logg:
     
     * SHOPS:
     
-        * i will need a shops collction, this will be used to store the shops rather then the user record.
-        * the users shop array will not store the shop class instances, but an id that references the shop in the shops collction
+        * All the shops need to have a value called weight, the higher the weight the higher the ranking in the shopPages
         * must have the client system display the shops.
     
         * shops are a way to make pebbles from other users.
