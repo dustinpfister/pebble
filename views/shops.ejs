@@ -20,9 +20,7 @@
                         
                         <input type="button" value="buy a shop" ng-click="buyShop()">
                         
-                        <div id="shops">
-                            
-                            <p>Whats goinf on?</p>
+                        <div id="shops" ng-bind="theShops">
                             
                         </div>
                         
@@ -52,9 +50,22 @@
                                     clientData.newShop = true;
                                     
                                 };
+                                $scope.test = 'change';
+                                $scope.theShops = ['something', 'okay'];
 
                             });
-
+                            
+                            app.directive('shoplist', function(){
+                                
+                                return {
+                                    
+                                    template : 'theShops: {{ theShops }}'
+                                    
+                                }
+                                
+                                
+                            });
+                            
                             angular.bootstrap(angularEL, ['shops_client']);
 
                             // standard API for a pebbleApp
@@ -66,9 +77,7 @@
                                 // what to do before a post
                                 before: function () {
 
-                                    //angular.element(angularEL).scope().requesting = 0;
-                                    //angular.element(angularEL).scope().$apply();
-
+                                    
                                 },
 
                                 // what to do with the response from the server
@@ -77,21 +86,9 @@
                                     console.log( response.shopPage );
                                     clientData.newShop = false;
 
+                                    angular.element(angularEL).scope().theShops = JSON.stringify(response.shopPage);
+                                    angular.element(angularEL).scope().$apply();
                                     
-                                    
-                                    // ALERT! learn how to do this with angular
-                                    var html = '', i = 0, len = response.shopPage.length;
-                                    
-                                    while(i < len){
-                                        
-                                        console.log(response.shopPage[i]);
-                                        
-                                        html += '<p>' + response.shopPage[i].id + '<\/p>';
-                                        
-                                        i++;
-                                    }
-                                    
-                                    document.getElementById('shops').innerHTML = '<p>ll</\p>' + html;
                                     
                                 }
 
