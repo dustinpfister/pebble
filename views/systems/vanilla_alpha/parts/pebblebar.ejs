@@ -70,10 +70,20 @@
         // dial home will post to the server every so often
         dialHome = function(){
             
+            var data = {action:'pebblebar'};
+            
+            
+            if(pebbleApp){
+                
+                data.clientData = pebbleApp.clientData;
+                
+            }
+            
+            
             setTimeout(dialHome, 5000);
             
             before();
-            postIt({action:'pebblebar'}, function(response){
+            postIt(data, function(response){
                 
                 after(response);
                 
@@ -87,7 +97,7 @@
             
             if(pebbleApp){
                 
-                console.log('pebbleApp : ' + pebbleApp.toServer.pebbleAppName + ' found.');
+                console.log('pebbleApp : ' + pebbleApp.clientData.pebbleAppName + ' found.');
                 
             }
             

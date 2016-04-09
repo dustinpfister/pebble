@@ -5,29 +5,70 @@
 
 <h2>The Reserve: </h2>
 
+<div>
+</div>
+
+<div>
+    <h3>Take a pebble:</h3>
+    <p>requesting: <span id="reserve_requesting">0</span></p>
+    <input id="reserve_takeapebble" type="button" value="take a pebble">
+</div>
+
 <script>
 
+    // reserve_client pebble app
     var pebbleApp = (function(){
        
-        var toServer = {
+        // client data that goes to the server
+        var clientData = {
             
-            pebbleAppName : 'reserve_client'
+            pebbleAppName : 'reserve_client',
+            requested : 0
             
-        };
+        },
+        requesting = 0;
         
+        // public API
         return {
         
-            toServer : toServer,
+            // pebble app needs access to this
+            clientData : clientData,
             
+            // before POST
             before : function(){
                 
+                clientData.requested = requesting;
+                requesting = 0;
+                
+                // update view
+                this.drawTake();
                 
             },
             
+            // after POST
             after : function(response){
                 
-                console.log('we have something.');
-                console.log(response);
+                clientData.requested = 0;
+                              
+            },
+            
+            // what to do when the take button is pressed
+            take : function(){
+                
+                requesting += 1;
+                
+            },
+            
+            // update view.
+            drawTake : function(){
+                
+                // update view
+                document.getElementById('reserve_requesting').innerHTML = requesting;
+
+            },
+            
+            drawReserve : function(){
+                
                 
             }
             
@@ -35,4 +76,17 @@
         
     }());
 
+// attach to button
+document.getElementById('reserve_takeapebble').addEventListener('click', function(){
+   
+    console.log('okay');
+    
+    // call take
+    pebbleApp.take();
+
+    // view
+    pebbleApp.drawTake();
+
+});
+    
 </script>
