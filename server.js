@@ -12,21 +12,23 @@
 var express = require('express')
     , session = require('express-session')
     , MongoStore = require('connect-mongo/es5')(session)
-openShift = require('./lib/openshift.js').openShiftObj,
+    , openShift = require('./lib/openshift.js').openShiftObj
 
     // passport
-    passport = require('passport')
+    , passport = require('passport')
     , Strategy = require('passport-local').Strategy,
 
     // express app
     app = express(),
 
+    // client system in use:
+    clientSystem = 'vanilla_alpha',
 
     // users
     users = require('./lib/users.js'),
 
     // pebble lib
-    pebble = require('./lib/pebble.js'),
+    pebble = require('./lib/pebble.js');
 
     // use passport local strategy
     // following example at : https://github.com/passport/express-4.x-local-example/blob/master/server.js
@@ -138,7 +140,7 @@ app.get('/', function (req, res, next) {
 
     pebble.getReserve(function (reserve) {
 
-        res.render('systems/angular_uibootstrap/main', {
+        res.render('systems/'+clientSystem+'/main', {
 
             req: req
             ,reserve: reserve
@@ -151,6 +153,8 @@ app.get('/', function (req, res, next) {
 });
 app.post('/', function (req, res) {
 
+    console.log(req.body);
+    
     // ALERT ! do we really need to do this for every post to / ?
     users.getUserSafe(req.user.username, function (user) {
 
@@ -161,7 +165,7 @@ app.post('/', function (req, res) {
             console.log(req.body);
 
             // if we have pebbleAppName do what needs to be done for the app
-            if (req.body.clientData.pebbleAppName) {
+            if (req.body.clientData) {
 
                 switch (req.body.clientData.pebbleAppName) {
 
@@ -291,7 +295,7 @@ app.post('/', function (req, res) {
 
 app.get('/reserve', function (req, res) {
 
-    res.render('systems/angular_uibootstrap/reserve', {
+    res.render('systems/'+clientSystem+'/reserve', {
 
         req: req,
         user: req.user
@@ -305,7 +309,7 @@ app.get('/reserve', function (req, res) {
 app.get('/shops', function (req, res){
     
     
-    res.render('systems/angular_uibootstrap/shops', {
+    res.render('systems/' + clientSystem + '/shops', {
        
         req: req,
         user: req.user
@@ -317,7 +321,7 @@ app.get('/shops', function (req, res){
 
 app.get('/login', function (req, res, next) {
 
-    res.render('login', {});
+    res.render('systems/' + clientSystem + '/login', {});
 
 });
 app.post('/login',
@@ -349,7 +353,7 @@ app.get('/logout', function (req, res) {
 
 app.get('/signup', function (req, res, next) {
 
-    res.render('signup', {});
+    res.render('systems/' + clientSystem + '/signup', {});
 
 });
 app.post('/signup', function (req, res, next) {

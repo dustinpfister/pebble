@@ -1,0 +1,38 @@
+<% include ./parts/head.ejs %>
+<% include ./parts/nav.ejs %>
+<% include ./parts/pebblebar.ejs %>
+
+
+<h2>The Reserve: </h2>
+
+<script>
+
+    var pebbleApp = (function(){
+       
+        var toServer = {
+            
+            pebbleAppName : 'reserve_client'
+            
+        };
+        
+        return {
+        
+            toServer : toServer,
+            
+            before : function(){
+                
+                
+            },
+            
+            after : function(response){
+                
+                console.log('we have something.');
+                console.log(response);
+                
+            }
+            
+        }
+        
+    }());
+
+</script>
