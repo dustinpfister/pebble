@@ -138,7 +138,7 @@ app.get('/', function (req, res, next) {
 
     pebble.getReserve(function (reserve) {
 
-        res.render('main', {
+        res.render('systems/angular_uibootstrap/main', {
 
             req: req
             ,reserve: reserve
@@ -291,7 +291,7 @@ app.post('/', function (req, res) {
 
 app.get('/reserve', function (req, res) {
 
-    res.render('reserve', {
+    res.render('systems/angular_uibootstrap/reserve', {
 
         req: req,
         user: req.user
@@ -305,7 +305,7 @@ app.get('/reserve', function (req, res) {
 app.get('/shops', function (req, res){
     
     
-    res.render('shops', {
+    res.render('systems/angular_uibootstrap/shops', {
        
         req: req,
         user: req.user
