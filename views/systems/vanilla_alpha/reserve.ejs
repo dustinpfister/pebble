@@ -5,7 +5,7 @@
 
 <h2>The Reserve: </h2>
 
-<div>
+<div id="reserve_state">
 </div>
 
 <div>
@@ -26,6 +26,9 @@
             requested : 0
             
         },
+            
+        reserve = {},
+            
         requesting = 0;
         
         // public API
@@ -49,7 +52,13 @@
             after : function(response){
                 
                 clientData.requested = 0;
-                              
+                      
+                console.log(response);
+                
+                reserve = response.reserve;
+                
+                this.drawReserve();
+                
             },
             
             // what to do when the take button is pressed
@@ -69,7 +78,19 @@
             
             drawReserve : function(){
                 
+                var html = '<table>',
+                    noShow = ['_id','_v', 'id'],
+                    prop;
                 
+                for(prop in reserve){
+                    
+                    html += '<tr><td>'+prop+'<\/td><td>'+reserve[prop]+'<\/td><\/tr>';
+                    
+                }
+                
+                
+                document.getElementById('reserve_state').innerHTML = html+'<\/table>';
+
             }
             
         }

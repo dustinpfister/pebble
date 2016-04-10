@@ -40,9 +40,9 @@
         // what to do before the post
         before = function(){
             
-            console.log('et dial home...');
+            console.log('ET phone home...');
             
-            if(pebbleApp){
+            if(window.pebbleApp){
                 
                 pebbleApp.before();
                 
@@ -59,7 +59,7 @@
             wallet.innerHTML = response.userData.wallet;
             
             // do what is called for after for the pebbleApp
-            if(pebbleApp){
+            if(window.pebbleApp){
                 
                 pebbleApp.after(response);
                 
@@ -73,7 +73,7 @@
             var data = {action:'pebblebar'};
             
             
-            if(pebbleApp){
+            if(window.pebbleApp){
                 
                 data.clientData = pebbleApp.clientData;
                 
@@ -95,7 +95,7 @@
         window.addEventListener('load', function(){
             
             
-            if(pebbleApp){
+            if(window.pebbleApp){
                 
                 console.log('pebbleApp : ' + pebbleApp.clientData.pebbleAppName + ' found.');
                 
