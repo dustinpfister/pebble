@@ -5,6 +5,15 @@
 
 <h1>Shops:</h1>
 
+<!-- page interface -->
+<p>
+    <input id="shops_backbutton" type="button" value="&#60;"> 
+    page <span id="shops_pagenum">1</span> 
+    of <span id="shops_maxpage">0</span> 
+    <input id="shops_forwardbutton" type="button" value="&#62;">
+</p>
+
+<!-- shop list -->
 <div id="shops_shoplist">
 </div>
 
@@ -41,9 +50,10 @@
                 console.log(response);
                 
                 shopList = response.shopPage;
-                maxPage = response.maxPage;
+                maxPage = response.maxPage - 1;
                 
                 this.drawShoplist();
+                this.drawInterface();
             },
             
             // draw the current list of shops
@@ -63,7 +73,46 @@
                     i++;
                 }
                 
+                // draw the shops list
                 document.getElementById('shops_shoplist').innerHTML = html + '<\/div>';
+                
+            },
+            
+            // draw page interface
+            drawInterface : function(){
+            
+                document.getElementById('shops_pagenum').innerHTML = clientData.shopPage;
+                document.getElementById('shops_maxpage').innerHTML = maxPage;
+            
+            },
+            
+            // nav
+            nav : function(forward){
+                
+                forward = forward === undefined ? false : true;
+                
+                if(forward){
+                    
+                    clientData.shopPage += 1;
+                    
+                
+                    if(clientData.shopPage > maxPage){
+                        
+                        clientData.shopPage = maxPage;
+                        
+                    }
+                    
+                }else{
+                    
+                    clientData.shopPage -= 1;
+                    
+                    if(clientData.shopPage < 0){
+                        
+                        clientData.shopPage = 0;
+                        
+                    }
+                    
+                }
                 
             }
             
@@ -71,5 +120,16 @@
         
     }());
 
+    // attach to nav buttons
+    document.getElementById('shops_forwardbutton').addEventListener('click', function(e){
+        
+        pebbleApp.nav(true);
+        
+    });
+    document.getElementById('shops_backbutton').addEventListener('click', function(e){
+        
+        pebbleApp.nav();
+        
+    });
     
 </script>
