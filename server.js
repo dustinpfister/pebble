@@ -220,7 +220,7 @@ app.post('/', function (req, res) {
                         users.startShop(req.user.username, function(shopObj){
                         
                             // get the shop page
-                            users.getShopPage(req.body.shopPage, function(shopPage){
+                            users.getShopPage(req.body.clientData.shopPage, function(shopPage){
                         
                                 res.send(JSON.stringify({
                         

@@ -5,6 +5,9 @@
 
 <h1>Shops:</h1>
 
+<div id="shops_shoplist">
+</div>
+
 <script>
 
     // reserve_client pebble app
@@ -13,9 +16,11 @@
         // client data that goes to the server
         var clientData = {
             
-            pebbleAppName : 'shops_client'
+            pebbleAppName : 'shops_client',
+            shopPage : 0  
+        },
             
-        };
+        shopList = [];
         
         // public API
         return {
@@ -32,8 +37,29 @@
             // after POST
             after : function(response){
              
-                console.log('we are ready to believe you.');
-                console.log(response);
+                shopList = response.shopPage;
+                
+                this.drawShoplist();
+            },
+            
+            // draw the current list of shops
+            drawShoplist : function(){
+                
+                var i = 0, len = shopList.length, html='<div>';
+                
+                console.log( shopList[i].shopName );
+                
+                while(i < len){
+                    
+                    html += '<div> <p> shop name: ' + shopList[i].shopName + 
+                        '; shop id: ' + shopList[i].id + 
+                        '; weight: ' + shopList[i].weight + 
+                        '; <\/p> <\/div>';
+                    
+                    i++;
+                }
+                
+                document.getElementById('shops_shoplist').innerHTML = html + '<\/div>';
                 
             }
             
