@@ -1,3 +1,45 @@
 <% include ./parts/head.ejs %>
 <% include ./parts/nav.ejs %>
 <% include ./parts/pebblebar.ejs %>
+
+
+<h1>Shops:</h1>
+
+<script>
+
+    // reserve_client pebble app
+    var pebbleApp = (function(){
+       
+        // client data that goes to the server
+        var clientData = {
+            
+            pebbleAppName : 'shops_client'
+            
+        };
+        
+        // public API
+        return {
+        
+            // pebble app needs access to this
+            clientData : clientData,
+            
+            // before POST
+            before : function(){
+                
+                
+            },
+            
+            // after POST
+            after : function(response){
+             
+                console.log('we are ready to believe you.');
+                console.log(response);
+                
+            }
+            
+        }
+        
+    }());
+
+    
+</script>
