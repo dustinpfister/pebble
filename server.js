@@ -220,12 +220,13 @@ app.post('/', function (req, res) {
                         users.startShop(req.user.username, function(shopObj){
                         
                             // get the shop page
-                            users.getShopPage(req.body.clientData.shopPage, function(shopPage){
+                            users.getShopPage(req.body.clientData.shopPage, function(shopPage, maxPage){
                         
                                 res.send(JSON.stringify({
                         
                                     userData : user,
                                     shopPage : shopPage,
+                                    maxPage : maxPage,
                                     newShop : shopObj
                         
                                 }));
@@ -239,12 +240,13 @@ app.post('/', function (req, res) {
                     }else{
                         
                         // get the shop page
-                        users.getShopPage(req.body.clientData.shopPage, function(shopPage){
+                        users.getShopPage(req.body.clientData.shopPage, function(shopPage, maxPage){
                         
                             res.send(JSON.stringify({
                                
                                userData : user,
-                               shopPage : shopPage
+                               shopPage : shopPage,
+                                maxPage : maxPage
                         
                             }));
                             

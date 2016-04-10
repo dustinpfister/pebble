@@ -20,6 +20,7 @@
             shopPage : 0  
         },
             
+        maxPage = 1,
         shopList = [];
         
         // public API
@@ -37,7 +38,10 @@
             // after POST
             after : function(response){
              
+                console.log(response);
+                
                 shopList = response.shopPage;
+                maxPage = response.maxPage;
                 
                 this.drawShoplist();
             },
