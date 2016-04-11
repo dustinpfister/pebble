@@ -67,7 +67,6 @@ pebble version logg:
     * have an area property for a user account that reflects the kind of resources that are availabule to the user
     * have resources such as wood, oil, water, and farmland in an area.
     * maybe pull wallets from users.js into new accounts model that will be in pebble.js if you think it's a good idea to do so.
-    * have a shops tab
     * Have a tax plan system that allows for more then one tax plan to be in effect including "no tax"
     * SSL for at least login and signup paths if not all
     
@@ -117,8 +116,64 @@ pebble version logg:
     
     * SHOPS:
     
+        * need a way to see and use other users shops
+        * need a way to manage your own shops
+        * do shops sell products? if so where do they come from?
         
-        * must have the client system display the shops.
+        
+        * we need a process that runs threw all shops and updates values based on timestamps (link the tax collection thing).
+        
+        * shop weight :
+        
+            * shops have a value called weight, that is used to determin its ranking in the shops tab pages.
+            * a shop starts with a certain amount of weight
+            
+            
+            * ways a shop gains weight :
+            
+                * starting weight.
+                * a sale is made.
+                * pebble is spent to upvote it.
+        
+            * ways a shop looses weight :
+            
+                * pebble is spent to downvote it.
+                * over time it looses weight (decay)
+                
+        
+        * shop class :
+        
+            * raw source
+            
+               * creates raw products
+               * raw source shops produce raw resources like food, wood, oil, water.
+               * souces can be bought by users that have a refignment, or wearhouse shop.
+            
+            * refignment
+            
+               * creates products
+               * this class of shop produces products from raw sources, and/or other products.
+               * refined products are often of greater value then raw souces
+               * refined products can not be sold directly to anyone, they can only be sold to a wearhouse
+               
+            * wearhouse
+            
+               * stores products
+               * a wearhouse stores products, and raw sources
+               * pebble is made from charging storage fee's from thouse that use it.
+            
+            * store
+            
+               * sells products
+               * a store sells products to anyone who wants to buy them.
+               * producs are bought from wearhouses
+            
+            
+        * have a start shop option on the reserve tab
+        * shops started from reserve:
+        * you can only buy one from the reserve if you have no shops at all
+            
+        
         * shops are a way to make pebbles from other users.
         * a shop can be bought from another player if they have it up for sale.
         * sales tax may be collected for some shops depedning on the shop and tax plan in effect (reserve account income).
