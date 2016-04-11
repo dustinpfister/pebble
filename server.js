@@ -231,7 +231,7 @@ app.post('/', function (req, res) {
                     users.getShopPage(req.body.clientData.shopPage, function (shopPage, maxPage) {
 
                         // get user shops
-                        users.getUsersShops(req.user.username, function () {
+                        users.getUsersShops(req.user.username, function (userShops) {
 
                             if (req.body.clientData.newShop) {
 
@@ -248,6 +248,7 @@ app.post('/', function (req, res) {
                                         , shopPage: shopPage
                                         , maxPage: maxPage
                                         , newShop: shopObj
+                                        , userShops: userShops
 
                                     }));
 
@@ -267,6 +268,7 @@ app.post('/', function (req, res) {
                                     userData: user
                                     , shopPage: shopPage
                                     , maxPage: maxPage
+                                    , userShops: userShops
 
                                 }));
 
