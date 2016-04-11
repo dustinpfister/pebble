@@ -14,8 +14,12 @@ var express = require('express')
     , MongoStore = require('connect-mongo/es5')(session)
     , openShift = require('./lib/openshift.js').openShiftObj
 
-    // passport
-    , passport = require('passport')
+// passport
+
+
+
+
+, passport = require('passport')
     , Strategy = require('passport-local').Strategy,
 
     // express app
@@ -30,30 +34,30 @@ var express = require('express')
     // pebble lib
     pebble = require('./lib/pebble.js');
 
-    // use passport local strategy
-    // following example at : https://github.com/passport/express-4.x-local-example/blob/master/server.js
-    passport.use(new Strategy(
+// use passport local strategy
+// following example at : https://github.com/passport/express-4.x-local-example/blob/master/server.js
+passport.use(new Strategy(
 
-        function (username, password, cb) {
+    function (username, password, cb) {
 
-            users.findByUsername(username, function (err, user) {
+        users.findByUsername(username, function (err, user) {
 
-                if (err) {
-                    return cb(err);
-                }
-                if (!user) {
-                    return cb(null, false);
-                }
-                if (user.password != password) {
-                    return cb(null, false);
-                }
-                return cb(null, user);
-            });
+            if (err) {
+                return cb(err);
+            }
+            if (!user) {
+                return cb(null, false);
+            }
+            if (user.password != password) {
+                return cb(null, false);
+            }
+            return cb(null, user);
+        });
 
-        }
+    }
 
 
-    ));
+));
 
 passport.serializeUser(function (user, cb) {
     cb(null, user.id);
@@ -140,10 +144,10 @@ app.get('/', function (req, res, next) {
 
     pebble.getReserve(function (reserve) {
 
-        res.render('systems/'+clientSystem+'/main', {
+        res.render('systems/' + clientSystem + '/main', {
 
             req: req
-            ,reserve: reserve
+            , reserve: reserve
             , user: req.user
 
         });
@@ -154,7 +158,7 @@ app.get('/', function (req, res, next) {
 app.post('/', function (req, res) {
 
     console.log(req.body);
-    
+
     // ALERT ! do we really need to do this for every post to / ?
     users.getUserSafe(req.user.username, function (user) {
 
@@ -169,7 +173,18 @@ app.post('/', function (req, res) {
 
                 switch (req.body.clientData.pebbleAppName) {
 
-                // the reserve client at the /reserve path
+
+                case 'home_client':
+
+                    // send results of the take
+                    res.send(JSON.stringify({
+                        userData: user
+                        , home: 'so you are home i see.'
+                    }));
+
+                    break;
+
+                    // the reserve client at the /reserve path
                 case 'reserve_client':
 
                     console.log('reserve client!');
@@ -208,54 +223,63 @@ app.post('/', function (req, res) {
                     });
 
                     break;
-                        
-                        
+
+
                 case 'shops_client':
 
-                        
-                    if(req.body.clientData.newShop){
-                        
-                        console.log('new Shop');
-                        
-                        users.startShop(req.user.username, function(shopObj){
-                        
-                            // get the shop page
-                            users.getShopPage(req.body.clientData.shopPage, function(shopPage, maxPage){
-                        
+                    // get the shops page
+                    users.getShopPage(req.body.clientData.shopPage, function (shopPage, maxPage) {
+
+                        // get user shops
+                        users.getUsersShops(req.user.username, function () {
+
+                            if (req.body.clientData.newShop) {
+
+                                console.log('new shop request');
+
+                                users.startShop(req.user.username, function (shopObj) {
+
+                                    // get the shop page
+                                    //users.getShopPage(req.body.clientData.shopPage, function (shopPage, maxPage) {
+
+                                    res.send(JSON.stringify({
+
+                                        userData: user
+                                        , shopPage: shopPage
+                                        , maxPage: maxPage
+                                        , newShop: shopObj
+
+                                    }));
+
+                                    //});
+
+                                });
+
+
+                                // no new shop
+                            } else {
+
+                                // get the shop page
+                                //users.getShopPage(req.body.clientData.shopPage, function (shopPage, maxPage) {
+
                                 res.send(JSON.stringify({
-                        
-                                    userData : user,
-                                    shopPage : shopPage,
-                                    maxPage : maxPage,
-                                    newShop : shopObj
-                        
+
+                                    userData: user
+                                    , shopPage: shopPage
+                                    , maxPage: maxPage
+
                                 }));
-                            
-                            });
-                            
+
+                                //});
+
+                            }
+
                         });
-                        
-                    
-                    // no new shop
-                    }else{
-                        
-                        // get the shop page
-                        users.getShopPage(req.body.clientData.shopPage, function(shopPage, maxPage){
-                        
-                            res.send(JSON.stringify({
-                               
-                               userData : user,
-                               shopPage : shopPage,
-                                maxPage : maxPage
-                        
-                            }));
-                            
-                        });
-                    
-                    }
-                        
+
+                    });
+
                     break;
-                        
+
                 default:
 
                     // send just the user data for pebblebar itself
@@ -288,37 +312,37 @@ app.post('/', function (req, res) {
 
     });
 
-    
-    
-   
+
+
+
 
 });
 
 
 app.get('/reserve', function (req, res) {
 
-    res.render('systems/'+clientSystem+'/reserve', {
+    res.render('systems/' + clientSystem + '/reserve', {
 
-        req: req,
-        user: req.user
+        req: req
+        , user: req.user
 
     });
-    
+
 
 });
 
 
-app.get('/shops', function (req, res){
-    
-    
+app.get('/shops', function (req, res) {
+
+
     res.render('systems/' + clientSystem + '/shops', {
-       
-        req: req,
-        user: req.user
-        
+
+        req: req
+        , user: req.user
+
     });
-    
-    
+
+
 });
 
 app.get('/login', function (req, res, next) {

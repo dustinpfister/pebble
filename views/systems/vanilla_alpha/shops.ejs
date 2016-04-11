@@ -2,8 +2,9 @@
 <% include ./parts/nav.ejs %>
 <% include ./parts/pebblebar.ejs %>
 
+<h1> Your Shops: </h1>
 
-<h1>Shops:</h1>
+<h1> Shop List: </h1>
 
 <!-- page interface -->
 <p>
@@ -26,7 +27,8 @@
         var clientData = {
             
             pebbleAppName : 'shops_client',
-            shopPage : 0  
+            shopPage : 0,
+            newShop : true
         },
             
         maxPage = 1,
@@ -50,7 +52,9 @@
                 console.log(response);
                 
                 shopList = response.shopPage;
-                maxPage = response.maxPage - 1;
+                maxPage = response.maxPage;
+                
+                clientData.newShop = false;
                 
                 this.drawShoplist();
                 this.drawInterface();
@@ -61,7 +65,6 @@
                 
                 var i = 0, len = shopList.length, html='<div> shop page: ' + clientData.shopPage;
                 
-                console.log( shopList[i].shopName );
                 
                 while(i < len){
                     
@@ -96,7 +99,7 @@
                     clientData.shopPage += 1;
                     
                 
-                    if(clientData.shopPage > maxPage){
+                    if(clientData.shopPage > maxPage -1){
                         
                         clientData.shopPage = maxPage;
                         
