@@ -4,6 +4,8 @@
 
 <h1> Your Shops: </h1>
 
+    <input id="shops_startshop" type="button" value="start shop">
+
 <h1> Shop List: </h1>
 
 <!-- page interface -->
@@ -28,7 +30,7 @@
             
             pebbleAppName : 'shops_client',
             shopPage : 0,
-            newShop : true
+            newShop : false
         },
             
         maxPage = 1,
@@ -117,9 +119,16 @@
                     
                 }
                 
+            },
+            
+            // tell the server you want a new shop
+            startShop : function(){
+                
+                clientData.newShop = true;
+                
             }
             
-        }
+        };
         
     }());
 
@@ -135,4 +144,10 @@
         
     });
     
+    // start a shop button
+    document.getElementById('shops_startshop').addEventListener('click', function(e){
+        
+        pebbleApp.startShop();
+        
+    });
 </script>
