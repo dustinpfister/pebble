@@ -86,26 +86,60 @@
                 
             },
             
+            buyWeight : function(id){
+                
+              console.log('buying weight');
+                
+              var weight = document.getElementById('shops_buyweight_'+id).value; 
+                
+                // weight is a number
+                weight = Number(weight);
+                
+                // isNaN? weight = 0;
+                if(isNaN(weight)){
+                    
+                    weight = 0;
+                }
+                
+                // no negative
+                if(weight < 0){
+                    
+                    weight = 0;
+                    
+                }
+                
+              console.log(id+' : '+weight);
+                
+            },
+            
             // draw the users shops
             drawUserShops : function(){
             
                console.log(userShops);
             
-                var i = 0, len = userShops.length, html='';
+                var s = 0, len = userShops.length, html='',
+                    container = document.getElementById('shops_usershops');
                 
-                
-                while(i < len){
+                while(s < len){
                     
-                    html += '<div> <p> shop name: ' + userShops[i].shopName + 
-                        '; shop id: ' + userShops[i].id + 
-                        '; weight: ' + userShops[i].weight + 
-                        '; <\/p> <\/div>';
+                    if(!document.getElementById('shops_usershop_' + userShops[s].id)){
                     
-                    i++;
+                        html = '<div id="shops_usershop_' + userShops[s].id +'" style="margin:10px; padding:5px; background: #00af00;">'+
+                        ' <p> shop name: ' + userShops[s].shopName + 
+                        '; shop id: ' + userShops[s].id + 
+                        '; weight: ' + userShops[s].weight + '<\/p>' + 
+                        '<input id="shops_buyweight_'+userShops[s].id+'" type="text" ><input  type="button" value="buy weight" onclick="pebbleApp.buyWeight('+userShops[s].id+')">' +
+                        '<\/div>';
+                    
+                        
+                        // draw the shops list
+                        container.innerHTML += html;
+                    }
+                       
+                    s++;
                 }
                 
-                // draw the shops list
-                document.getElementById('shops_usershops').innerHTML = html;
+                
                 
                 
             },
