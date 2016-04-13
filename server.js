@@ -117,7 +117,6 @@ app.get('*', function (req, res, next) {
         // redirrect to login page
     } else {
 
-        console.log(req.path);
 
         i = 0;
         okay = false;
@@ -157,7 +156,6 @@ app.get('/', function (req, res, next) {
 });
 app.post('/', function (req, res) {
 
-    console.log(req.body);
 
     // ALERT ! do we really need to do this for every post to / ?
     users.getUserSafe(req.user.username, function (user) {
@@ -166,7 +164,7 @@ app.post('/', function (req, res) {
         if (req.body.action === 'pebblebar') {
 
             console.log('pebblebar!');
-            console.log(req.body);
+            console.log(JSON.stringify(req.body));
 
             // if we have pebbleAppName do what needs to be done for the app
             if (req.body.clientData) {

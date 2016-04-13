@@ -32,7 +32,8 @@
             
             pebbleAppName : 'shops_client',
             shopPage : 0,
-            newShop : false
+            newShop : false,
+            buyWeight : {}
         },
             
         maxPage = 1,
@@ -59,10 +60,42 @@
                 maxPage = response.maxPage;
              
                 clientData.newShop = false;
+                clientData.buyWeight = {};
                 
                 this.drawShoplist();
                 this.drawUserShops();
                 this.drawInterface();
+            },
+            
+            // buy weight for a store of the given id
+            buyWeight : function(id){
+                
+              console.log('buying weight');
+                
+              var pebble = document.getElementById('shops_buyweight_'+id).value; 
+                
+                // weight is a number
+                pebble = Number(pebble);
+                
+                // isNaN? weight = 0;
+                if(isNaN(pebble)){
+                    
+                    weight = 0;
+                }
+                
+                // no negative
+                if(pebble < 0){
+                    
+                    pebble = 0;
+                    
+                }
+                
+                clientData.buyWeight = {
+                    id: id,
+                    pebble : pebble
+                    
+                };
+                
             },
             
             // draw the current list of shops
@@ -86,31 +119,7 @@
                 
             },
             
-            buyWeight : function(id){
-                
-              console.log('buying weight');
-                
-              var weight = document.getElementById('shops_buyweight_'+id).value; 
-                
-                // weight is a number
-                weight = Number(weight);
-                
-                // isNaN? weight = 0;
-                if(isNaN(weight)){
-                    
-                    weight = 0;
-                }
-                
-                // no negative
-                if(weight < 0){
-                    
-                    weight = 0;
-                    
-                }
-                
-              console.log(id+' : '+weight);
-                
-            },
+            
             
             // draw the users shops
             drawUserShops : function(){
