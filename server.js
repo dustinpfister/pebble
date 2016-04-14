@@ -117,7 +117,6 @@ app.get('*', function (req, res, next) {
         // redirrect to login page
     } else {
 
-
         i = 0;
         okay = false;
         while (i < len) {
@@ -163,12 +162,10 @@ app.post('/', function (req, res) {
         // pebblebar backend
         if (req.body.action === 'pebblebar') {
 
-            console.log('pebblebar!');
-            console.log(JSON.stringify(req.body));
-
             // if we have pebbleAppName do what needs to be done for the app
             if (req.body.clientData) {
 
+                // what we do depends on the app
                 switch (req.body.clientData.pebbleAppName) {
 
 
@@ -225,12 +222,16 @@ app.post('/', function (req, res) {
 
                 case 'shops_client':
 
+                        
+                    console.log(JSON.stringify(req.body));
+                        
                     // get the shops page
                     users.getShopPage(req.body.clientData.shopPage, function (shopPage, maxPage) {
 
                         // get user shops
                         users.getUsersShops(req.user.username, function (userShops) {
 
+                            // if new shop requested
                             if (req.body.clientData.newShop) {
 
                                 console.log('new shop request');
@@ -261,6 +262,38 @@ app.post('/', function (req, res) {
                                 // get the shop page
                                 //users.getShopPage(req.body.clientData.shopPage, function (shopPage, maxPage) {
 
+                                if(req.body.clientData.buyWeight.pebble){
+                                    
+                                    console.log('oh so you want some weight hua?');
+                                    
+                                    console.log('pebble to spend on weight: ' + req.body.clientData.buyWeight.pebble);
+                                    console.log('pebble the user has: ' + user.wallet);
+                                    
+                                    if(user.wallet >= req.body.clientData.buyWeight.pebble){
+                                        
+                                        console.log('looks like you have the pebble at least.');
+                                        console.log('so lets get the reserve account...');
+                                        pebble.getReserve(function(reserve){
+                                            
+                                            // credit the reserve
+                                            reserve.wallet += req.body.clientData.buyWeight.pebble;
+                                            
+                                            // debit the user
+                                            user.wallet -= req.body.clientData.buyWeight.pebble;
+                                            
+                                            // update the accounts
+                                            reserve.save();
+                                            user.save();
+                                            
+                                            
+                                        });
+                                        
+                                    }
+                                    
+                                    
+                                }
+                                
+                                
                                 res.send(JSON.stringify({
 
                                     userData: user
