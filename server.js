@@ -19,6 +19,7 @@ var express = require('express')
 
 
 
+
 , passport = require('passport')
     , Strategy = require('passport-local').Strategy,
 
@@ -222,9 +223,9 @@ app.post('/', function (req, res) {
 
                 case 'shops_client':
 
-                        
+
                     console.log(JSON.stringify(req.body));
-                        
+
                     // get the shops page
                     users.getShopPage(req.body.clientData.shopPage, function (shopPage, maxPage) {
 
@@ -262,38 +263,51 @@ app.post('/', function (req, res) {
                                 // get the shop page
                                 //users.getShopPage(req.body.clientData.shopPage, function (shopPage, maxPage) {
 
-                                if(req.body.clientData.buyWeight.pebble){
-                                    
-                                    console.log('oh so you want some weight hua?');
-                                    
-                                    console.log('pebble to spend on weight: ' + req.body.clientData.buyWeight.pebble);
-                                    console.log('pebble the user has: ' + user.wallet);
-                                    
-                                    if(user.wallet >= req.body.clientData.buyWeight.pebble){
-                                        
-                                        console.log('looks like you have the pebble at least.');
-                                        console.log('so lets get the reserve account...');
-                                        pebble.getReserve(function(reserve){
-                                            
-                                            // credit the reserve
-                                            reserve.wallet += req.body.clientData.buyWeight.pebble;
-                                            
-                                            // debit the user
-                                            user.wallet -= req.body.clientData.buyWeight.pebble;
-                                            
-                                            // update the accounts
-                                            reserve.save();
-                                            user.save();
-                                            
-                                            
+                                if (req.body.clientData.buyWeight.pebble) {
+
+                                    if (user.wallet >= req.body.clientData.buyWeight.pebble) {
+
+                                        pebble.getReserve(function (reserve) {
+
+
+
+                                            console.log('the shop id we need to get: ' + req.body.clientData.buyWeight.id);
+
+                                            users.findShopById(req.body.clientData.buyWeight.id, function (err, shop) {
+
+                                                console.log(shop);
+
+                                                // if we get the shop
+                                                if (shop) {
+
+                                                    // credit the reserve
+                                                    reserve.wallet += req.body.clientData.buyWeight.pebble;
+
+                                                    // debit the user
+                                                    user.wallet -= req.body.clientData.buyWeight.pebble;
+
+                                                    // rase weight
+                                                    shop.weight += req.body.clientData.buyWeight.pebble;
+
+                                                    // update the accounts
+                                                    reserve.save();
+                                                    user.save();
+                                                    shop.save();
+
+                                                }
+
+                                            });
+
+
+
                                         });
-                                        
+
                                     }
-                                    
-                                    
+
+
                                 }
-                                
-                                
+
+
                                 res.send(JSON.stringify({
 
                                     userData: user
