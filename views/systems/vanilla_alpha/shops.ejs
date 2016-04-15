@@ -55,7 +55,7 @@
             // after POST
             after : function(response){
              
-                userShops = response.userShops;
+                userShops = response.userShops === undefined ? [] : response.userShops ;
                 shopList = response.shopPage;
                 maxPage = response.maxPage;
              
@@ -107,6 +107,7 @@
                 while(i < len){
                     
                     html += '<div> <p> shop name: ' + shopList[i].shopName + 
+                        '; owner: ' + shopList[i].shopOwner +
                         '; shop id: ' + shopList[i].id + 
                         '; weight: ' + shopList[i].weight + 
                         '; <\/p> <\/div>';
