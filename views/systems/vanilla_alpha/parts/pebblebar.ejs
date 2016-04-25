@@ -26,6 +26,8 @@
                 if(this.readyState === 4){
                 
                     
+                    console.log(this.response);
+                    
                     done(JSON.parse(this.response));
                 
                 }
@@ -106,6 +108,130 @@
             
         });
         
+        /*
+        return {
+          
+            addApp : function(app){
+                
+                console.log('pebbleapp: ' + app);
+                
+            }
+            
+        };
+    
+        */
     }());
 
 </script>
+
+<!--
+<script>
+
+    
+    var pebbleBar = (function(){
+        
+        // post to server
+        var postIt = function(data, done){
+        
+            // new xhr
+            var http = new XMLHttpRequest();
+            
+            // open a post
+            http.open('POST', '/');
+            
+            //Send the proper header information along with the request
+            http.setRequestHeader("Content-type", "application/json");
+            
+            // what to do on state change
+            http.onreadystatechange = function(){
+              
+                //console.log(this.readyState + ' : ' + this.response);
+                
+                if(this.readyState === 4){
+                
+                    
+                    done(JSON.parse(this.response));
+                
+                }
+                
+            };
+            
+            // send it out
+            http.send(JSON.stringify(data));
+            
+        },
+        
+        // what to do before the post
+        before = function(){
+            
+            console.log('ET phone home.');
+            
+            if(window.pebbleApp){
+                
+                pebbleApp.before();
+                
+            }
+            
+        },
+            
+        // what to de after the post
+        after = function(response){
+            
+            // update pebblebar
+            var wallet = document.getElementById('pebblebar_wallet');
+            
+            wallet.innerHTML = response.userData.wallet;
+            
+            // do what is called for after for the pebbleApp
+            if(window.pebbleApp){
+                
+                pebbleApp.after(response);
+                
+            }
+            
+        },
+            
+        // dial home will post to the server every so often
+        dialHome = function(){
+            
+            var data = {action:'pebblebar'};
+            
+            
+            if(window.pebbleApp){
+                
+                data.clientData = pebbleApp.clientData;
+                
+            }
+            
+            
+            setTimeout(dialHome, 5000);
+            
+            before();
+            postIt(data, function(response){
+                
+                after(response);
+                
+            });
+            
+        };
+       
+        // check for pebble app on page load
+        window.addEventListener('load', function(){
+            
+            
+            if(window.pebbleApp){
+                
+                console.log('pebbleApp : ' + pebbleApp.clientData.pebbleAppName + ' found.');
+                
+            }
+            
+            // start dial home
+            dialHome();
+            
+        });
+        
+    
+    }());
+
+</script>
+-->
