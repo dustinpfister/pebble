@@ -157,7 +157,6 @@ app.get('/', function (req, res, next) {
 app.post('/', function (req, res) {
 
     // use pebblebar backend for post.
-    //require('./lib/pebblebar_back.js').post(req,res,users,pebble);
     require('./lib/pebblebar/index.js').post(req,res,users,pebble);
 
     
