@@ -243,8 +243,14 @@ app.listen(openShift.port, openShift.ipaddress, function () {
     // the tax loop
     var taxLoop = function () {
 
-        var t = setTimeout(taxLoop, 65000);
-        pebble.collectTax();
+        var t = setTimeout(taxLoop, 10000);
+        
+        users.updateShops(function(){
+        
+            pebble.collectTax();
+        
+        });
+        
 
     };
     taxLoop();
