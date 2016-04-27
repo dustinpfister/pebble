@@ -52,8 +52,6 @@
             after : function(response){
                 
                 clientData.requested = 0;
-                      
-                console.log(response);
                 
                 reserve = response.reserve;
                 
@@ -100,7 +98,6 @@
 // attach to button
 document.getElementById('reserve_takeapebble').addEventListener('click', function(){
    
-    console.log('okay');
     
     // call take
     pebbleApp.take();
@@ -134,7 +131,6 @@ var postIt = function(data, done){
             // what to do on state change
             http.onreadystatechange = function(){
               
-                //console.log(this.readyState + ' : ' + this.response);
                 
                 if(this.readyState === 4){
                 

@@ -26,7 +26,7 @@
                 if(this.readyState === 4){
                 
                     
-                    console.log(this.response);
+                    //console.log(this.response);
                     
                     done(JSON.parse(this.response));
                 
@@ -42,7 +42,6 @@
         // what to do before the post
         before = function(){
             
-            console.log('ET phone home.');
             
             if(window.pebbleApp){
                 
@@ -97,11 +96,11 @@
         window.addEventListener('load', function(){
             
             
-            if(window.pebbleApp){
+            //if(window.pebbleApp){
                 
-                console.log('pebbleApp : ' + pebbleApp.clientData.pebbleAppName + ' found.');
+                // console.log('pebbleApp : ' + pebbleApp.clientData.pebbleAppName + ' found.');
                 
-            }
+            //}
             
             // start dial home
             dialHome();

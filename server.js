@@ -173,6 +173,18 @@ app.post('/', function (req, res) {
                       
                 break;
                     
+                // grant pebble
+                case 'grant':
+                    
+                    pebble.grant(req, function(response){
+                    
+                        response.mess = 'grant response.';
+                        res.send(JSON.stringify(response));
+                        
+                    });
+                    
+                break;
+                    
                 // send unkown action response by default
                 default:
                     
