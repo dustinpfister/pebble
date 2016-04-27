@@ -165,6 +165,13 @@ app.post('/', function (req, res) {
         if(req.body.action){
             
             switch(req.body.action){
+                   
+                // if foo return bar
+                case 'foo':
+                    
+                    res.send(JSON.stringify({mess:'bar!'}));
+                      
+                break;
                     
                 // send unkown action response by default
                 default:

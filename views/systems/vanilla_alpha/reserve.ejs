@@ -111,3 +111,47 @@ document.getElementById('reserve_takeapebble').addEventListener('click', functio
 });
     
 </script>
+
+
+<script>
+
+// call this the js console to post to dirrectly post to server
+    
+// ex : postIt({action: 'foo'});
+var postIt = function(data, done){
+        
+            // new xhr
+            var http = new XMLHttpRequest();
+    
+            done = done === undefined ? function(){} : done;
+            
+            // open a post
+            http.open('POST', '/');
+            
+            //Send the proper header information along with the request
+            http.setRequestHeader("Content-type", "application/json");
+            
+            // what to do on state change
+            http.onreadystatechange = function(){
+              
+                //console.log(this.readyState + ' : ' + this.response);
+                
+                if(this.readyState === 4){
+                
+                    
+                    console.log(this.response);
+                    
+                    done(JSON.parse(this.response));
+                
+                }
+                
+            };
+            
+            // send it out
+            http.send(JSON.stringify(data));
+            
+            return 'sent post...';
+    
+        };
+    
+</script>
