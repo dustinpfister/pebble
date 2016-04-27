@@ -45,18 +45,18 @@ pebble 1.0.x Andesite introduced shops. A shop is where you can go to make more 
 
 outlines of current, and proposed releases of pebble. Content of proposed versions are subject to change.
 
-1.0.x Andesite (current)
+* 1.0.x Andesite (current)
     * Alpha state release
     * Can create a user account, and log in.
     * Take pebbles from the reserve account by clicking "take a pebble" button.
     * Basic tax system to keep players from hording pebbles.
     * Shops concept added.
 
-1.1.x Boninite (proposed)
+* 1.1.x Boninite (proposed)
     * first Beta release of game.
     * Land concept introduced.
     
-1.2.x Carbonatite (proposed)
+* 1.2.x Carbonatite (proposed)
     * Person object concept introduced.
     * One or more person objects to care for at the home tab
     * User starts with one person object
@@ -66,10 +66,10 @@ outlines of current, and proposed releases of pebble. Content of proposed versio
     * A new person can spawn for a little pebble
     * A player can have a max of 4 persons per account.
     
-1.3.x Dunite (proposed)
+* 1.3.x Dunite (proposed)
     * grants concept added on the reserve tab
     * players can apply for grants (take large sums of pebble from reserve account)
     
-1.4.x Essexite (proposed)
+* 1.4.x Essexite (proposed)
     * tax systems concept added.
     * players can vote for the tax system they want at reserve tab
