@@ -159,8 +159,28 @@ app.post('/', function (req, res) {
     // use pebblebar backend for post.
     require('./lib/pebblebar/index.js').post(req,res,users,pebble,function(){
         
-        res.send(null);
+        // not a pebblebar post?
         
+        // some other action?
+        if(req.body.action){
+            
+            switch(req.body.action){
+                    
+                // send unkown action response by default
+                default:
+                    
+                    res.send(JSON.stringify({mess:'unkown action.'}));
+                    
+                break;
+                    
+            }
+            
+        // no action? send "hey stop that!"
+        }else{
+        
+            res.send(JSON.stringify({mess:'hey stop that!'}));
+        
+        }
     });
 
     
