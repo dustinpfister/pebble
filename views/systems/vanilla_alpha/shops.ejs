@@ -119,7 +119,11 @@
                         '; owner: ' + shopList[i].shopOwner +
                         '; shop id: ' + shopList[i].id + 
                         '; weight: ' + shopList[i].weight + 
-                        '; <\/p> <\/div>';
+                        '; <\/p> '+
+                        '<p>'+
+                        ' for Sale: <br>' + JSON.stringify(shopList[i].forSale) +
+                        '<\/p>'+
+                        '<\/div>';
                     
                     i++;
                 }
