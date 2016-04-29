@@ -42,7 +42,8 @@
             pebbleAppName : 'shops_client',
             shopPage : 0,
             newShop : false,
-            buyWeight : {}
+            buyWeight : {},
+            buyItems : []
         },
             
         maxPage = 1,
@@ -70,6 +71,8 @@
              
                 clientData.newShop = false;
                 clientData.buyWeight = {};
+                
+                clientData.buyItems = [];
                 
                 this.drawShoplist();
                 this.drawUserShops();
@@ -107,6 +110,38 @@
                 
             },
             
+            // the buy item function.
+            buyItem : function(shopId, itemId){
+                
+                // push to the buy items array.
+                clientData.buyItems.push({
+                    shopId : shopId,
+                    ietmId : itemId
+                });
+                
+                console.log('buy items: ');
+                console.log(clientData.buyItems);
+                
+            },
+            
+            // draw sale items for a shop listing
+            drawSaleItems : function(shop, forSaleData){
+                
+                var html = '';
+                
+                forSaleData.forEach(function(itemData){
+                    
+                    html += '<p>' + itemData.productName + ' : cost: ' + itemData.pebbleCost + ' pebble. '+
+                    '<input type="button" value="buy" onclick="pebbleApp.buyItem(\''+shop.id+'\',\''+itemData._id+'\');"><\/p>';
+                    
+                    
+                });
+                
+                
+                return html;
+                
+            },
+            
             // draw the current list of shops
             drawShoplist : function(){
                 
@@ -120,9 +155,9 @@
                         '; shop id: ' + shopList[i].id + 
                         '; weight: ' + shopList[i].weight + 
                         '; <\/p> '+
-                        '<p>'+
-                        ' for Sale: <br>' + JSON.stringify(shopList[i].forSale) +
-                        '<\/p>'+
+                        '<div>'+
+                        ' for Sale: <br>' + this.drawSaleItems(shopList[i], shopList[i].forSale) +
+                        '<\/div>'+
                         '<\/div>';
                     
                     i++;
@@ -138,7 +173,6 @@
             // draw the users shops
             drawUserShops : function(){
             
-               console.log(userShops);
             
                 var s = 0, len = userShops.length, html='',
                     container = document.getElementById('shops_usershops');
