@@ -65,6 +65,9 @@
             // after POST
             after : function(response){
              
+                console.log('response from server:');
+                console.log(response);
+                
                 userShops = response.userShops === undefined ? [] : response.userShops ;
                 shopList = response.shopPage;
                 maxPage = response.maxPage;
