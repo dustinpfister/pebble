@@ -290,7 +290,7 @@ app.listen(openShift.port, openShift.ipaddress, function () {
         
         users.updateShops(function(){
         
-            pebble.collectTax();
+            //pebble.collectTax();
         
         });
         

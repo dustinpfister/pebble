@@ -77,10 +77,23 @@
             drawReserve : function(){
                 
                 var html = '<table>',
-                    noShow = ['_id','_v', 'id'],
+                    noShow = ['_id','__v', 'id', 'lastCollection','brackets'],
+                    
+                    
                     prop;
                 
-                for(prop in reserve){
+                resProps: for(prop in reserve){
+                    
+                    var i = 0, len = noShow.length;
+                    while(i < len){
+                        
+                        if(prop === noShow[i]){
+                            
+                            continue resProps;
+                        }
+                        
+                        i++;
+                    }
                     
                     html += '<tr><td>'+prop+'<\/td><td>'+reserve[prop]+'<\/td><\/tr>';
                     
