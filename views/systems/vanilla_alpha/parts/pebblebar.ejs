@@ -1,4 +1,4 @@
-<p><%= user.username %> <a href="/logout">logout</a> | wallet: <span id="pebblebar_wallet"> <%= user.wallet %> </span></p>
+<p><%= user.username %> <a href="/logout">logout</a> | wallet: <span id="pebblebar_wallet">  </span></p>
 
 
 <script>
@@ -56,6 +56,8 @@
             
             // update pebblebar
             var wallet = document.getElementById('pebblebar_wallet');
+            
+            console.log(response.userData);
             
             wallet.innerHTML = response.userData.wallet;
             
