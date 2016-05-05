@@ -185,6 +185,18 @@ app.post('/', function (req, res) {
                     
                 break;
                     
+                // the user wants to give pebble away somewhere, how nice.
+                case 'give':
+                    
+                    pebble.give(req, function(response){
+                        
+                        response.mess = 'thank you.';
+                        res.send(JSON.stringify(response));
+                        
+                    });
+                    
+                break;
+                    
                 // send unkown action response by default
                 default:
                     
