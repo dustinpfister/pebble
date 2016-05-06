@@ -11,6 +11,7 @@ pebblebar
 pebble.js
 
     * fix a bug where a player can create pebble by transfering pebble to the same account.
+    * pebble.transfer
 
 users.js
 

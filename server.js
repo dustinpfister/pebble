@@ -188,12 +188,26 @@ app.post('/', function (req, res) {
                 // the user wants to give pebble away somewhere, how nice.
                 case 'give':
                     
-                    pebble.give(req, function(response){
+                    pebble.give(
+                        req, 
                         
-                        response.mess = 'thank you.';
-                        res.send(JSON.stringify(response));
+                        // done
+                        function(response){
                         
-                    });
+                            response.mess = 'thank you.';
+                            res.send(JSON.stringify(response));
+                        
+                        },
+                        
+                        // fail
+                        function(mess){
+                            
+                            res.send(JSON.stringify(mess));
+                            
+                            
+                        }
+                        
+                    );
                     
                 break;
                     
