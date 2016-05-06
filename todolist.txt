@@ -1,0 +1,22 @@
+
+pebblebar
+
+   * all code for our "plugins" should be in this folder, the client side code is another matter i'am not sure 
+   if it should be stored hear as well.
+   
+   * the backends folder should be called "responders", the lable backends is to general
+
+   * everything that has to do with shops should be pulled into the pebblebar folder if you want shops to be a plugin
+
+users.js
+
+    * pull everything that has to do with shops into it's own file.
+
+pebble_check.js
+
+    * I am only checking prime user accounts, I should be checking ALL accounts.
+    
+pebble_fix.js
+
+    * I am only checking prime user accounts when preforming a check, I should be checking ALL accounts.
+    
