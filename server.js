@@ -14,12 +14,10 @@ var express = require('express')
     , MongoStore = require('connect-mongo/es5')(session)
     , openShift = require('./lib/openshift.js').openShiftObj
 
+    , mongoose = require('mongoose')
+    , db = mongoose.createConnection(openShift.mongo)
+
 // passport
-
-
-
-
-
 , passport = require('passport')
     , Strategy = require('passport-local').Strategy,
 
@@ -313,7 +311,7 @@ app.listen(openShift.port, openShift.ipaddress, function () {
     users.infoCheck();
     pebble.reserveCheck();
     
-    require('./lib/pebblebar/setup.js').setup(app, clientSystem);
+    require('./lib/pebblebar/setup.js').setup(app, db,clientSystem);
 
     // the tax loop
     var taxLoop = function () {
