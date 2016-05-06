@@ -8,6 +8,10 @@ pebblebar
 
    * everything that has to do with shops should be pulled into the pebblebar folder if you want shops to be a plugin
 
+pebble.js
+
+    * fix a bug where a player can create pebble by transfering pebble to the same account.
+
 users.js
 
     * pull everything that has to do with shops into it's own file.
@@ -20,3 +24,11 @@ pebble_fix.js
 
     * I am only checking prime user accounts when preforming a check, I should be checking ALL accounts.
     
+    
+    
+    
+    
+DONE:
+********** ********** ********** ********** ********** ********** ********** ********** ********** ********** 
+
+pebble.js: (done 1.0.154) allow for the option to give pebble to a usernames prime account
