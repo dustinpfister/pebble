@@ -244,7 +244,7 @@ app.get('/reserve', function (req, res) {
 
 });
 
-
+/*
 app.get('/shops', function (req, res) {
 
 
@@ -257,6 +257,7 @@ app.get('/shops', function (req, res) {
 
 
 });
+*/
 
 app.get('/login', function (req, res, next) {
 
@@ -308,6 +309,8 @@ app.listen(openShift.port, openShift.ipaddress, function () {
 
     users.infoCheck();
     pebble.reserveCheck();
+    
+    require('./lib/pebblebar/setup.js').setup(app, clientSystem);
 
     // the tax loop
     var taxLoop = function () {
