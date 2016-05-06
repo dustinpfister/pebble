@@ -27,7 +27,7 @@ var express = require('express')
     app = express(),
 
     // client system in use:
-    clientSystem = 'vanilla_alpha',
+    clientSystem = 'vanilla_beta',
 
     // users
     users = require('./lib/users.js'),
@@ -157,7 +157,10 @@ app.get('/', function (req, res, next) {
 app.post('/', function (req, res) {
 
     // use pebblebar backend for post.
-    require('./lib/pebblebar/index.js').post(req,res,users,pebble,function(){
+    //require('./lib/pebblebar/index.js').post(req,res,users,pebble,function(){
+    
+    
+    require('./lib/pebblebar/responder.js').post(req,res,users,pebble,function(){
         
         // not a pebblebar post?
         
@@ -317,12 +320,13 @@ app.listen(openShift.port, openShift.ipaddress, function () {
 
         var t = setTimeout(taxLoop, 10000);
         
+        /*
         users.updateShops(function(){
         
             //pebble.collectTax();
         
         });
-        
+        */
 
     };
     taxLoop();
