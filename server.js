@@ -302,6 +302,8 @@ app.listen(openShift.port, openShift.ipaddress, function () {
         
         });
         */
+        
+        require('./lib/pebblebar/updater.js').update();
 
     };
     taxLoop();
