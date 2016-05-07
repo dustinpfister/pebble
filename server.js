@@ -17,18 +17,18 @@ var express = require('express')
     , mongoose = require('mongoose')
     , db = mongoose.createConnection(openShift.mongo)
 
-// passport
-, passport = require('passport')
-    , Strategy = require('passport-local').Strategy,
+    // passport
+    , passport = require('passport')
+    , Strategy = require('passport-local').Strategy
 
     // express app
-    app = express(),
+    ,app = express()
 
     // client system in use:
-    clientSystem = 'vanilla_beta',
+    ,clientSystem = 'vanilla_beta'
 
     // users
-    users = require('./lib/users.js'),
+    ,users = require('./lib/users.js')
 
     // pebble lib
     pebble = require('./lib/pebble.js');
@@ -54,7 +54,6 @@ passport.use(new Strategy(
         });
 
     }
-
 
 ));
 
@@ -152,11 +151,8 @@ app.get('/', function (req, res, next) {
     });
 
 });
-app.post('/', function (req, res) {
 
-    // use pebblebar backend for post.
-    //require('./lib/pebblebar/index.js').post(req,res,users,pebble,function(){
-    
+app.post('/', function (req, res) {
     
     require('./lib/pebblebar/responder.js').post(req,res,users,pebble,function(){
         
@@ -228,10 +224,8 @@ app.post('/', function (req, res) {
         
         }
     });
-
     
 });
-
 
 app.get('/reserve', function (req, res) {
 
@@ -242,29 +236,14 @@ app.get('/reserve', function (req, res) {
 
     });
 
-
 });
-
-/*
-app.get('/shops', function (req, res) {
-
-
-    res.render('systems/' + clientSystem + '/shops', {
-
-        req: req
-        , user: req.user
-
-    });
-
-
-});
-*/
 
 app.get('/login', function (req, res, next) {
 
     res.render('systems/' + clientSystem + '/login', {});
 
 });
+
 app.post('/login',
 
     // authenticate
@@ -282,9 +261,6 @@ app.post('/login',
 
 );
 
-
-
-
 app.get('/logout', function (req, res) {
 
     req.logout();
@@ -297,6 +273,7 @@ app.get('/signup', function (req, res, next) {
     res.render('systems/' + clientSystem + '/signup', {});
 
 });
+
 app.post('/signup', function (req, res, next) {
 
     users.newUser(req, res);
