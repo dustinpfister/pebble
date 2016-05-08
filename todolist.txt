@@ -1,8 +1,5 @@
 
 pebblebar
-
-   * all code for our "plugins" should be in this folder, the client side code is another matter i'am not sure 
-   if it should be stored hear as well.
    
    * the backends folder should be called "responders", the lable backends is to general
 
@@ -11,7 +8,6 @@ pebblebar
 pebble.js
 
     * fix a bug where a player can create pebble by transfering pebble to the same account.
-    * pebble.transfer
 
 users.js
 
@@ -33,3 +29,4 @@ DONE:
 ********** ********** ********** ********** ********** ********** ********** ********** ********** ********** 
 
 pebble.js: (done 1.0.154) allow for the option to give pebble to a usernames prime account
+pebblebar  (done 1.0.168) all code for our "plugins" should be in this folder.
