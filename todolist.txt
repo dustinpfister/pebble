@@ -1,23 +1,35 @@
+Pebble todo list:
 
-pebblebar
+
+pebblebar:
    
-   * the backends folder should be called "responders", the lable backends is to general
+   * the clientData object should really be an array, this will allow for more then one app on a page, and more effeciant processing 
+   of requests from the client system.
+   * start work on a "land" plugin
 
-   * everything that has to do with shops should be pulled into the pebblebar folder if you want shops to be a plugin
+pebble_procesor:
 
-pebble.js
+   * make a seperate process from the main server.js file called pebble_processor.js
+   * The process should process TransactionRequests.
+   * every now and then the process should stop processing TransactionRequests to preform other tasks on the current state of accounts.
+   * In addition to processing transactions pebble process should also preform a sanity check every now and then, and logg the outcome 
+   of that check to the reserve object.
+   * In the event of a failed sanity check, pebble_process should take autocorrection action, when it happens this also should be logged to the reserve account.
 
-    * fix a bug where a player can create pebble by transfering pebble to the same account.
+pebble.js:
 
-users.js
+    * have a collection called TransactionRequest, all transactions should start out as this, then be processed.
+    * once you have the TransactionRequest collection make a seperate process that actually preforms the transactions (call it pebble_processor)
+
+users.js:
 
     * pull everything that has to do with shops into it's own file.
 
-pebble_check.js
+pebble_check.js:
 
     * I am only checking prime user accounts, I should be checking ALL accounts.
     
-pebble_fix.js
+pebble_fix.js:
 
     * I am only checking prime user accounts when preforming a check, I should be checking ALL accounts.
     
@@ -29,4 +41,7 @@ DONE:
 ********** ********** ********** ********** ********** ********** ********** ********** ********** ********** 
 
 pebble.js: (done 1.0.154) allow for the option to give pebble to a usernames prime account
-pebblebar  (done 1.0.168) all code for our "plugins" should be in this folder.
+pebblebar: (done 1.0.168) all code for our "plugins" should be in this folder.
+pebblebar: (done 1.0.173) the backends folder should be called "plugins", the lable backends is to general
+pebblevar: (done 1.0.173) everything that has to do with shops should be pulled into the pebblebar folder if you want shops to be a plugin
+pebble.js: (done 1.0.173) fix a bug where a player can create pebble by transfering pebble to the same account.
