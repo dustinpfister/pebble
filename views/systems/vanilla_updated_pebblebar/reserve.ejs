@@ -31,17 +31,20 @@
         
         var clientData = [
             
+            
             {
                 
-                plugin : 'reserve'
+                plugin : 'reserve_info'
             
-            },
+            }
             
+            /*
             {
                 
                 plugin : 'reserve_take'
             
             }
+            */
         ],
         
         /*
@@ -73,6 +76,28 @@
             // before POST
             before : function(){
                 
+                this.clientData = [{
+                    
+                    plugin : 'reserve_info'
+                    
+                }];
+                
+                
+                if(requesting > 0){
+                
+                    this.clientData.push({
+                        plugin : 'reserve_take',
+                        requested : requesting
+                        
+                        
+                    });
+                    
+                    requesting = 0;
+                    
+                    console.log('what the fuck is going on?');
+                    
+                }
+                
                 //clientData.requested = requesting;
                 requesting = 0;
                 
@@ -88,7 +113,7 @@
                 
                 //clientData.requested = 0;
                 
-                reserve = response.reserve;
+                //reserve = response.reserve;
                 
                 this.drawReserve();
                 

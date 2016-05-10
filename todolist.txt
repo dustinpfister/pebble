@@ -3,11 +3,9 @@ Pebble todo list:
 
 pebblebar:
    
-   * the clientData object should really be an array, this will allow for more then one app on a page, and more effeciant processing 
-   of requests from the client system.
+   * update plugins and client system to work with new clientData Array.
    * a config file of sorts for pebblebar might be nice.
    * updater.js should be a process and not just something that is called from server.js
-   
    * shops plugin :
    
        * should be able to define more then one shop class
@@ -50,3 +48,4 @@ pebblebar: (done 1.0.168) all code for our "plugins" should be in this folder.
 pebblebar: (done 1.0.173) the backends folder should be called "plugins", the lable backends is to general
 pebblevar: (done 1.0.173) everything that has to do with shops should be pulled into the pebblebar folder if you want shops to be a plugin
 pebble.js: (done 1.0.173) fix a bug where a player can create pebble by transfering pebble to the same account.
+pebblebar: (done 1.0.179) the clientData object will now be an array of objects
