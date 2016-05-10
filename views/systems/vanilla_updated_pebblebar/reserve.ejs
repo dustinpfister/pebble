@@ -20,12 +20,32 @@
     var pebbleApp = (function(){
        
         // client data that goes to the server
+        /*
         var clientData = {
             
             plugin : 'reserve',
             requested : 0
             
         },
+        */
+        
+        var clientData = 1,
+        
+        /*
+        var clientData = [
+        
+            
+            {
+                plugin : 'reserve',
+                requested : 0
+                
+            }
+            
+            
+        ],
+        */
+            
+        
             
         reserve = {},
             
@@ -50,6 +70,8 @@
             
             // after POST
             after : function(response){
+                
+                console.log(response);
                 
                 clientData.requested = 0;
                 

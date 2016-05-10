@@ -25,7 +25,8 @@ var express = require('express')
     ,app = express()
 
     // client system in use:
-    ,clientSystem = 'vanilla_beta'
+    //,clientSystem = 'vanilla_beta'
+    ,clientSystem = 'vanilla_updated_pebblebar'
 
     // users
     ,users = require('./lib/users.js')
