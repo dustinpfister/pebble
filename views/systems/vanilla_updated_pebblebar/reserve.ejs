@@ -29,7 +29,7 @@
         },
         */
         
-        var clientData = 1,
+        var clientData = [],
         
         /*
         var clientData = [
@@ -60,7 +60,7 @@
             // before POST
             before : function(){
                 
-                clientData.requested = requesting;
+                //clientData.requested = requesting;
                 requesting = 0;
                 
                 // update view
@@ -73,7 +73,7 @@
                 
                 console.log(response);
                 
-                clientData.requested = 0;
+                //clientData.requested = 0;
                 
                 reserve = response.reserve;
                 
