@@ -5,7 +5,12 @@ pebblebar:
    
    * the clientData object should really be an array, this will allow for more then one app on a page, and more effeciant processing 
    of requests from the client system.
-   * start work on a "land" plugin
+   * a config file of sorts for pebblebar might be nice.
+   * updater.js should be a process and not just something that is called from server.js
+   
+   * shops plugin :
+   
+       * should be able to define more then one shop class
 
 pebble_procesor:
 
