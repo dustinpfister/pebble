@@ -1,6 +1,6 @@
 {
   "name": "pebble",
-  "version": "1.0.182",
+  "version": "1.0.183",
   "description": "a game about collecting pebbles",
   "main": "server.js",
   "dependencies": {
