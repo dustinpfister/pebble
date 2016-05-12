@@ -33,7 +33,41 @@
 
 <script>
 
+    
+    var pebbleApp = (function(){
+        
+        var clientData = [
+            
+            {
+                plugin : 'shops_getshoppage',
+                shopPage : 0
+                
+            }
+        
+        ];
+       
+        return {
+            
+            clientData : clientData,
+            
+            before : function(){
+                
+                
+            },
+            
+            after : function(response){
+                
+                
+                console.log(response);
+                
+            }
+            
+        };
+        
+    }());
+    
     // shops_client pebble app
+    /*
     var pebbleApp = (function(){
        
         // client data that goes to the server
@@ -271,6 +305,8 @@
         pebbleApp.startShop();
         
     });
+    
+    */
 </script>
 
 </body>

@@ -3,7 +3,6 @@ Pebble todo list:
 
 pebblebar:
 
-   * have a "scope" variable that will contain references to users.js, pebble.js and any other *.js files that are added by plugin.
    * fix the problem with require('./shops') in all the new shops plugins
    * get new shops plugins working in place of the older shops plugin that used the single clientData object
    * get how plugins work in order, this is the current plan for better or worse:
@@ -75,3 +74,5 @@ pebble.js: (done 1.0.173) fix a bug where a player can create pebble by transfer
 pebblebar: (done 1.0.179) the clientData object will now be an array of objects
 pebblebar: (done 1.0.180) reserve_info, and reserve_take plugins are not working with clientData Array
 pebblebar: (done 1.0.186) broke down the shops plugin into many small plugins that work with the new clientData Array.
+pebblebar: (done 1.0.194) have a "scope" variable that will contain references to any *.js files that are needed by plugins.
+   
