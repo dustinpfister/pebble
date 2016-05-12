@@ -155,7 +155,8 @@ app.get('/', function (req, res, next) {
 
 app.post('/', function (req, res) {
     
-    require('./lib/pebblebar/responder.js').post(req,res,users,pebble,function(){
+    //require('./lib/pebblebar/responder.js').post(req,res,users,pebble,function(){
+    require('./lib/pebblebar/responder.js').post(req,res,function(){
         
         // not a pebblebar post?
         
