@@ -289,7 +289,7 @@ app.listen(openShift.port, openShift.ipaddress, function () {
     users.infoCheck();
     pebble.reserveCheck();
     
-    require('./lib/pebblebar/setup.js').setup(app, db,clientSystem);
+    require('./lib/pebblebar/setup.js').setup(app, db,clientSystem, users, pebble);
 
     // the tax loop
     var taxLoop = function () {

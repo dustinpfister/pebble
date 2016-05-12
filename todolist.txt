@@ -2,8 +2,32 @@ Pebble todo list:
 
 
 pebblebar:
+
+   * have a "scope" variable that will contain references to users.js, pebble.js and any other *.js files that are added by plugin.
+   * fix the problem with require('./shops') in all the new shops plugins
+   * get new shops plugins working in place of the older shops plugin that used the single clientData object
+   * get how plugins work in order, this is the current plan for better or worse:
    
-   * brake down the shops plugin into many small plugins that work with the new clientData Array.
+   we will have "core paths", and "app paths"
+   
+   core path example : plugins/shops/
+   app path example  : plugins/shops_appname/
+
+   * core path : a core path contains assets that are shared by one or more app paths
+   * app path : a app path contains just code that is nessacery for a single app function, it depends on a core path.
+   
+   * both a core and app path can have the following *.js files:
+       * responder.js : a script that responds to requests from a client system
+       * updater.js : a script that is called by the server every so often to update something server side
+       * setup.js : scripts that are to be called when the server starts
+   
+   shops  // core path for shops contains shops.js dependancy, and setup.js adds that dependacy to the scope object
+   shops_getshoppage   // an app that uses shops.js
+   shops_getusershops  // an app that uses shops.js
+   land
+   land_getuserland
+   land_update
+   
    * a config file of sorts for pebblebar might be nice.
    * updater.js should be a process and not just something that is called from server.js
    * shops plugin :
@@ -50,3 +74,4 @@ pebblevar: (done 1.0.173) everything that has to do with shops should be pulled 
 pebble.js: (done 1.0.173) fix a bug where a player can create pebble by transfering pebble to the same account.
 pebblebar: (done 1.0.179) the clientData object will now be an array of objects
 pebblebar: (done 1.0.180) reserve_info, and reserve_take plugins are not working with clientData Array
+pebblebar: (done 1.0.186) broke down the shops plugin into many small plugins that work with the new clientData Array.
