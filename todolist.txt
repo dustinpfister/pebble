@@ -3,31 +3,7 @@ Pebble todo list:
 
 pebblebar:
 
-   * fix the problem with require('./shops') in all the new shops plugins
-   * get new shops plugins working in place of the older shops plugin that used the single clientData object
-   * get how plugins work in order, this is the current plan for better or worse:
-   
-   we will have "core paths", and "app paths"
-   
-   core path example : plugins/shops/
-   app path example  : plugins/shops_appname/
-
-   * core path : a core path contains assets that are shared by one or more app paths
-   * app path : a app path contains just code that is nessacery for a single app function, it depends on a core path.
-   
-   * both a core and app path can have the following *.js files:
-       * responder.js : a script that responds to requests from a client system
-       * updater.js : a script that is called by the server every so often to update something server side
-       * setup.js : scripts that are to be called when the server starts
-   
-   shops  // core path for shops contains shops.js dependancy, and setup.js adds that dependacy to the scope object
-   shops_getshoppage   // an app that uses shops.js
-   shops_getusershops  // an app that uses shops.js
-   land
-   land_getuserland
-   land_update
-   
-   * a config file of sorts for pebblebar might be nice.
+   * might need a config file of sorts.
    * updater.js should be a process and not just something that is called from server.js
    * shops plugin :
    
@@ -66,13 +42,15 @@ pebble_fix.js:
 DONE:
 ********** ********** ********** ********** ********** ********** ********** ********** ********** ********** 
 
-pebble.js: (done 1.0.154) allow for the option to give pebble to a usernames prime account
-pebblebar: (done 1.0.168) all code for our "plugins" should be in this folder.
-pebblebar: (done 1.0.173) the backends folder should be called "plugins", the lable backends is to general
-pebblevar: (done 1.0.173) everything that has to do with shops should be pulled into the pebblebar folder if you want shops to be a plugin
-pebble.js: (done 1.0.173) fix a bug where a player can create pebble by transfering pebble to the same account.
-pebblebar: (done 1.0.179) the clientData object will now be an array of objects
-pebblebar: (done 1.0.180) reserve_info, and reserve_take plugins are not working with clientData Array
-pebblebar: (done 1.0.186) broke down the shops plugin into many small plugins that work with the new clientData Array.
+
+pebblebar: (done 1.0.205) fix the problem with require('./shops') in all the new shops plugins
+pebblebar: (done 1.0.205) get new shops plugins working in place of the older shops plugin that used the single clientData object
 pebblebar: (done 1.0.194) have a "scope" variable that will contain references to any *.js files that are needed by plugins.
-   
+pebblebar: (done 1.0.186) broke down the shops plugin into many small plugins that work with the new clientData Array.
+pebblebar: (done 1.0.180) reserve_info, and reserve_take plugins are not working with clientData Array
+pebblebar: (done 1.0.179) the clientData object will now be an array of objects
+pebble.js: (done 1.0.173) fix a bug where a player can create pebble by transfering pebble to the same account.
+pebblevar: (done 1.0.173) everything that has to do with shops should be pulled into the pebblebar folder
+pebblebar: (done 1.0.173) the backends folder should be called "plugins", the lable backends is to general
+pebblebar: (done 1.0.168) all code for our "plugins" should be in this folder.
+pebble.js: (done 1.0.154) allow for the option to give pebble to a usernames prime account
