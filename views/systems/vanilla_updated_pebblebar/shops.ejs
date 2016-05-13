@@ -49,7 +49,7 @@
             },
             {
                 plugin : 'shops_newshopcheck',
-                newShop : true
+                newShop : false
                 
             },
             {
@@ -59,7 +59,44 @@
                 
             }
         
-        ];
+        ],
+          
+        // draw methods
+        // ALERT! we will need methods that will ba called once, on top of these.
+        draw = {
+            
+            shops_getshoppage : function(res){},
+            shops_getusershops : function(res){
+                
+                var userShops = res.userShops,
+                    s = 0, len = userShops.length, html='',
+                    container = document.getElementById('shops_usershops');
+                
+                while(s < len){
+                    
+                    if(!document.getElementById('shops_usershop_' + userShops[s].id)){
+                    
+                        html = '<div id="shops_usershop_' + userShops[s].id +'" style="margin:10px; padding:5px; background: #00af00;">'+
+                        ' <p> shop name: ' + userShops[s].shopName + 
+                        '; shop id: ' + userShops[s].id + 
+                        '; weight: ' + userShops[s].weight + '<\/p>' + 
+                        '<input id="shops_buyweight_'+userShops[s].id+'" type="text" ><input  type="button" value="buy weight" onclick="pebbleApp.buyWeight('+userShops[s].id+')">' +
+                        '<\/div>';
+                    
+                        
+                        // draw the shops list
+                        container.innerHTML += html;
+                    }
+                       
+                    s++;
+                }
+                
+                
+            },
+            shops_newshopcheck : function(res){},
+            shops_buyweight : function(res){}
+            
+        };
        
         return {
             
@@ -70,10 +107,50 @@
                 
             },
             
-            after : function(response){
+            after : function(res){
+                
+                var i=0, len = res.response.length
+                while(i < len){
+                    
+                    console.log(res.response[i].responderPlugin);
+                    
+                    // call draw method for the plugin
+                    draw[res.response[i].responderPlugin](res.response[i]);
+                    
+                    i++;
+                    
+                }
+                
+            },
+            
+            // draw the users shops
+            drawUserShops : function(userShops){
+            
+            
+                var s = 0, len = userShops.length, html='',
+                    container = document.getElementById('shops_usershops');
+                
+                while(s < len){
+                    
+                    if(!document.getElementById('shops_usershop_' + userShops[s].id)){
+                    
+                        html = '<div id="shops_usershop_' + userShops[s].id +'" style="margin:10px; padding:5px; background: #00af00;">'+
+                        ' <p> shop name: ' + userShops[s].shopName + 
+                        '; shop id: ' + userShops[s].id + 
+                        '; weight: ' + userShops[s].weight + '<\/p>' + 
+                        '<input id="shops_buyweight_'+userShops[s].id+'" type="text" ><input  type="button" value="buy weight" onclick="pebbleApp.buyWeight('+userShops[s].id+')">' +
+                        '<\/div>';
+                    
+                        
+                        // draw the shops list
+                        container.innerHTML += html;
+                    }
+                       
+                    s++;
+                }
                 
                 
-                console.log(response);
+                
                 
             }
             
