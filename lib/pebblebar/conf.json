@@ -6,15 +6,8 @@
         
             "info", "take"
         
-        ],
-        
-        "shops":[
-        
-            "buyitemscheck", "buyweight", "getshoppage", "getusershops", "newshopcheck"
-        
         ]
-    
+            
     }
-
 
 }
