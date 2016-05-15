@@ -3,12 +3,31 @@ Pebble todo list:
 
 pebblebar:
 
+   * reserve_grant plugin for grant requests
+   * reserve_playtime plugin pays pebble to users based on how long they have played.
+   * main setup.js should run setup.js scripts for each plugin that has one
+   * main updater.js should run updater.js files for each plugin that has one.
    * might need a config file of sorts.
    * updater.js should be a process and not just something that is called from server.js
-   * shops plugin :
+   * shops:
    
-       * should be able to define more then one shop class
-
+       * start a public or private shop
+       * public shops allow other users to invest in your shop, but they get a share in the profits for doing so
+       * private shops allow for you to enjoy all the prfoit for yourself, but you need to do all the investing into the shop.
+       * what is now weight whould be pebbleInvest.
+       * pebbleInvest should be an array that contains one or more invester objects
+       * an invester object contains:
+           * the username of the invester
+           * the amount of pebble they have invested
+           * the percentage of the shop that they own.
+       * have a totalSales property that is an amount of total profit that was made by sales
+       * have a property that holds the date that the shop was started (for computing decay)
+       * have a property that holds lastPromoted date ( for countering decay )
+       * weight should be inpacted by pebbleInvest, but it should also be inpacted by sales, and decay.
+       * have a property that holds an pebble account
+       * have pebble that is made by sales stored in the shops pebble account
+       * have payments payed out to owners accounts from the shop account
+        
 pebble_procesor:
 
    * make a seperate process from the main server.js file called pebble_processor.js
@@ -26,6 +45,7 @@ pebble.js:
 users.js:
 
     * pull everything that has to do with shops into it's own file.
+    * we should have a lastrequest property for the userRec that will be used to know if we have a dead account.
 
 pebble_check.js:
 
