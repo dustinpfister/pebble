@@ -1,6 +1,6 @@
 {
     
-    pluginName : 'reserve_info',
-    coreFiles : ['responder']
+    "pluginName" : "reserve_info",
+    "coreFiles" : ["responder"]
     
 }
