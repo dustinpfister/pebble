@@ -155,6 +155,12 @@ app.get('/', function (req, res, next) {
 
 app.post('/', function (req, res) {
     
+    if(!req.user){
+        
+        res.send({mess: 'you are not logged in.'});
+        
+    }else{
+    
     //require('./lib/pebblebar/responder.js').post(req,res,users,pebble,function(){
     require('./lib/pebblebar/responder.js').post(req,res,function(){
         
@@ -226,6 +232,8 @@ app.post('/', function (req, res) {
         
         }
     });
+        
+    }
     
 });
 
