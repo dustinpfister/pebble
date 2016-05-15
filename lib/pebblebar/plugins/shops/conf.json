@@ -1,0 +1,7 @@
+{
+    
+    pluginName : 'shops',
+    coreFiles : ['path','responder', 'setup', 'updater'],
+    collectionFiles : ['shops']
+    
+}

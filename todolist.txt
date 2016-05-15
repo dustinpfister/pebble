@@ -3,9 +3,11 @@ Pebble todo list:
 
 pebblebar:
 
+   * conf.json files should be used to run setup.js files for any plugin that has one.
+   
+   
    * reserve_grant plugin for grant requests
    * reserve_playtime plugin pays pebble to users based on how long they have played.
-   * main setup.js should run setup.js scripts for each plugin that has one
    * main updater.js should run updater.js files for each plugin that has one.
    * might need a config file of sorts.
    * updater.js should be a process and not just something that is called from server.js
@@ -62,7 +64,7 @@ pebble_fix.js:
 DONE:
 ********** ********** ********** ********** ********** ********** ********** ********** ********** ********** 
 
-
+pebblebar: (done 1.0.219) main setup.js checks conf.json files for config info
 pebblebar: (done 1.0.205) fix the problem with require('./shops') in all the new shops plugins
 pebblebar: (done 1.0.205) get new shops plugins working in place of the older shops plugin that used the single clientData object
 pebblebar: (done 1.0.194) have a "scope" variable that will contain references to any *.js files that are needed by plugins.
