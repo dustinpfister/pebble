@@ -3,7 +3,9 @@ Pebble todo list:
 
 pebblebar:
 
-
+   main responder.js:
+   
+   main setup.js:
 
    main updater.js:
    
