@@ -75,8 +75,14 @@
             shops_getusershops : function(res){
                 
                 var userShops = res.userShops,
-                    s = 0, len = userShops.length, html='',
+                    s = 0, len = 0, html='',
                     container = document.getElementById('shops_usershops');
+                
+                if(userShops){
+                    
+                    len = userShops.length;
+                    
+                }
                 
                 while(s < len){
                     
