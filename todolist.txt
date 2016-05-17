@@ -3,7 +3,9 @@ Pebble todo list:
 
 pebblebar:
 
-   * a core plugin should have an addToScope property in it's conf.json file.
+   * A core plugin should have an addToScope property in it's conf.json file.
+   * Updater.js will need some kind of registery for all the update scripts that are to be called on an update loop.   
+   * The updater registery should be called by the main
    
    
    * reserve_grant plugin for grant requests
