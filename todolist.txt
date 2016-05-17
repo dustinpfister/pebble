@@ -3,7 +3,7 @@ Pebble todo list:
 
 pebblebar:
 
-   * conf.json files should be used to run setup.js files for any plugin that has one.
+   * a core plugin should have an addToScope property in it's conf.json file.
    
    
    * reserve_grant plugin for grant requests
@@ -64,6 +64,8 @@ pebble_fix.js:
 DONE:
 ********** ********** ********** ********** ********** ********** ********** ********** ********** ********** 
 
+pebblebar: (done 1.0.223) if a plugin has a setup.js file it is called if it it listed in it's conf.json file.
+pebblebar: (done 1.0.222) conf.json files are used to run setup.js files for any plugin that has one.
 pebblebar: (done 1.0.219) main setup.js checks conf.json files for config info
 pebblebar: (done 1.0.205) fix the problem with require('./shops') in all the new shops plugins
 pebblebar: (done 1.0.205) get new shops plugins working in place of the older shops plugin that used the single clientData object
