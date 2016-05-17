@@ -38,6 +38,12 @@
         
         var clientData = [
             
+            
+            {
+               plugin : 'user_checkin'  
+            },
+            
+            
             {
                 plugin : 'shops_getshoppage',
                 shopPage : 0
@@ -64,7 +70,7 @@
         // draw methods
         // ALERT! we will need methods that will ba called once, on top of these.
         draw = {
-            
+            user_checkin : function(res){},
             shops_getshoppage : function(res){},
             shops_getusershops : function(res){
                 
@@ -109,10 +115,12 @@
             
             after : function(res){
                 
+                console.log(res);
+                
                 var i=0, len = res.response.length
                 while(i < len){
                     
-                    console.log(res.response[i].responderPlugin);
+                    //console.log(res.response[i].responderPlugin);
                     
                     // call draw method for the plugin
                     draw[res.response[i].responderPlugin](res.response[i]);

@@ -6,6 +6,10 @@ pebblebar:
    main responder.js:
    
    main setup.js:
+   
+       * path.js plugin files should be added in the coreFiles foreach in checkPluginConf, and not the plugins setup.js
+       * responder.js plugin files should be restered in the coreFiles foreach in checkPluginConf
+       * updater.js files should be registered in the coreFiles foreach in checkPluginConf.
 
    main updater.js:
    
