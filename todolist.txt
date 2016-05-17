@@ -3,17 +3,39 @@ Pebble todo list:
 
 pebblebar:
 
+
+
+   main updater.js:
    
-   * Updater.js will need some kind of registery for all the update scripts that are to be called on an update loop.   
-   * The updater registery should be called by the main
+       * main updater.js should run updater.js files for each plugin that has one.
+       * Updater.js will need some kind of registery for all the update scripts that are to be called on an update loop.   
+       * The updater registery should be called by the main
+       * updater.js should be a process and not just something that is called from server.js
    
    
-   * reserve_grant plugin for grant requests
-   * reserve_playtime plugin pays pebble to users based on how long they have played.
-   * main updater.js should run updater.js files for each plugin that has one.
-   * might need a config file of sorts.
-   * updater.js should be a process and not just something that is called from server.js
-   * shops:
+   plugins:
+   
+   
+   * user core:
+   
+       * user_safeinfo gets info that is public in nature.
+       * user_give allows for a user to just give pebble to another account.
+       * user_checkin_basic simply just sets a property in userRec that is the last time the user has sent a request.
+       * user_deadaccount checks how long it has been sense the last time there has been a request for an account, and
+           flags the account as dead if enough time has passed.
+   
+   
+   * reserve core:
+   
+       * reserve_grant plugin for grant requests
+       * reserve_playtime plugin pays pebble to users based on how long they have played.
+       * reserve_visiting plugin rewards players with pebble from the reserve acount for visiting often.
+       * reserve_time plugin rewards players with pebble from the reserve account based on the amount of time played.
+       * reserve_webwork rewards players by allowing webwork to be preformed (requires webwork plugin)
+       * reserve_promote rewards players with pebble from the reserve for promoting pebble by providing a social media link.
+       
+       
+   * shops core:
    
        * start a public or private shop
        * public shops allow other users to invest in your shop, but they get a share in the profits for doing so
