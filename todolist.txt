@@ -3,7 +3,7 @@ Pebble todo list:
 
 pebblebar:
 
-   * A core plugin should have an addToScope property in it's conf.json file.
+   
    * Updater.js will need some kind of registery for all the update scripts that are to be called on an update loop.   
    * The updater registery should be called by the main
    
@@ -66,17 +66,19 @@ pebble_fix.js:
 DONE:
 ********** ********** ********** ********** ********** ********** ********** ********** ********** ********** 
 
-pebblebar: (done 1.0.223) if a plugin has a setup.js file it is called if it it listed in it's conf.json file.
-pebblebar: (done 1.0.222) conf.json files are used to run setup.js files for any plugin that has one.
-pebblebar: (done 1.0.219) main setup.js checks conf.json files for config info
-pebblebar: (done 1.0.205) fix the problem with require('./shops') in all the new shops plugins
-pebblebar: (done 1.0.205) get new shops plugins working in place of the older shops plugin that used the single clientData object
-pebblebar: (done 1.0.194) have a "scope" variable that will contain references to any *.js files that are needed by plugins.
-pebblebar: (done 1.0.186) broke down the shops plugin into many small plugins that work with the new clientData Array.
-pebblebar: (done 1.0.180) reserve_info, and reserve_take plugins are not working with clientData Array
-pebblebar: (done 1.0.179) the clientData object will now be an array of objects
-pebble.js: (done 1.0.173) fix a bug where a player can create pebble by transfering pebble to the same account.
-pebblevar: (done 1.0.173) everything that has to do with shops should be pulled into the pebblebar folder
-pebblebar: (done 1.0.173) the backends folder should be called "plugins", the lable backends is to general
-pebblebar: (done 1.0.168) all code for our "plugins" should be in this folder.
-pebble.js: (done 1.0.154) allow for the option to give pebble to a usernames prime account
+pebblebar: (1.0.225) addToScope property now working in main setup.js
+pebblebar: (1.0.224) A core plugin now has have an addToScope property in it's conf.json file.
+pebblebar: (1.0.223) if a plugin has a setup.js file it is called if it it listed in it's conf.json file.
+pebblebar: (1.0.222) conf.json files are used to run setup.js files for any plugin that has one.
+pebblebar: (1.0.219) main setup.js checks conf.json files for config info
+pebblebar: (1.0.205) fix the problem with require('./shops') in all the new shops plugins
+pebblebar: (1.0.205) get new shops plugins working in place of the older shops plugin that used the single clientData object
+pebblebar: (1.0.194) have a "scope" variable that will contain references to any *.js files that are needed by plugins.
+pebblebar: (1.0.186) broke down the shops plugin into many small plugins that work with the new clientData Array.
+pebblebar: (1.0.180) reserve_info, and reserve_take plugins are not working with clientData Array
+pebblebar: (1.0.179) the clientData object will now be an array of objects
+pebble.js: (1.0.173) fix a bug where a player can create pebble by transfering pebble to the same account.
+pebblevar: (1.0.173) everything that has to do with shops should be pulled into the pebblebar folder
+pebblebar: (1.0.173) the backends folder should be called "plugins", the lable backends is to general
+pebblebar: (1.0.168) all code for our "plugins" should be in this folder.
+pebble.js: (1.0.154) allow for the option to give pebble to a usernames prime account
