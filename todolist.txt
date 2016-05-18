@@ -110,7 +110,7 @@ pebble.js:
 
 users.js:
 
-    * add a pluginData property.
+    * pluginData array should work with at least one plugin.
     * allot of stuff in the userRec should be optional stuff that will be in pluginData.
     
 
@@ -129,6 +129,7 @@ pebble_fix.js:
 DONE:
 ********** ********** ********** ********** ********** ********** ********** ********** ********** ********** 
 
+users.js:  (1.0.250) added a pluginData property.
 pebblevar: (1.0.238) reserve path moved from server.js to path.js in reserve core plugin
 pebblebar: (10.0237) path.js plugin files are now added in the coreFiles foreach in checkPluginConf, and not the plugins setup.js
 pebblebar: (1.0.236) user_checkin sets a property in userRec that is the last time the user has sent a request.
