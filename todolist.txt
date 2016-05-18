@@ -3,6 +3,20 @@ Pebble todo list:
 
 pebblebar:
 
+    storage core:
+    
+        * so maybe we should have a storage core plugin
+        * storage.js : a file in storage core that is added to scope, it will provide an api for other plugins that use storage.
+        * stoarge_incoming : a plugin that is used when the user recives an item into there storage.
+        * storage_outgoing : the users item is transported from there storage to someplace else.
+        * storage_drop : the user drops an item from there storage.
+
+
+    shops userRec storage:
+    
+        * in users.js there should be a property such as "pluginData" to store what is currently stored in things like max shops, 
+        shops, storage, maxStorage.
+
     shops :
     
     shop ownership:
@@ -47,7 +61,10 @@ pebblebar:
    
     plugins:
    
+    * home core:
     
+        * home_userinfo
+        * home_getaccounts get user accounts info
    
     * user core:
    
@@ -93,8 +110,9 @@ pebble.js:
 
 users.js:
 
-    * pull everything that has to do with shops into it's own file.
-    * we should have a lastrequest property for the userRec that will be used to know if we have a dead account.
+    * add a pluginData property.
+    * allot of stuff in the userRec should be optional stuff that will be in pluginData.
+    
 
 pebble_check.js:
 
