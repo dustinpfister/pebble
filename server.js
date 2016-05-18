@@ -281,7 +281,7 @@ app.post('/signup', function (req, res, next) {
 // start the server
 app.listen(openShift.port, openShift.ipaddress, function () {
 
-    console.log('pebble lives');
+    console.log('server.js: pebble lives');
 
     users.infoCheck();
     pebble.reserveCheck();
