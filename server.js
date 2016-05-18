@@ -237,19 +237,6 @@ app.post('/', function (req, res) {
     
 });
 
-/*
-app.get('/reserve', function (req, res) {
-
-    res.render('systems/' + clientSystem + '/reserve', {
-
-        req: req
-        , user: req.user
-
-    });
-
-});
-*/
-
 app.get('/login', function (req, res, next) {
 
     res.render('systems/' + clientSystem + '/login', {});
@@ -266,9 +253,8 @@ app.post('/login',
     // success
     function (req, res) {
 
-        console.log(req.user.name + ' loggin!');
-
         res.redirect('/');
+    
     }
 
 );
@@ -307,14 +293,7 @@ app.listen(openShift.port, openShift.ipaddress, function () {
 
         var t = setTimeout(taxLoop, 10000);
         
-        /*
-        users.updateShops(function(){
-        
-            //pebble.collectTax();
-        
-        });
-        */
-        
+        // run pebblebars updater
         require('./lib/pebblebar/updater.js').update();
 
     };
