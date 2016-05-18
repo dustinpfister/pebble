@@ -40,6 +40,9 @@
             
             
             {
+               plugin : 'storage_incoming'  
+            },
+            {
                plugin : 'user_checkin'  
             },
             
@@ -70,6 +73,7 @@
         // draw methods
         // ALERT! we will need methods that will ba called once, on top of these.
         draw = {
+            storage_incoming : function(res){},
             user_checkin : function(res){},
             shops_getshoppage : function(res){},
             shops_getusershops : function(res){
