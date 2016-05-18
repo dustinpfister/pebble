@@ -7,7 +7,6 @@ pebblebar:
    
    main setup.js:
    
-       * path.js plugin files should be added in the coreFiles foreach in checkPluginConf, and not the plugins setup.js
        * responder.js plugin files should be restered in the coreFiles foreach in checkPluginConf
        * updater.js files should be registered in the coreFiles foreach in checkPluginConf.
 
@@ -25,6 +24,8 @@ pebblebar:
    * user core:
    
        * user_safeinfo gets info that is public in nature.
+       * user_openaccount to start a new account
+       * user closeaccount to close an account.
        * user_give allows for a user to just give pebble to another account.
        * user_deadaccount checks how long it has been sense the last time there has been a request for an account, and
            flags the account as dead if enough time has passed.
@@ -93,6 +94,8 @@ pebble_fix.js:
 DONE:
 ********** ********** ********** ********** ********** ********** ********** ********** ********** ********** 
 
+pebblevar: (1.0.238) reserve path moved from server.js to path.js in reserve core plugin
+pebblebar: (10.0237) path.js plugin files are now added in the coreFiles foreach in checkPluginConf, and not the plugins setup.js
 pebblebar: (1.0.236) user_checkin sets a property in userRec that is the last time the user has sent a request.
 pebblebar: (1.0.225) addToScope property now working in main setup.js
 pebblebar: (1.0.224) A core plugin now has have an addToScope property in it's conf.json file.

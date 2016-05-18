@@ -1,6 +1,6 @@
 {
     
     "pluginName" : "reserve",
-    "coreFiles" : ["responder"]
+    "coreFiles" : ["path","responder"]
     
 }

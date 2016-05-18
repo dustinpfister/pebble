@@ -237,6 +237,7 @@ app.post('/', function (req, res) {
     
 });
 
+/*
 app.get('/reserve', function (req, res) {
 
     res.render('systems/' + clientSystem + '/reserve', {
@@ -247,6 +248,7 @@ app.get('/reserve', function (req, res) {
     });
 
 });
+*/
 
 app.get('/login', function (req, res, next) {
 
