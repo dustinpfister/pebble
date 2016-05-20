@@ -1,3 +1,9 @@
+/*
+ *    peb.js console pebble client
+
+*/
+
+
 var post = function (path, data, done) {
 
         // new xhr
@@ -33,9 +39,21 @@ var post = function (path, data, done) {
     var peb = (function () {
 
         
-        var control = function () {
+        var control = function (obj) {
 
-
+            if(obj === undefined){
+                
+                post('/',{action:'pebblebar'});
+                
+            }else{
+                
+                post('/', obj );
+                
+            }
+            
+            return 'making call to server...';
+            
+            
         };
 
         control.post = function (path, obj) {
@@ -58,7 +76,6 @@ var post = function (path, data, done) {
             
         control.login = function(username, password){
             
-            //post('/console_login', {username: username, password: password});
             post('/', {action:'login', username: username, password: password});
             
             
