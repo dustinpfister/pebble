@@ -14,26 +14,36 @@ var express = require('express')
     , MongoStore = require('connect-mongo/es5')(session)
     , openShift = require('./lib/openshift.js').openShiftObj
 
-    , mongoose = require('mongoose')
+
+
+, mongoose = require('mongoose')
     , db = mongoose.createConnection(openShift.mongo)
 
-    // passport
-    , passport = require('passport')
+// passport
+
+
+, passport = require('passport')
     , Strategy = require('passport-local').Strategy
 
-    // express app
-    ,app = express()
+// express app
 
-    // client system in use:
-    //,clientSystem = 'vanilla_beta'
-    //,clientSystem = 'vanilla_updated_pebblebar'
-    ,clientSystem = 'command_only'
 
-    // users
-    ,users = require('./lib/users.js')
+, app = express()
 
-    // pebble lib
-    pebble = require('./lib/pebble.js');
+// client system in use:
+//,clientSystem = 'vanilla_beta'
+//,clientSystem = 'vanilla_updated_pebblebar'
+
+
+, clientSystem = 'command_only'
+
+// users
+
+
+, users = require('./lib/users.js')
+
+// pebble lib
+pebble = require('./lib/pebble.js');
 
 // use passport local strategy
 // following example at : https://github.com/passport/express-4.x-local-example/blob/master/server.js
@@ -154,96 +164,183 @@ app.get('/', function (req, res, next) {
 
 });
 
-app.post('/', function (req, res) {
-    
-    if(!req.user){
-        
-        res.send({mess: 'you are not logged in.'});
-        
-    }else{
-    
-    //require('./lib/pebblebar/responder.js').post(req,res,users,pebble,function(){
-    require('./lib/pebblebar/responder.js').post(req,res,function(){
-        
-        // not a pebblebar post?
-        
+app.post('/', function (req, res, next) {
+
+    if (!req.user) {
+
         // some other action?
-        if(req.body.action){
-            
-            switch(req.body.action){
-                   
-                // if foo return bar
+        if (req.body.action) {
+
+            switch (req.body.action) {
+
+            case 'logout':
+
+                res.send(JSON.stringify({
+                    mess: 'you are not logged in.'
+                }));
+
+                break;
+
+                // login action
+            case 'login':
+
+                passport.authenticate('local', function (err, user, info) {
+
+                    if (err) {
+
+                        return res.send(JSON.stringify({
+                            mess: 'login fail.'
+                        }));
+
+                    }
+                    if (!user) {
+
+                        return res.send(JSON.stringify({
+                            mess: 'login fail.'
+                        }));
+
+                    }
+
+                    req.logIn(user, function (err) {
+
+                        if (err) {
+
+                            return res.send(JSON.stringify({
+                                mess: 'login fail.'
+                            }));
+
+                        }
+
+                        return res.send(JSON.stringify({
+                            mess: 'login good.'
+                        }));
+                    });
+                })(req, res, next);
+
+                break;
+
+
+            default:
+
+                res.send({
+                    mess: 'unkown action'
+                });
+
+                break;
+
+            }
+
+            // if no action just say they are not logged in.
+        } else {
+
+            res.send({
+                mess: 'you are not logged in.'
+            });
+
+        }
+
+        // else if the user is logged in
+    } else {
+
+        //require('./lib/pebblebar/responder.js').post(req,res,users,pebble,function(){
+        require('./lib/pebblebar/responder.js').post(req, res, function () {
+
+            // not a pebblebar post?
+
+            // some other action?
+            if (req.body.action) {
+
+                switch (req.body.action) {
+
+                    // if foo return bar
                 case 'foo':
-                    
-                    res.send(JSON.stringify({mess:'bar!'}));
-                      
-                break;
-                    
-                // logout action
+
+                    res.send(JSON.stringify({
+                        mess: 'bar!'
+                    }));
+
+                    break;
+
+                case 'login':
+
+                    res.send(JSON.stringify({
+                        mess: 'you are all ready loged in as ' + req.user.username
+                    }));
+
+
+                    break;
+
+                    // logout action
                 case 'logout':
-                    
+
                     req.logout();
-                    res.send(JSON.stringify({mess:'logout'}));
-                    
-                break;
-                    
-                // grant pebble
+                    res.send(JSON.stringify({
+                        mess: 'logout'
+                    }));
+
+                    break;
+
+                    // grant pebble
                 case 'grant':
-                    
-                    pebble.grant(req, function(response){
-                    
+
+                    pebble.grant(req, function (response) {
+
                         response.mess = 'grant response.';
                         res.send(JSON.stringify(response));
-                        
+
                     });
-                    
-                break;
-                    
-                // the user wants to give pebble away somewhere, how nice.
+
+                    break;
+
+                    // the user wants to give pebble away somewhere, how nice.
                 case 'give':
-                    
+
                     pebble.give(
-                        req, 
-                        
+                        req,
+
                         // done
-                        function(response){
-                        
+                        function (response) {
+
                             response.mess = 'thank you.';
                             res.send(JSON.stringify(response));
-                        
+
                         },
-                        
+
                         // fail
-                        function(mess){
-                            
+                        function (mess) {
+
                             res.send(JSON.stringify(mess));
-                            
-                            
+
+
                         }
-                        
+
                     );
-                    
-                break;
-                    
-                // send unkown action response by default
+
+                    break;
+
+                    // send unkown action response by default
                 default:
-                    
-                    res.send(JSON.stringify({mess:'unkown action.'}));
-                    
-                break;
-                    
+
+                    res.send(JSON.stringify({
+                        mess: 'unkown action.'
+                    }));
+
+                    break;
+
+                }
+
+                // no action? send "hey stop that!"
+            } else {
+
+                res.send(JSON.stringify({
+                    mess: 'hey stop that!'
+                }));
+
             }
-            
-        // no action? send "hey stop that!"
-        }else{
-        
-            res.send(JSON.stringify({mess:'hey stop that!'}));
-        
-        }
-    });
-        
+        });
+
     }
-    
+
 });
 
 app.get('/login', function (req, res, next) {
@@ -263,7 +360,7 @@ app.post('/login',
     function (req, res) {
 
         res.redirect('/');
-    
+
     }
 
 );
@@ -294,14 +391,14 @@ app.listen(openShift.port, openShift.ipaddress, function () {
 
     users.infoCheck();
     pebble.reserveCheck();
-    
-    require('./lib/pebblebar/setup.js').setup(app, db,clientSystem, users, pebble);
+
+    require('./lib/pebblebar/setup.js').setup(app, db, clientSystem, users, pebble);
 
     // the tax loop
     var taxLoop = function () {
 
         var t = setTimeout(taxLoop, 10000);
-        
+
         // run pebblebars updater
         require('./lib/pebblebar/updater.js').update();
 

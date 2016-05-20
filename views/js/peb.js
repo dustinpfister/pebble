@@ -1,4 +1,4 @@
-var post = function (data, done) {
+var post = function (path, data, done) {
 
         // new xhr
         var http = new XMLHttpRequest();
@@ -6,7 +6,7 @@ var post = function (data, done) {
         done = done === undefined ? function (response) { console.log(response) } : done;
 
         // open a post
-        http.open('POST', '/');
+        http.open('POST', path);
 
         //Send the proper header information along with the request
         http.setRequestHeader("Content-type", "application/json");
@@ -38,9 +38,9 @@ var post = function (data, done) {
 
         };
 
-        control.post = function (obj) {
+        control.post = function (path, obj) {
 
-            post(obj, function (response) {
+            post(path, obj, function (response) {
         
                 console.log(response);
 
@@ -50,7 +50,7 @@ var post = function (data, done) {
 
         control.logout = function () {
 
-            post({action: 'logout'});
+            post('/', {action: 'logout'});
             
             return 'peb.logout...';
 
@@ -58,7 +58,9 @@ var post = function (data, done) {
             
         control.login = function(username, password){
             
-            post({action: 'login', username: username, password: password});
+            //post('/console_login', {username: username, password: password});
+            post('/', {action:'login', username: username, password: password});
+            
             
             return 'peb.login';
             
