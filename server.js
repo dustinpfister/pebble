@@ -179,7 +179,8 @@ app.post('/', function (req, res, next) {
             case 'logout':
 
                 res.send(JSON.stringify({
-                    mess: 'you are not logged in.'
+                    mess: 'you are not logged in.',
+                    success: false
                 }));
 
                 break;
@@ -192,14 +193,14 @@ app.post('/', function (req, res, next) {
                     if (err) {
 
                         return res.send(JSON.stringify({
-                            mess: 'login fail.'
+                            mess: 'login fail.', success: false
                         }));
 
                     }
                     if (!user) {
 
                         return res.send(JSON.stringify({
-                            mess: 'login fail.'
+                            mess: 'login fail.', success: false
                         }));
 
                     }
@@ -209,13 +210,13 @@ app.post('/', function (req, res, next) {
                         if (err) {
 
                             return res.send(JSON.stringify({
-                                mess: 'login fail.'
+                                mess: 'login fail.', success: false
                             }));
 
                         }
 
                         return res.send(JSON.stringify({
-                            mess: 'login good.'
+                            mess: 'login good.',success: true
                         }));
                     });
                 })(req, res, next);
@@ -237,7 +238,8 @@ app.post('/', function (req, res, next) {
         } else {
 
             res.send({
-                mess: 'you are not logged in.'
+                mess: 'you are not logged in.',
+                success: false
             });
 
         }
@@ -267,7 +269,8 @@ app.post('/', function (req, res, next) {
                 case 'login':
 
                     res.send(JSON.stringify({
-                        mess: 'you are all ready loged in as ' + req.user.username
+                        mess: 'you are all ready loged in as ' + req.user.username, 
+                        success: false
                     }));
 
 
@@ -278,7 +281,8 @@ app.post('/', function (req, res, next) {
 
                     req.logout();
                     res.send(JSON.stringify({
-                        mess: 'logout'
+                        mess: 'logout',
+                        success: true
                     }));
 
                     break;

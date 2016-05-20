@@ -79,7 +79,7 @@ var post = function (path, data, done) {
             post('/', {action:'login', username: username, password: password}, function(response){
                 
                 console.log('okay looks good so far');
-                window.location.href = '/';
+                //window.location.href = '/';
                 console.log(response);
                 
                 
