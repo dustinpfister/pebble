@@ -68,9 +68,20 @@ var post = function (path, data, done) {
 
         control.logout = function () {
 
-            post('/', {action: 'logout'});
+            post('/', {action: 'logout'}, function(response){
             
-            return 'peb.logout...';
+                // redirect to login if success
+                if(response.success){
+                
+                    window.location.href = '/login';
+                
+                }
+                
+                console.log(response);
+                
+            });
+            
+            return 'peb.logout.';
 
         },
             
@@ -78,10 +89,15 @@ var post = function (path, data, done) {
             
             post('/', {action:'login', username: username, password: password}, function(response){
                 
-                console.log('okay looks good so far');
-                //window.location.href = '/';
-                console.log(response);
+                // redirect to root if success
+                if(response.success){
                 
+                    window.location.href = '/';
+                
+                }
+                    
+                console.log(response);
+                    
                 
             });
             
