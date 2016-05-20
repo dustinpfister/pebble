@@ -76,7 +76,14 @@ var post = function (path, data, done) {
             
         control.login = function(username, password){
             
-            post('/', {action:'login', username: username, password: password});
+            post('/', {action:'login', username: username, password: password}, function(response){
+                
+                console.log('okay looks good so far');
+                window.location.href = '/';
+                console.log(response);
+                
+                
+            });
             
             
             return 'peb.login';
