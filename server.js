@@ -179,6 +179,14 @@ app.post('/', function (req, res) {
                       
                 break;
                     
+                // logout action
+                case 'logout':
+                    
+                    req.logout();
+                    res.send(JSON.stringify({mess:'logout'}));
+                    
+                break;
+                    
                 // grant pebble
                 case 'grant':
                     
