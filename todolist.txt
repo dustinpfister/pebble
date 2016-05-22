@@ -5,19 +5,14 @@ pebblebar:
 
     storage core:
     
-        * so maybe we should have a storage core plugin
-        * storage.js : a file in storage core that is added to scope, it will provide an api for other plugins that use storage.
         * stoarge_incoming : a plugin that is used when the user recives an item into there storage.
         * storage_outgoing : the users item is transported from there storage to someplace else.
         * storage_drop : the user drops an item from there storage.
 
 
-    shops userRec storage:
-    
-        * in users.js there should be a property such as "pluginData" to store what is currently stored in things like max shops, 
-        shops, storage, maxStorage.
-
     shops :
+    
+        * get shops to work with new pluginData userRec
     
     shop ownership:
        
@@ -110,7 +105,6 @@ pebble.js:
 
 users.js:
 
-    * pluginData array should work with at least one plugin.
     * allot of stuff in the userRec should be optional stuff that will be in pluginData.
     
 
@@ -124,10 +118,42 @@ pebble_fix.js:
     
     
     
+user membership levels (we need to have a game first, if you get started with this just do the token system) :
     
+        * Membership levels start at level 0 upwards
+        * The player must pay in terms of pebble or real money to upgrade membership level
+        * Membership levels are subject to decay (player must continue to pay in terms of pebble and or real money)
+        
+        * real money payments:
+            * Dirrectly unlock a membership level
+            * Are charged on a monthy billing cycle.
+            * plans start at just 0.99$ a month.
+            * real money plans rase membership level base from level 0 (free account)
+            
+        * pebble payments:
+            * the player can spend pebble towrds one or more "membership tokens"
+            * the player can then spend these membership tokens to unlock higher levels.
+            * the cost of membership levels in terms of tokens grows ( lv 1 = 1 token, lv 2 = 2 tokens, lv 3 = 4 tokens, ect.)
+            * membership tokens can be horded, allowing for free (but tempery) access to higher membership levels.
+        
+        * membership tokens:
+            * a token does not have to be bought outright, as they cost allot of pebble.
+            * a player may spend as much or as little pebble as they like twords there next token.
+            * once enough pebble has been spent they will recive a token.
+            * no set limit on tokens.
+            * tokens are transferable between accounts (you can gift tokens).
+        
+        * decay:
+        
+            * membership levels decay at the rate of one per month.
+            * decay stops at level 0, or highest payed member base.  
     
 DONE:
 ********** ********** ********** ********** ********** ********** ********** ********** ********** ********** 
+
+1.0.270 pluginData property added to userRec.
+1.0.270 storage.js : a file in storage core that is added to scope, it will provide an api for other plugins that use storage.
+1.0.270 storage core plugin
 
 users.js:  (1.0.250) added a pluginData property.
 pebblevar: (1.0.238) reserve path moved from server.js to path.js in reserve core plugin

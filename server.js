@@ -165,9 +165,6 @@ app.get('/', function (req, res, next) {
 });
 
 app.post('/', function (req, res, next) {
-
-    console.log('okay here is the body man:');
-    console.log(req.body);
     
     if (!req.user) {
 
