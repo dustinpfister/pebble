@@ -12,7 +12,7 @@ pebblebar:
 
     shops :
     
-        * get shops to work with new pluginData userRec
+        * shops.startShop and shops.getUserShops should be updated to make use of new pluginData userRec property.
     
     shop ownership:
        
