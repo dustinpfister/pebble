@@ -1,7 +1,7 @@
 {
     
     "pluginName" : "shops",
-    "coreFiles" : ["path","responder","setup","updater"],
+    "coreFiles" : ["path","setup","updater"],
     "addToScopeFiles" : ["shops"]
     
 }
