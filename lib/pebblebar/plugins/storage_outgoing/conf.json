@@ -1,6 +1,6 @@
 {
     
     "pluginName" : "storage_outgoing",
-    "coreFiles" : ["responder"]
+    "coreFiles" : []
     
 }
