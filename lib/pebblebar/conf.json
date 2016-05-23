@@ -14,9 +14,16 @@
             
         ],
         
-        "storage":[],
+        "storage":[
+            
+            
+        ],
         
-        "shops": []
+        "shops": [
+            
+            "buyitems", "buyweight", "getshoppage", "getusershops", "newshop"
+            
+        ]
             
     }
 
