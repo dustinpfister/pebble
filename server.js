@@ -17,6 +17,7 @@ var express = require('express')
 
 
 
+
 , mongoose = require('mongoose')
     , db = mongoose.createConnection(openShift.mongo)
 
@@ -24,10 +25,12 @@ var express = require('express')
 
 
 
+
 , passport = require('passport')
     , Strategy = require('passport-local').Strategy
 
 // express app
+
 
 
 
@@ -39,9 +42,11 @@ var express = require('express')
 
 
 
+
 , clientSystem = 'command_only'
 
 // users
+
 
 
 
@@ -410,22 +415,24 @@ app.listen(openShift.port, openShift.ipaddress, function () {
 
     console.log('server.js: pebble lives');
 
-    users.infoCheck();
-    
-    pebble.reserveCheck(function () {
+    users.infoCheck(function () {
 
-        require('./lib/pebblebar/setup.js').setup(app, db, clientSystem, users, pebble);
+        pebble.reserveCheck(function () {
 
-        // the tax loop
-        taxLoop = function () {
+            require('./lib/pebblebar/setup.js').setup(app, db, clientSystem, users, pebble);
 
-            var t = setTimeout(taxLoop, 10000);
+            // the tax loop
+            taxLoop = function () {
 
-            // run pebblebars updater
-            require('./lib/pebblebar/updater.js').update();
+                var t = setTimeout(taxLoop, 10000);
 
-        };
-        taxLoop();
+                // run pebblebars updater
+                require('./lib/pebblebar/updater.js').update();
+
+            };
+            taxLoop();
+
+        });
 
     });
 
