@@ -67,7 +67,21 @@ peb({action:'pebblebar', clientData:[{plugin:'reserve_info'},{plugin:'reserve_ta
         
         <li><h4>shops_buyitems</h4></li>
         <li><h4>shops_buyweight</h4></li>
-        <li><h4>shops_getshoppage</h4></li>
+        <li><h4>shops_getshoppage</h4>
+        
+            <p>
+            </p>
+            
+            <pre>
+// get shop page #0 (top page containg shops with heighest weight ratings)
+peb({action:'pebblebar', clientData:[{plugin:'shops_getshoppage'}]})
+
+// get shop page #1
+peb({action:'pebblebar', clientData:[{plugin:'shops_getshoppage'}]})
+            </pre>
+            
+        </li>
+        
         <li><h4>shops_getusershops</h4>
         
             <p>
@@ -80,6 +94,7 @@ peb({action:'pebblebar', clientData:[{plugin:'shops_getusershops'}]})
             </pre>
         
         </li>
+        
         <li><h4>shops_newshop</h4>
         
             <p>
