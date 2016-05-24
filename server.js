@@ -243,6 +243,12 @@ app.post('/', function (req, res, next) {
 
         // else if the user is logged in
     } else {
+        
+        users.checkIn(req.user.username, function(){
+           
+            //console.log(req.user.username + ' has checked in.');
+            
+        });
 
         //require('./lib/pebblebar/responder.js').post(req,res,users,pebble,function(){
         require('./lib/pebblebar/responder.js').post(req, res, function () {
