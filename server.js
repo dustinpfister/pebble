@@ -16,16 +16,19 @@ var express = require('express')
 
 
 
+
 , mongoose = require('mongoose')
     , db = mongoose.createConnection(openShift.mongo)
 
 // passport
 
 
+
 , passport = require('passport')
     , Strategy = require('passport-local').Strategy
 
 // express app
+
 
 
 , app = express()
@@ -35,9 +38,11 @@ var express = require('express')
 //,clientSystem = 'vanilla_updated_pebblebar'
 
 
+
 , clientSystem = 'command_only'
 
 // users
+
 
 
 , users = require('./lib/users.js')
@@ -165,7 +170,7 @@ app.get('/', function (req, res, next) {
 });
 
 app.post('/', function (req, res, next) {
-    
+
     if (!req.user) {
 
         // some other action?
@@ -176,8 +181,8 @@ app.post('/', function (req, res, next) {
             case 'logout':
 
                 res.send(JSON.stringify({
-                    mess: 'you are not logged in.',
-                    success: false
+                    mess: 'you are not logged in.'
+                    , success: false
                 }));
 
                 break;
@@ -190,14 +195,16 @@ app.post('/', function (req, res, next) {
                     if (err) {
 
                         return res.send(JSON.stringify({
-                            mess: 'login fail.', success: false
+                            mess: 'login fail.'
+                            , success: false
                         }));
 
                     }
                     if (!user) {
 
                         return res.send(JSON.stringify({
-                            mess: 'login fail.', success: false
+                            mess: 'login fail.'
+                            , success: false
                         }));
 
                     }
@@ -207,13 +214,15 @@ app.post('/', function (req, res, next) {
                         if (err) {
 
                             return res.send(JSON.stringify({
-                                mess: 'login fail.', success: false
+                                mess: 'login fail.'
+                                , success: false
                             }));
 
                         }
 
                         return res.send(JSON.stringify({
-                            mess: 'login good.',success: true
+                            mess: 'login good.'
+                            , success: true
                         }));
                     });
                 })(req, res, next);
@@ -235,19 +244,19 @@ app.post('/', function (req, res, next) {
         } else {
 
             res.send({
-                mess: 'you are not logged in.',
-                success: false
+                mess: 'you are not logged in.'
+                , success: false
             });
 
         }
 
         // else if the user is logged in
     } else {
-        
-        users.checkIn(req.user.username, function(){
-           
+
+        users.checkIn(req.user.username, function () {
+
             //console.log(req.user.username + ' has checked in.');
-            
+
         });
 
         //require('./lib/pebblebar/responder.js').post(req,res,users,pebble,function(){
@@ -272,8 +281,8 @@ app.post('/', function (req, res, next) {
                 case 'login':
 
                     res.send(JSON.stringify({
-                        mess: 'you are all ready loged in as ' + req.user.username, 
-                        success: false
+                        mess: 'you are all ready loged in as ' + req.user.username
+                        , success: false
                     }));
 
 
@@ -284,8 +293,8 @@ app.post('/', function (req, res, next) {
 
                     req.logout();
                     res.send(JSON.stringify({
-                        mess: 'logout',
-                        success: true
+                        mess: 'logout'
+                        , success: true
                     }));
 
                     break;
@@ -389,7 +398,7 @@ app.get('/signup', function (req, res, next) {
 });
 
 app.post('/signup', function (req, res, next) {
-    
+
     users.newUser(req, res);
 
 });
@@ -397,23 +406,27 @@ app.post('/signup', function (req, res, next) {
 // start the server
 app.listen(openShift.port, openShift.ipaddress, function () {
 
+    var taxloop;
+
     console.log('server.js: pebble lives');
 
     users.infoCheck();
-    pebble.reserveCheck();
+    
+    pebble.reserveCheck(function () {
 
-    require('./lib/pebblebar/setup.js').setup(app, db, clientSystem, users, pebble);
+        require('./lib/pebblebar/setup.js').setup(app, db, clientSystem, users, pebble);
 
-    // the tax loop
-    var taxLoop = function () {
+        // the tax loop
+        taxLoop = function () {
 
-        var t = setTimeout(taxLoop, 10000);
+            var t = setTimeout(taxLoop, 10000);
 
-        // run pebblebars updater
-        require('./lib/pebblebar/updater.js').update();
+            // run pebblebars updater
+            require('./lib/pebblebar/updater.js').update();
 
-    };
-    taxLoop();
+        };
+        taxLoop();
 
+    });
 
 });
