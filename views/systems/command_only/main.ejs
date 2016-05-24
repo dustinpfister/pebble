@@ -57,7 +57,45 @@ peb({action:'pebblebar', clientData:[{plugin:'reserve_info'},{plugin:'reserve_ta
 </pre>
 <p>This should give you two objects in your response array for each plugin you invoked.</p>
 
+<h2>pebblebar: plugin list</h2>
+<p>Here is a complate list of plugins that respond to client requests.</p>
 
+<ul>
+    
+    <li><h3>Shops</h3><ul>
+        
+        
+        <li><h4>shops_buyitems</h4></li>
+        <li><h4>shops_buyweight</h4></li>
+        <li><h4>shops_getshoppage</h4></li>
+        <li><h4>shops_getusershops</h4>
+        
+            <p>
+                get the shops that you own.
+            </p>
+        
+            <pre>
+// shops_getusershops: get a list of data on shops that you own.
+peb({action:'pebblebar', clientData:[{plugin:'shops_getusershops'}]})
+            </pre>
+        
+        </li>
+        <li><h4>shops_newshop</h4>
+        
+            <p>
+                Call this plugin to start a new shop.
+            </p>
+        
+            <pre>
+// start a new shop         
+peb({action:'pebblebar', clientData:[{plugin:'shops_newshop', newShop:true}]})
+            </pre>
+            
+        </li>
+    
+    </ul></li>
+    
+</ul>
 
 <h2>give action: give pebble back to the reserve, or to another user.</h2>
 <p>the give action can be used to give pebble to another account, including the reserve.</p>
@@ -82,6 +120,7 @@ peb({action:'grant', amount:100})
 
 </pre>
 
+<!--
 <h2>plugin list:</h2>
 <p>the following is a list of plugins and useage examples.</p>
 
@@ -116,5 +155,7 @@ peb({action:'pebblebar', clientData:[{plugin:'storage_getstorage'}]})
 peb({action:'pebblebar', clientData:[{plugin:'user_checkin'}]})
 
 </pre>
+
+-->
 
 <% include ./parts/foot.ejs %>
