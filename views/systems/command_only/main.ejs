@@ -66,7 +66,23 @@ peb({action:'pebblebar', clientData:[{plugin:'reserve_info'},{plugin:'reserve_ta
         
         
         <li><h4>shops_buyitems</h4></li>
-        <li><h4>shops_buyweight</h4></li>
+        
+        <li><h4>shops_buyweight</h4>
+        
+            <p>
+                Buy weight for a shop of yours. weight is what is used to determin your ranking in the shop pages.
+                 So the heigher the weight of a shop the better. To buy weight you must know the shop id of the shop 
+                of yours that you want to buy weight for, you also will want to give an amount as well.
+                
+            </p>
+        
+            <pre>
+// buy 100 pebble worth of weight for your shop that has an id of '1464108248925'
+peb({action: 'pebblebar', clientData:[{plugin:'shops_buyweight', shopId: '1464108248925', amount: 100}]})
+            </pre>
+            
+        </li>
+        
         <li><h4>shops_getshoppage</h4>
         
             <p>
