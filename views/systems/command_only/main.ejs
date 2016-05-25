@@ -65,7 +65,32 @@ peb({action:'pebblebar', clientData:[{plugin:'reserve_info'},{plugin:'reserve_ta
     <li><h3>Shops</h3><ul>
         
         
-        <li><h4>shops_buyitems</h4></li>
+        <li><h4>shops_buyitems</h4>
+        
+            <p>
+                Use this plugin to buy one or more items from a shop.
+            </p>
+            
+            <pre>
+// buy items from shop of id ''1464126130305''
+// and buy items of the item id's in the array.
+peb({
+    action:'pebblebar', 
+    clientData:[
+       {
+           plugin: 'shops_buyitems', 
+           shopId: '1464126130305', 
+           items : [
+               '5744cb967b38c814076cd1b2', 
+               '5744cbf07b38c814076cd1b5', 
+               '5744cc4a7b38c814076cd1b8'
+           ]
+        }
+    ]
+})
+            </pre>
+        
+        </li>
         
         <li><h4>shops_buyweight</h4>
         
