@@ -412,11 +412,11 @@ app.post('/signup', function (req, res, next) {
     
         },
                   
-        function(){
+        function(status){
         
             //res.redirect('/signup')
         
-            res.render('systems/' + clientSystem + '/signupfail', {});
+            res.render('systems/' + clientSystem + '/signupfail', {status: status});
         
         }
     );
