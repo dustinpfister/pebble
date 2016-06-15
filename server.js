@@ -414,7 +414,9 @@ app.post('/signup', function (req, res, next) {
                   
         function(){
         
-            res.redirect('/signup')
+            //res.redirect('/signup')
+        
+            res.render('systems/' + clientSystem + '/signupfail', {});
         
         }
     );
