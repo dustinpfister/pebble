@@ -177,7 +177,7 @@ app.get('/', function (req, res, next) {
 app.post('/', function (req, res, next) {
 
     
-    require('./lib/actions.js').checkForAction(req, 
+    require('./lib/actions.js').checkForAction(req, res,
         
         // action found in request
         function(response){
@@ -187,9 +187,9 @@ app.post('/', function (req, res, next) {
         },
         
         // fail
-        function(){
+        function(response){
     
-            res.send({mess: 'action failed.'});
+            res.send(response);
     
         }
         
