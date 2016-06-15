@@ -177,7 +177,7 @@ app.get('/', function (req, res, next) {
 app.post('/', function (req, res, next) {
 
     
-    require('./lib/actions.js').checkForAction(req, res,
+    require('./lib/actions.js').checkForAction(req, res, next,
         
         // action found in request
         function(response){
