@@ -1,7 +1,0 @@
-{
-    
-    "pluginName" : "storage",
-    "coreFiles" : ["setup"],
-    "addToScopeFiles" : ["storage"]
-    
-}
