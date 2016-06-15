@@ -404,8 +404,6 @@ app.get('/signup', function (req, res, next) {
 
 app.post('/signup', function (req, res, next) {
 
-    // users.newUser(req, res);
-
     users.newUser(req, 
                   
         function(){
