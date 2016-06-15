@@ -6,23 +6,6 @@
         
             "info", "take"
         
-        ],
-        
-        "user":[
-          
-            "checkin"
-            
-        ],
-        
-        "storage":[
-            
-            
-        ],
-        
-        "shops": [
-            
-            "buyitems", "buyweight", "getshoppage", "getusershops", "newshop"
-            
         ]
             
     }
