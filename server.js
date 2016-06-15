@@ -176,6 +176,28 @@ app.get('/', function (req, res, next) {
 
 app.post('/', function (req, res, next) {
 
+    
+    require('./lib/actions.js').checkForAction(req, 
+        
+        // action found in request
+        function(response){
+        
+            res.send(response);    
+        
+        },
+        
+        // fail
+        function(){
+    
+            res.send({mess: 'no action found in post.'});
+    
+        }
+        
+    );
+    
+    
+    
+    /*
     if (!req.user) {
 
         // some other action?
@@ -365,6 +387,7 @@ app.post('/', function (req, res, next) {
 
     }
 
+    */
 });
 
 app.get('/login', function (req, res, next) {
