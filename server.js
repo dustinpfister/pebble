@@ -3,41 +3,34 @@
 /*    Pebble
  *    Copyright 2016 by Dustin Pfister (GPL-3.0)
  *    dustin.pfister@gamil.com
- *    
+ *
  *    https://github.com/dustinpfister/pebble
  *
  *    try to get them all!
  */
 
-var express = require('express')
-    , session = require('express-session')
-    , MongoStore = require('connect-mongo/es5')(session)
-    , openShift = require('./lib/openshift.js').openShiftObj
+var express = require('express'), session = require('express-session'), MongoStore = require('connect-mongo/es5')(session), openShift = require('./lib/openshift.js').openShiftObj, mongoose = require('mongoose'), db = mongoose.createConnection(openShift.mongo)
 
-, mongoose = require('mongoose')
-    , db = mongoose.createConnection(openShift.mongo)
+    // passport
+, passport = require('passport'), Strategy = require('passport-local').Strategy
 
-// passport
-, passport = require('passport')
-    , Strategy = require('passport-local').Strategy
-
-// express app
+    // express app
 , app = express()
 
-// client system in use:
+    // client system in use:
 , clientSystem = 'command_only'
 
-// users
+    // users
 , users = require('./lib/users.js')
 
-// pebble lib
-pebble = require('./lib/pebble.js');
+    // pebble lib
+    pebble = require('./lib/pebble.js');
 
 // use passport local strategy
 // following example at : https://github.com/passport/express-4.x-local-example/blob/master/server.js
 passport.use(new Strategy(
 
-    function (username, password, cb) {
+        function (username, password, cb) {
 
         users.findByUsername(username, function (err, user) {
 
@@ -53,9 +46,7 @@ passport.use(new Strategy(
             return cb(null, user);
         });
 
-    }
-
-));
+    }));
 
 passport.serializeUser(function (user, cb) {
     cb(null, user.id);
@@ -77,21 +68,21 @@ passport.deserializeUser(function (id, cb) {
 // Use application-level middleware for common functionality, including logging, parsing, and session handling.
 app.use(require('cookie-parser')());
 app.use(require('body-parser').json({
-    limit: '5mb'
-}));
+        limit : '5mb'
+    }));
 app.use(require('body-parser').urlencoded({
-    extended: true
-    , limit: '5mb'
-}));
+        extended : true,
+        limit : '5mb'
+    }));
 app.use(session({
-    secret: 'keyboard cat', // ALERT! look into express-session and why the secret is important
-    resave: false
-    , store: new MongoStore({
-        url: openShift.mongo
-    })
-    , saveUninitialized: false
-    , limit: '5mb'
-}));
+        secret : 'keyboard cat', // ALERT! look into express-session and why the secret is important
+        resave : false,
+        store : new MongoStore({
+            url : openShift.mongo
+        }),
+        saveUninitialized : false,
+        limit : '5mb'
+    }));
 app.use(passport.initialize()); // Initialize Passport and restore authentication state, if any, from the session
 app.use(passport.session());
 
@@ -103,21 +94,20 @@ app.use(express.static('views')); // must do this to get external files
 app.get('*', function (req, res, next) {
 
     var visitPaths = ['/login', '/signup'], // paths that are okay to visit without being logged in
-        i = 0
-        , len = visitPaths.length
-        , okay;
+    i = 0,
+    len = visitPaths.length,
+    okay;
 
     // check if logged in
     if (req.user) {
 
         next();
 
-    // redirect to login page
+        // redirect to login page
     } else {
 
         i = 0;
         okay = false;
-
         while (i < len) {
 
             if (req.path === visitPaths[i]) {
@@ -154,9 +144,9 @@ app.get('/', function (req, res, next) {
 
         res.render('systems/' + clientSystem + '/main', {
 
-            req: req
-            , reserve: reserve
-            , user: req.user
+            req : req,
+            reserve : reserve,
+            user : req.user
 
         });
 
@@ -171,20 +161,18 @@ app.post('/', function (req, res, next) {
     require('./lib/actions.js').checkForAction(req, res, next,
 
         // action found in request
-        function(response){
+        function (response) {
 
-            res.send(response);
+        res.send(response);
 
-        },
+    },
 
         // fail
-        function(response){
+        function (response) {
 
-            res.send(response);
+        res.send(response);
 
-        }
-
-    );
+    });
 
 });
 
@@ -200,17 +188,15 @@ app.post('/login',
 
     // authenticate
     passport.authenticate('local', {
-        failureRedirect: '/login'
+        failureRedirect : '/login'
     }),
 
     // success
     function (req, res) {
 
-        res.redirect('/');
+    res.redirect('/');
 
-    }
-
-);
+});
 
 // logout path
 app.get('/logout', function (req, res) {
@@ -232,28 +218,29 @@ app.post('/signup', function (req, res, next) {
 
     users.newUser(req,
 
-        function(){
+        function () {
 
-            res.redirect('/login');
+        res.redirect('/login');
 
-        },
+    },
 
-        function(status){
+        function (status) {
 
-            //res.redirect('/signup')
+        //res.redirect('/signup')
 
-            res.render('systems/' + clientSystem + '/signupfail', {status: status});
+        res.render('systems/' + clientSystem + '/signupfail', {
+            status : status
+        });
 
-        }
-
-    );
+    });
 
 });
 
 // start the server
 app.listen(openShift.port, openShift.ipaddress, function () {
 
-    var taxloop, pebbleProcess;
+    var taxloop,
+    pebbleProcess;
 
     console.log('server.js: pebble lives');
 
@@ -266,51 +253,73 @@ app.listen(openShift.port, openShift.ipaddress, function () {
                 // the tax loop
                 taxLoop = function () {
 
-                        var t = setTimeout(taxLoop, 10000);
+                    var t = setTimeout(taxLoop, 10000);
 
-                        // run pebblebars updater
-                        require('./lib/pebblebar/updater.js').update();
+                    // run pebblebars updater
+                    require('./lib/pebblebar/updater.js').update();
+
+                },
+
+                pebbleProcess = (function () {
+
+                    var lastCheck = new Date(0),
+
+                    // check the reserve obect for the time of the last check
+                    checkReserve = function (done) {
+
+                        pebble.getReserve(function (reserve) {
+
+                            console.log('server.js : pebble process reserve check... ');
+                            //console.log(reserve.sanity.lastCheck);
+
+                            lastCheck = new Date(reserve.sanity.lastCheck);
+
+                            done();
+
+                        });
 
                     },
+					
+					sanityCheck = function(){
+						
+						pebble.sanityCheck();
+						
+					},
 
-                    pebbleProcess = (function(){
+                    loop = function () {
 
-                        var lastCheck = new Date(0),
+                        var t = setTimeout(loop, 3000),
 
-                        // check the reserve obect for the time of the last check
-                        checkReserve = function(done){
+                        time = new Date() - lastCheck;
 
-                            pebble.getReserve(function(reserve){
+                        console.log('server.js : time sence last sanity check: ' + time);
 
-                                console.log('server.js : pebble process reserve check... ');
-                                console.log(reserve.sanity.lastCheck);
-
-                                done();
-
-                            });
-
-                        },
-
-                        loop = function () {
-
-                            var t = setTimeout(loop, 3000);
-
-                            console.log('server.js : pebble process loop: ')
+                        if (time < 10000) {
 
                             pebble.processNext();
                             pebble.fulfillNext();
 
-                        };
+                        } else {
 
-                        checkReserve(function(){
+                            clearTimeout(t);
+                            console.log('time for a sanity check');
 
-                            console.log('server.js: okay reserve check went well. starting the pebbleProcess loop...');
+							sanityCheck();
+							
+                        }
 
-                            loop();
+                    };
 
-                        });
+                    checkReserve(function () {
 
-                    }());
+                        console.log('server.js: okay reserve check went well. starting the pebbleProcess loop...');
+
+                        loop();
+
+                    });
+
+                }
+                    ());
 
                 // start tax loop, and pebble process.
                 taxLoop();
