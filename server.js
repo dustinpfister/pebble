@@ -279,12 +279,12 @@ app.listen(openShift.port, openShift.ipaddress, function () {
                         });
 
                     },
-					
-					sanityCheck = function(){
-						
-						pebble.sanityCheck();
-						
-					},
+
+                    sanityCheck = function () {
+
+                        pebble.sanityCheck();
+
+                    },
 
                     loop = function () {
 
@@ -304,8 +304,8 @@ app.listen(openShift.port, openShift.ipaddress, function () {
                             clearTimeout(t);
                             console.log('time for a sanity check');
 
-							sanityCheck();
-							
+                            sanityCheck();
+
                         }
 
                     };
