@@ -14,42 +14,20 @@ var express = require('express')
     , MongoStore = require('connect-mongo/es5')(session)
     , openShift = require('./lib/openshift.js').openShiftObj
 
-
-
-
-
 , mongoose = require('mongoose')
     , db = mongoose.createConnection(openShift.mongo)
 
 // passport
-
-
-
-
 , passport = require('passport')
     , Strategy = require('passport-local').Strategy
 
 // express app
-
-
-
-
 , app = express()
 
 // client system in use:
-//,clientSystem = 'vanilla_beta'
-//,clientSystem = 'vanilla_updated_pebblebar'
-
-
-
-
 , clientSystem = 'command_only'
 
 // users
-
-
-
-
 , users = require('./lib/users.js')
 
 // pebble lib
@@ -121,7 +99,7 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 app.use(express.static('views')); // must do this to get external files
 
-
+// wild get request handler
 app.get('*', function (req, res, next) {
 
     var visitPaths = ['/login', '/signup'], // paths that are okay to visit without being logged in
@@ -134,30 +112,42 @@ app.get('*', function (req, res, next) {
 
         next();
 
-        // redirrect to login page
+    // redirect to login page
     } else {
 
         i = 0;
         okay = false;
+
         while (i < len) {
+
             if (req.path === visitPaths[i]) {
+
                 okay = true;
+
                 break;
+
             }
+
             i++;
+
         }
 
-        // if not okay redirrect
+        // if not okay redirect
         if (!okay) {
-            res.redirect('/login')
+
+            res.redirect('/login');
+
         } else {
+
             next();
+
         }
 
     }
 
 });
 
+// root get requests
 app.get('/', function (req, res, next) {
 
     pebble.getReserve(function (reserve) {
@@ -174,35 +164,38 @@ app.get('/', function (req, res, next) {
 
 });
 
+// all posts are sent to root (except for the login, and sign up paths)
 app.post('/', function (req, res, next) {
 
-    
+    // actions.js checks all incoming post request for known 'actions'
     require('./lib/actions.js').checkForAction(req, res, next,
-        
+
         // action found in request
         function(response){
-        
-            res.send(response);    
-        
+
+            res.send(response);
+
         },
-        
+
         // fail
         function(response){
-    
+
             res.send(response);
-    
+
         }
-        
+
     );
-    
+
 });
 
+// login path
 app.get('/login', function (req, res, next) {
 
     res.render('systems/' + clientSystem + '/login', {});
 
 });
 
+// login
 app.post('/login',
 
     // authenticate
@@ -219,6 +212,7 @@ app.post('/login',
 
 );
 
+// logout path
 app.get('/logout', function (req, res) {
 
     req.logout();
@@ -226,31 +220,34 @@ app.get('/logout', function (req, res) {
 
 });
 
+// the sign up path
 app.get('/signup', function (req, res, next) {
 
     res.render('systems/' + clientSystem + '/signup', {});
 
 });
 
+// posts to sign up path
 app.post('/signup', function (req, res, next) {
 
-    users.newUser(req, 
-                  
+    users.newUser(req,
+
         function(){
-    
+
             res.redirect('/login');
-    
+
         },
-                  
+
         function(status){
-        
+
             //res.redirect('/signup')
-        
+
             res.render('systems/' + clientSystem + '/signupfail', {status: status});
-        
+
         }
+
     );
-        
+
 });
 
 // start the server
@@ -279,8 +276,6 @@ app.listen(openShift.port, openShift.ipaddress, function () {
                     pebbleProcess = function () {
 
                         var t = setTimeout(pebbleProcess, 1000);
-
-                        //console.log('processing transfer requests...');
 
                         pebble.processNext();
 
