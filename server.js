@@ -293,8 +293,9 @@ app.listen(openShift.port, openShift.ipaddress, function () {
 
                         loop = function () {
 
-                            var t = setTimeout(pebbleProcess, 1000);
+                            var t = setTimeout(loop, 3000);
 
+                            console.log('server.js : pebble process loop: ')
 
                             pebble.processNext();
                             pebble.fulfillNext();
@@ -303,7 +304,9 @@ app.listen(openShift.port, openShift.ipaddress, function () {
 
                         checkReserve(function(){
 
-                            console.log('server.js: okay reserve check went well..');
+                            console.log('server.js: okay reserve check went well. starting the pebbleProcess loop...');
+
+                            loop();
 
                         });
 
