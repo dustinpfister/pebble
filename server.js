@@ -273,19 +273,45 @@ app.listen(openShift.port, openShift.ipaddress, function () {
 
                     },
 
-                    pebbleProcess = function () {
+                    pebbleProcess = (function(){
 
-                        var t = setTimeout(pebbleProcess, 1000);
+                        var lastCheck = new Date(0),
 
-                        pebble.processNext();
+                        // check the reserve obect for the time of the last check
+                        checkReserve = function(done){
 
-                        pebble.fulfillNext();
+                            pebble.getReserve(function(reserve){
 
-                    };
+                                console.log('server.js : pebble process reserve check... ');
+                                console.log(reserve.sanity.lastCheck);
+
+                                done();
+
+                            });
+
+                        },
+
+                        loop = function () {
+
+                            var t = setTimeout(pebbleProcess, 1000);
+
+
+                            pebble.processNext();
+                            pebble.fulfillNext();
+
+                        };
+
+                        checkReserve(function(){
+
+                            console.log('server.js: okay reserve check went well..');
+
+                        });
+
+                    }());
 
                 // start tax loop, and pebble process.
                 taxLoop();
-                pebbleProcess();
+                //pebbleProcess();
 
             });
 
