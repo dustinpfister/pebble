@@ -282,7 +282,14 @@ app.listen(openShift.port, openShift.ipaddress, function () {
 
                     sanityCheck = function () {
 
-                        pebble.sanityCheck();
+                        pebble.sanityCheck(function () {
+
+                            // this should  work for now, but should not be set this way
+                            lastCheck = new Date();
+
+                            loop();
+
+                        });
 
                     },
 
