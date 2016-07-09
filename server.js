@@ -282,10 +282,13 @@ app.listen(openShift.port, openShift.ipaddress, function () {
 
                     sanityCheck = function () {
 
-                        pebble.sanityCheck(function () {
+                        pebble.sanityCheck(function (report) {
+
+                            console.log('sanity check compleate:');
+                            console.log(report);
 
                             // this should  work for now, but should not be set this way
-                            lastCheck = new Date();
+                            lastCheck = new Date(report.checkDone);
 
                             loop();
 
