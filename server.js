@@ -1,12 +1,10 @@
 // #!/bin/env node
-
-/*    Pebble
- *    Copyright 2016 by Dustin Pfister (GPL-3.0)
- *    dustin.pfister@gamil.com
+ /*
+ *    server.js for Pebble (https://github.com/dustinpfister/pebble)
+ *    Copyright 2016 by Dustin Pfister (GPL v3)
  *
- *    https://github.com/dustinpfister/pebble
+ *    This is the main "server.js" this is to be called by node ( $ node server.js) to start pebble
  *
- *    try to get them all!
  */
 
 var express = require('express'), session = require('express-session'), MongoStore = require('connect-mongo/es5')(session), openShift = require('./lib/openshift.js').openShiftObj, mongoose = require('mongoose'), db = mongoose.createConnection(openShift.mongo)
